@@ -18,8 +18,11 @@ const Navbar = () => {
 
   const darkModeHandler = () => {
     setIsDark((prev) => {
-      if (prev) document.documentElement.classList.remove("dark");
-      else {
+      if (prev) {
+        document.body.classList.remove("bg-gray-800");
+        document.documentElement.classList.remove("dark");
+      } else {
+        document.body.classList.add("bg-gray-800");
         document.documentElement.classList.add("dark");
       }
       return !prev;
@@ -33,7 +36,7 @@ const Navbar = () => {
   };
   return (
     <Fragment>
-      <div className="flex flex-wrap items-center p-2 pl-8 pr-8 lg:pl-12 lg:pr-12 border-b border-b-gray-200 shadow dark:bg-gray-900">
+      <div className="flex flex-wrap items-center p-2 pl-8 pr-8 lg:pl-12 lg:pr-12 bg-white border-b border-b-gray-200 shadow dark:bg-gray-900 dark:border-none dark:shadow-slate-600 dark:shadow-sm">
         <div className="w-fit font-serif text-3xl font-black mr-4 dark:text-white">
           BLOGIFY
         </div>
