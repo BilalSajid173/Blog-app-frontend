@@ -3,6 +3,15 @@ import image from "../../Images/hpbgimg2.jpg";
 // import image1 from "../../Images/hpbgimg.png";
 import Button from "../UI/Button/Button";
 import AllArticles from "../Article/AllArticles";
+import TopAuths from "./TopAuthors";
+
+const authors = [
+  { name: "Rashid" },
+  { name: "Aatir" },
+  { name: "Anzal" },
+  { name: "Ijlal" },
+  { name: "Faiz" },
+];
 
 const Home = () => {
   //   const isDark = localStorage.getItem("theme");
@@ -32,8 +41,9 @@ const Home = () => {
           <AllArticles />
         </div>
         <div className="sticky top-10 h-0 w-3/12 dark:text-white">
-          <div className="mb-3">
-            <h2 className="font-semibold">Top Authors</h2>
+          <div className="mb-6">
+            <h2 className="font-semibold mb-4">Top Authors</h2>
+            <TopAuths authors={authors} />
           </div>
           <div>
             <h2 className="font-semibold">Popular Tags</h2>
