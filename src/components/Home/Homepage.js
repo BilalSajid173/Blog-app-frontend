@@ -19,7 +19,16 @@ const Home = () => {
         </Button>
       </div>
       <div className="flex flex-wrap justify-center">
+        {/*handle active state for button bg color */}
         <div className="w-5/12 mr-6">
+          <div className="mb-5">
+            <Button className="p-3 bg-blue-300 dark:bg-white rounded-sm font-bold mr-3 hover:bg-gray-200">
+              Latest
+            </Button>
+            <Button className="p-3 bg-blue-300 dark:bg-white rounded-sm font-bold  hover:bg-gray-200">
+              Top Rated
+            </Button>
+          </div>
           <AllArticles />
         </div>
         <div className="sticky top-0 h-0 w-3/12">
