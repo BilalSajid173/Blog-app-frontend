@@ -4,7 +4,7 @@ import image from "../../Images/userimg.png";
 const Article = (props) => {
   return (
     <Fragment>
-      <div className="border border-gray-300 flex flex-col p-3 bg-white dark:bg-[#07244C] dark:text-white my-3 first:mt-0 rounded-sm">
+      <div className="border border-gray-300 dark:border-gray-500 flex flex-col p-3 bg-white dark:bg-[#07244C] dark:text-white my-3 first:mt-0 rounded-sm">
         <div className="flex flex-wrap justify-center mb-2">
           {/*use cloudinary image component for image*/}
           <div className="rounded-full h-16 w-16 flex flex-wrap bg-gray-500 dark:bg-white">

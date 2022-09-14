@@ -87,7 +87,7 @@ const Navbar = () => {
           )}
           {isLogin && (
             <button className="p-1.5 px-3 bg-slate-300 rounded-3xl">
-              <i class="fa-regular fa-user"></i>
+              <i className="dark:text-black fa-regular fa-user"></i>
             </button>
           )}
         </div>
