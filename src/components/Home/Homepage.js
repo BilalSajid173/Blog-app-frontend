@@ -48,18 +48,19 @@ const Home = () => {
   //   console.log(isDark);
   return (
     <Fragment>
-      <div className="relative flex flex-wrap justify-center my-10">
+      <div className="relative flex flex-wrap justify-center mb-5 md:my-10">
         {/* {isDark === null && (
           <img className="h-96 w-9/12" src={image1} alt="img"></img>
         )} */}
-        <img className="h-96 w-9/12" src={image} alt="img"></img>
-        <Button className="absolute bottom-12 left-2/3 p-3 px-5 bg-blue-500 text-2xl hover:bg-blue-800 dark:text-white rounded-sm">
-          Write Something!!
-        </Button>
+        <img
+          className="md:w-11/12 lg:w-9/12 lg:h-96"
+          src={image}
+          alt="img"
+        ></img>
       </div>
       <div className="flex flex-wrap justify-center">
         {/*handle active state for button bg color */}
-        <div className="w-5/12 mr-6">
+        <div className="w-11/12 sm:w-9/12 md:w-6/12 lg:w-5/12 md:mr-6">
           <div className="mb-5">
             <Button className="p-3 bg-blue-300 dark:bg-white rounded-sm font-bold mr-3 hover:bg-gray-200">
               Latest
@@ -70,7 +71,7 @@ const Home = () => {
           </div>
           <AllArticles />
         </div>
-        <div className="sticky top-10 h-0 w-3/12 dark:text-white">
+        <div className="hidden md:block sticky top-10 h-0 md:w-4/12 lg:w-3/12 dark:text-white">
           <div className="mb-6">
             <h2 className="font-semibold mb-4">Top Authors</h2>
             <TopAuths authors={authors} />
