@@ -31,9 +31,45 @@ const Home = () => {
           </div>
           <AllArticles />
         </div>
-        <div className="sticky top-0 h-0 w-3/12">
-          <h1>HEllo</h1>
-          <p>HEllo</p>
+        <div className="sticky top-10 h-0 w-3/12 dark:text-white">
+          <div className="mb-3">
+            <h2 className="font-semibold">Top Authors</h2>
+          </div>
+          <div>
+            <h2 className="font-semibold">Popular Tags</h2>
+            <div className="flex flex-wrap mt-2">
+              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                <span>#javascript</span>
+              </div>
+              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                <span>#mongodb</span>
+              </div>
+              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                <span>#nodejs</span>
+              </div>
+              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                <span>#nextjs</span>
+              </div>
+              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                <span>#typescript</span>
+              </div>
+              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                <span>#javascript</span>
+              </div>
+              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                <span>#mongodb</span>
+              </div>
+              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                <span>#nodejs</span>
+              </div>
+              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                <span>#nextjs</span>
+              </div>
+              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                <span>#typescript</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </Fragment>
