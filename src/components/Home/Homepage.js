@@ -6,11 +6,41 @@ import AllArticles from "../Article/AllArticles";
 import TopAuths from "./TopAuthors";
 
 const authors = [
-  { name: "Rashid" },
-  { name: "Aatir" },
-  { name: "Anzal" },
-  { name: "Ijlal" },
-  { name: "Faiz" },
+  {
+    name: "Rashid",
+    address: "New York",
+    exp: "orem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    email: "rashid@gmail.com",
+    education: "Oxford Uni",
+  },
+  {
+    name: "Aatir",
+    address: "San Francisco",
+    exp: "orem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    email: "aatir@gmail.com",
+    education: "Cambridge Uni",
+  },
+  {
+    name: "Anzal",
+    address: "Paris",
+    exp: "orem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    email: "anzal@gmail.com",
+    education: "Yale Uni",
+  },
+  {
+    name: "Ijlal",
+    address: "Sambhal",
+    exp: "orem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    email: "ijlal@gmail.com",
+    education: "Oxford Uni",
+  },
+  {
+    name: "Faiz",
+    address: "Portugal",
+    exp: "orem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    email: "faiz@gmail.com",
+    education: "Cambridge Uni",
+  },
 ];
 
 const Home = () => {

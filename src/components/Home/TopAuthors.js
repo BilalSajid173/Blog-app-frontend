@@ -2,14 +2,7 @@ import { Avatar, Tooltip } from "@mui/material";
 import { Fragment } from "react";
 import image from "../../Images/userimg.png";
 import AuthInfo from "./AuthorInfo";
-// import makeStyles from "@mui/core/styles";
-// const useStyles = makeStyles((theme) => ({
-//   customWidth: {
-//     maxWidth: 500,
-//   },
-// }));
 const TopAuths = (props) => {
-  //   const classes = useStyles();
   return (
     <Fragment>
       {props.authors.map((author) => {
@@ -23,7 +16,15 @@ const TopAuths = (props) => {
                 },
               },
             }}
-            title={<AuthInfo />}
+            title={
+              <AuthInfo
+                name={author.name}
+                edu={author.education}
+                address={author.address}
+                exp={author.exp}
+                email={author.email}
+              />
+            }
             classes={{ tooltip: "dark:bg-gray-600" }}
             placement="left"
           >
