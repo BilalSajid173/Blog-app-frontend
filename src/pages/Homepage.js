@@ -1,7 +1,13 @@
 import Navbar from "../components/Navigation/navbar";
+import Home from "../components/Home/Homepage";
 
-const Homepage = () => {
-  return <Navbar />;
+const Mainpage = () => {
+  return (
+    <>
+      <Navbar />
+      <Home />
+    </>
+  );
 };
 
-export default Homepage;
+export default Mainpage;
