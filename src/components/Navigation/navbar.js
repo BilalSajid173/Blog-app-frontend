@@ -1,11 +1,24 @@
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
+import LoginModal from "../SignUp&Login/LoginModal";
+import DarkContext from "../../store/darkmode-context";
 const Navbar = () => {
+  const Darkctx = useContext(DarkContext);
   const [isLogin, setIsLogin] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [openLoginModal, setOpenLoginModal] = useState(false);
 
   const loginHandler = () => {
+    setOpenLoginModal((prev) => {
+      return !prev;
+    });
     setIsLogin((prev) => {
+      return !prev;
+    });
+  };
+
+  const LoginCloseHandler = () => {
+    setOpenLoginModal((prev) => {
       return !prev;
     });
   };
@@ -17,6 +30,7 @@ const Navbar = () => {
   };
 
   const darkModeHandler = () => {
+    Darkctx.changeMode();
     setIsDark((prev) => {
       if (prev) {
         document.body.classList.remove("bg-gray-800");
@@ -36,6 +50,7 @@ const Navbar = () => {
   };
   return (
     <Fragment>
+      <LoginModal open={openLoginModal} handleClose={LoginCloseHandler} />
       <div className="flex flex-wrap items-center p-2 pl-8 pr-8 lg:pl-12 lg:pr-12 bg-white border-b border-b-gray-200 shadow dark:bg-gray-900 dark:border-none dark:shadow-slate-600 dark:shadow-sm">
         <div className="w-fit font-serif text-3xl font-black mr-4 dark:text-white">
           BLOGIFY
