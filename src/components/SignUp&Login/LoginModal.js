@@ -46,7 +46,7 @@ const LoginModal = (props) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div className="absolute flex flex-col top-2/4 left-2/4 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 p-4 py-10 dark:bg-slate-700 dark:text-white">
+        <div className="rounded-sm absolute flex flex-col top-2/4 left-2/4 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 p-4 py-10 dark:bg-slate-700 dark:text-white">
           <div className="flex flex-wrap p-1 justify-center mb-4">
             <h2 className="text-xl sm:text-2xl text-gray-600 mr-auto dark:text-gray-200">
               Login To Continue

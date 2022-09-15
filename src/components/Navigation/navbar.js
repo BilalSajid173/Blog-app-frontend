@@ -1,5 +1,6 @@
 import { Fragment, useContext, useState } from "react";
 import LoginModal from "../SignUp&Login/LoginModal";
+import SignupModal from "../SignUp&Login/SignUpModal";
 import DarkContext from "../../store/darkmode-context";
 const Navbar = () => {
   const Darkctx = useContext(DarkContext);
@@ -7,6 +8,7 @@ const Navbar = () => {
   const [isDark, setIsDark] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
+  const [openSignupModal, setOpenSignupModal] = useState(false);
 
   const loginHandler = () => {
     setOpenLoginModal((prev) => {
@@ -19,6 +21,12 @@ const Navbar = () => {
 
   const LoginCloseHandler = () => {
     setOpenLoginModal((prev) => {
+      return !prev;
+    });
+  };
+
+  const SignupModalHandler = () => {
+    setOpenSignupModal((prev) => {
       return !prev;
     });
   };
@@ -51,6 +59,7 @@ const Navbar = () => {
   return (
     <Fragment>
       <LoginModal open={openLoginModal} handleClose={LoginCloseHandler} />
+      <SignupModal open={openSignupModal} handleClose={SignupModalHandler} />
       <div className="flex flex-wrap items-center p-2 pl-6 pr-6 sm:pl-8 sm:pr-8 lg:pl-12 lg:pr-12 bg-white border-b border-b-gray-200 shadow dark:bg-gray-900 dark:border-none dark:shadow-slate-600 dark:shadow-sm">
         <div className="w-fit font-serif text-3xl font-black mr-4 dark:text-white">
           BLOGIFY
@@ -83,7 +92,10 @@ const Navbar = () => {
             </button>
           )}
           {!isLogin && (
-            <button className="transition-all duration-300 px-2 py-1 border border-blue-700 hover:bg-blue-600 hover:text-gray-100">
+            <button
+              onClick={SignupModalHandler}
+              className="transition-all duration-300 px-2 py-1 border border-blue-700 hover:bg-blue-600 hover:text-gray-100"
+            >
               Create Account
             </button>
           )}
@@ -144,7 +156,10 @@ const Navbar = () => {
           </button>
         )}
         {!isLogin && (
-          <button className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white">
+          <button
+            onClick={SignupModalHandler}
+            className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"
+          >
             <i class="mr-2 p-2 fa-sharp fa-solid fa-circle-plus"></i> Create
             Account
           </button>
