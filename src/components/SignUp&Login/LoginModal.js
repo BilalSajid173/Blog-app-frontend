@@ -48,7 +48,7 @@ const LoginModal = (props) => {
       >
         <div className="absolute flex flex-col top-2/4 left-2/4 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 p-4 py-10 dark:bg-slate-700 dark:text-white">
           <div className="flex flex-wrap p-1 justify-center mb-4">
-            <h2 className="text-2xl text-gray-600 mr-auto dark:text-gray-200">
+            <h2 className="text-xl sm:text-2xl text-gray-600 mr-auto dark:text-gray-200">
               Login To Continue
             </h2>
             <div className="flex flex-wrap justify-center pt-1">
@@ -56,7 +56,7 @@ const LoginModal = (props) => {
               <TwitterIcon className="cursor-pointer text-blue-700 dark:text-blue-400" />
             </div>
           </div>
-          <div className="mb-4 w-96">
+          <div className="mb-4 w-[calc(100vw-5rem)] sm:w-96">
             <ThemeProvider theme={darkTheme}>
               <TextField
                 className="w-full"
@@ -69,7 +69,7 @@ const LoginModal = (props) => {
               />
             </ThemeProvider>
           </div>
-          <div className="mb-8 w-96">
+          <div className="mb-8 w-[calc(100vw-5rem)] sm:w-96">
             <ThemeProvider theme={darkTheme}>
               <FormControl variant="outlined" className="w-full">
                 <InputLabel htmlFor="outlined-adornment-password" required>
