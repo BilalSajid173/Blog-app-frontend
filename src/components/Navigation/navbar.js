@@ -2,6 +2,7 @@ import { Fragment, useContext, useState } from "react";
 import LoginModal from "../SignUp&Login/LoginModal";
 import SignupModal from "../SignUp&Login/SignUpModal";
 import DarkContext from "../../store/darkmode-context";
+import AddNewArticle from "../AddArticle/AddArticle";
 const Navbar = () => {
   const Darkctx = useContext(DarkContext);
   const [isLogin, setIsLogin] = useState(false);
@@ -9,6 +10,7 @@ const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [openSignupModal, setOpenSignupModal] = useState(false);
+  const [openArticleModal, setOpenArticleModal] = useState(false);
 
   const loginHandler = () => {
     setOpenLoginModal((prev) => {
@@ -56,8 +58,23 @@ const Navbar = () => {
       return !prev;
     });
   };
+
+  const closeNewArticleModal = () => {
+    setOpenArticleModal((prev) => {
+      return !prev;
+    });
+  };
+
+  const openNewArticleModal = () => {
+    setOpenArticleModal((prev) => {
+      return !prev;
+    });
+  };
   return (
     <Fragment>
+      {openArticleModal && (
+        <AddNewArticle onClick={closeNewArticleModal}></AddNewArticle>
+      )}
       <LoginModal open={openLoginModal} handleClose={LoginCloseHandler} />
       <SignupModal open={openSignupModal} handleClose={SignupModalHandler} />
       <div className="flex flex-wrap items-center p-2 pl-6 pr-6 sm:pl-8 sm:pr-8 lg:pl-12 lg:pr-12 bg-white border-b border-b-gray-200 shadow dark:bg-gray-900 dark:border-none dark:shadow-slate-600 dark:shadow-sm">
@@ -100,7 +117,10 @@ const Navbar = () => {
             </button>
           )}
           {isLogin && (
-            <button className="transition-all duration-300 px-2 py-1 hover:bg-blue-600 hover:text-white">
+            <button
+              onClick={openNewArticleModal}
+              className="transition-all duration-300 px-2 py-1 hover:bg-blue-600 hover:text-white"
+            >
               New
             </button>
           )}
@@ -170,7 +190,10 @@ const Navbar = () => {
           </button>
         )}
         {isLogin && (
-          <button className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white">
+          <button
+            onClick={openNewArticleModal}
+            className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"
+          >
             <i class="mr-2 p-2 px-2.5 fa-solid fa-plus"></i> New Article
           </button>
         )}
