@@ -4,7 +4,7 @@ import reactDom from "react-dom";
 const Backdrop = (props) => {
   return (
     <div
-      className="fixed top-0 left-0 w-full h-full z-20 bg-gray-700 opacity-30"
+      className="fixed top-0 left-0 w-full h-full z-30 bg-gray-700 opacity-30"
       onClick={props.onClick}
     ></div>
   );
@@ -13,7 +13,7 @@ const Backdrop = (props) => {
 //make it responsive as well by using calc(50% - 2rem)
 const ModalOverlay = (props) => {
   return (
-    <div className="flex fixed justify-center items-center top-5 left-5 w-11/12 h-5/6 bg-white p-4 z-30 rounded-sm">
+    <div className="flex fixed justify-center items-center top-16 left-[4%] w-11/12 md:w-[50rem] md:left-[calc(50%-25rem)] h-5/6 bg-white p-4 z-40 rounded-sm">
       {props.children}
     </div>
   );
