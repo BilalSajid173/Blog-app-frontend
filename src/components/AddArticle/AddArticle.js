@@ -73,7 +73,7 @@ const AddNewArticle = (props) => {
     const setParaTimer = setTimeout(() => {
       setParagraphs((prev) => {
         console.log(prev);
-        const newPars = enteredContent.split("\\n");
+        const newPars = enteredContent.split("\n");
         prev = newPars.map((par) => {
           return par.trim();
         });
@@ -87,6 +87,7 @@ const AddNewArticle = (props) => {
   }, [enteredContent]);
 
   const showPreviewHandler = () => {
+    console.log(enteredContent);
     setShowPreview((prev) => {
       return !prev;
     });
@@ -148,8 +149,8 @@ const AddNewArticle = (props) => {
                 rows="12"
                 name="content"
                 id="content"
-                className="rounded-sm p-2 my-1 w-full resize-none border-0 outline-none dark:bg-gray-800 dark:border dark:border-gray-600"
-                placeholder="Whats this about? (use \n in your text for a new paragraph and enclose subheadings in {}. Each subheading should be after a newline character)"
+                className="rounded-sm p-2 my-1 w-full resize-none border-0 outline-none dark:bg-gray-800 dark:border dark:border-gray-600 scrollbar"
+                placeholder="Whats this about? (enclose subheadings in {}. Each subheading should be after a newline character)"
                 required
                 value={enteredContent}
                 onChange={contentChangeHandler}
