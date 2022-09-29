@@ -4,6 +4,60 @@ import image from "../../Images/hpbgimg2.jpg";
 import Button from "../UI/Button/Button";
 import AllArticles from "../Article/AllArticles";
 import TopAuths from "./TopAuthors";
+import TopPicks from "./TopArticles";
+
+const articles = [
+  {
+    name: "Bilal Sajid",
+    time: "10 minutes ago",
+    heading: "This is an Article and this is an article!!",
+    tags: ["javascript", "nodejs", "react", "mongodb"],
+    likes: 20,
+    comments: 10,
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.",
+  },
+  {
+    name: "Aatir Nadim",
+    time: "30 minutes ago",
+    heading: "This is an Article and this is an article!!",
+    tags: ["javascript", "react", "Algorithms"],
+    likes: 15,
+    comments: 50,
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.",
+  },
+  {
+    name: "Aaliyah Beg",
+    time: "20 minutes ago",
+    heading: "This is an Article and this is an article!!",
+    tags: ["javascript", "react", "Algorithms", "Mongodb"],
+    likes: 15,
+    comments: 20,
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.",
+  },
+  {
+    name: "Aatir Nadim",
+    time: "30 minutes ago",
+    heading: "This is an Article and this is an article!!",
+    tags: ["javascript", "react", "Algorithms"],
+    likes: 15,
+    comments: 50,
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.",
+  },
+  {
+    name: "Aaliyah Beg",
+    time: "20 minutes ago",
+    heading: "This is an Article and this is an article!!",
+    tags: ["javascript", "react", "Algorithms", "Mongodb"],
+    likes: 15,
+    comments: 20,
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.",
+  },
+];
 
 const authors = [
   {
@@ -58,6 +112,7 @@ const Home = () => {
           alt="img"
         ></img>
       </div>
+      <TopPicks articles={articles.slice(0, 3)} />
       <div className="flex flex-wrap justify-center">
         {/*handle active state for button bg color */}
         <div className="w-11/12 sm:w-9/12 md:w-6/12 lg:w-5/12 md:mr-6">
