@@ -77,7 +77,7 @@ const Navbar = () => {
       )}
       <LoginModal open={openLoginModal} handleClose={LoginCloseHandler} />
       <SignupModal open={openSignupModal} handleClose={SignupModalHandler} />
-      <div className="flex flex-wrap items-center p-2 pl-6 pr-6 sm:pl-8 sm:pr-8 lg:pl-12 lg:pr-12 bg-white border-b border-b-gray-200 shadow dark:bg-gray-900 dark:border-none dark:shadow-slate-600 dark:shadow-sm">
+      <div className="sticky top-0 z-10 flex flex-wrap items-center p-2 pl-6 pr-6 sm:pl-8 sm:pr-8 lg:pl-12 lg:pr-12 bg-white border-b border-b-gray-200 shadow dark:bg-gray-900 dark:border-none dark:shadow-slate-600 dark:shadow-sm">
         <div className="w-fit font-serif text-3xl font-black mr-4 dark:text-white">
           BLOGIFY
         </div>

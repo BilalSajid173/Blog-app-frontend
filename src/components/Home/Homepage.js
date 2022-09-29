@@ -73,7 +73,7 @@ const Home = () => {
         </div>
         <div className="hidden md:block sticky top-10 h-0 md:w-4/12 lg:w-3/12 dark:text-white">
           <div className="mb-6">
-            <h2 className="font-semibold mb-4">Top Authors</h2>
+            <h2 className="font-semibold mb-4 mt-6">Top Authors</h2>
             <TopAuths authors={authors} />
           </div>
           <div>
