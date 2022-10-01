@@ -128,18 +128,22 @@ const Home = () => {
         ></img>
       </div> */}
       <div className="flex flex-wrap justify-center dark:text-gray-100">
-        <div className="w-[40%] flex flex-col pt-24 items-center pl-10">
+        <div className="pt-10 mb-10 md:mb-0 w-full md:w-[45%] flex flex-col md:pt-24 items-center lg:pl-10">
           <h1 className="text-2xl pl-2">WELCOME TO</h1>
           <div className={`${classes.content} flex flex-wrap justify-center`}>
-            <h1 className="text-8xl font-bold">BLOGIFY</h1>
-            <h1 className="text-8xl font-bold">BLOGIFY</h1>
+            <h1 className="text-7xl sm:text-9xl md:text-7xl lg:text-8xl xl:text-9xl font-bold">
+              BLOGIFY
+            </h1>
+            <h1 className="text-7xl sm:text-9xl md:text-7xl lg:text-8xl xl:text-9xl font-bold">
+              BLOGIFY
+            </h1>
           </div>
           <p className="pl-2 text-lg">Eat, Sleep, Code, Repeat.</p>
         </div>
         {/* get started button here */}
         <div
           ref={container}
-          className="container flex flex-wrap justify-center md:my-6 w-[60%] h-[30rem]"
+          className="mb-10 md:mb-0 w-full container flex flex-wrap justify-center md:my-6 md:h-[20rem] lg:h-[25rem] md:w-[55%] xl:h-[30rem]"
         ></div>
       </div>
       <TopPicks articles={articles.slice(0, 3)} />

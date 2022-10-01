@@ -2,12 +2,42 @@
   display: flex;
   flex-wrap: wrap;
   position: relative;
-  height: 8.5rem;
 }
+
+@media (min-width:300px){
+  .content{
+    height:6rem;
+  }
+}
+
+@media (min-width:640px){
+  .content{
+    height:9rem;
+  }
+}
+
+@media (min-width: 768px){
+  .content{
+    height:5.5rem;
+  }
+}
+
+ @media (min-width: 1024px) {
+  .content {
+    height: 7rem;
+  }
+} 
+
+
+@media (min-width: 1280px) {
+  .content {
+    height: 8.5rem;
+  }
+}
+
 
 .content h1 {
   color: #fff;
-  font-size: 8rem;
   position: absolute;
 }
 
