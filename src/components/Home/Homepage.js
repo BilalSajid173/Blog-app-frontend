@@ -6,7 +6,7 @@ import AllArticles from "../Article/AllArticles";
 import TopAuths from "./TopAuthors";
 import TopPicks from "./TopArticles";
 import lottie from "lottie-web";
-import classes from "./TextEffects.module.css";
+import classes from "../TextEffects/TextEffects.module.css";
 
 const articles = [
   {
@@ -110,7 +110,7 @@ const Home = () => {
       renderer: "svg",
       loop: true,
       autoplay: true,
-      animationData: require("./animation.json"),
+      animationData: require("../../Animations/animation.json"),
     });
 
     return () => instance.destroy();
