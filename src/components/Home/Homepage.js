@@ -1,10 +1,12 @@
-import React, { Fragment } from "react";
-import image from "../../Images/hpbgimg2.jpg";
+import React, { Fragment, useEffect, useRef } from "react";
+//import image from "../../Images/hpbgimg2.jpg";
 // import image1 from "../../Images/hpbgimg.png";
 import Button from "../UI/Button/Button";
 import AllArticles from "../Article/AllArticles";
 import TopAuths from "./TopAuthors";
 import TopPicks from "./TopArticles";
+import lottie from "lottie-web";
+import classes from "./TextEffects.module.css";
 
 const articles = [
   {
@@ -100,17 +102,45 @@ const authors = [
 const Home = () => {
   //   const isDark = localStorage.getItem("theme");
   //   console.log(isDark);
+
+  const container = useRef(null);
+  useEffect(() => {
+    const instance = lottie.loadAnimation({
+      container: container.current,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: require("./animation.json"),
+    });
+
+    return () => instance.destroy();
+  }, []);
   return (
     <Fragment>
-      <div className="relative flex flex-wrap justify-center mb-5 md:my-10">
-        {/* {isDark === null && (
+      {/* <div className="flex flex-wrap justify-center mb-5 md:my-10"> */}
+      {/* {isDark === null && (
           <img className="h-96 w-9/12" src={image1} alt="img"></img>
         )} */}
-        <img
+      {/* <img
           className="md:w-11/12 lg:w-9/12 lg:h-96"
           src={image}
           alt="img"
         ></img>
+      </div> */}
+      <div className="flex flex-wrap justify-center dark:text-gray-100">
+        <div className="w-[40%] flex flex-col pt-24 items-center pl-10">
+          <h1 className="text-2xl pl-2">WELCOME TO</h1>
+          <div className={`${classes.content} flex flex-wrap justify-center`}>
+            <h1 className="text-8xl font-bold">BLOGIFY</h1>
+            <h1 className="text-8xl font-bold">BLOGIFY</h1>
+          </div>
+          <p className="pl-2 text-lg">Eat, Sleep, Code, Repeat.</p>
+        </div>
+        {/* get started button here */}
+        <div
+          ref={container}
+          className="container flex flex-wrap justify-center md:my-6 w-[60%] h-[30rem]"
+        ></div>
       </div>
       <TopPicks articles={articles.slice(0, 3)} />
       <div className="flex flex-wrap justify-center">
