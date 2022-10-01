@@ -7,6 +7,7 @@ import TopAuths from "./TopAuthors";
 import TopPicks from "./TopArticles";
 import lottie from "lottie-web";
 import classes from "../TextEffects/TextEffects.module.css";
+import TypedText from "../TextEffects/TypedText";
 
 const articles = [
   {
@@ -138,7 +139,7 @@ const Home = () => {
               BLOGIFY
             </h1>
           </div>
-          <p className="pl-2 text-lg">Eat, Sleep, Code, Repeat.</p>
+          <TypedText />
         </div>
         {/* get started button here */}
         <div
