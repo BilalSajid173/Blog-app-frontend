@@ -101,12 +101,27 @@ const Home = () => {
         {/*handle active state for button bg color */}
         <div className="w-11/12 sm:w-9/12 md:w-6/12 lg:w-5/12 md:mr-6">
           <div className="mb-5">
-            <Button className="p-3 bg-blue-300 dark:bg-white rounded-sm font-bold mr-3 hover:bg-gray-200">
+            <Button className="p-1 md:p-3 py-2 bg-blue-300 dark:bg-white rounded-sm font-bold mr-1 md:mr-2 hover:bg-gray-200 mb-1">
               Latest
             </Button>
-            <Button className="p-3 bg-blue-300 dark:bg-white rounded-sm font-bold  hover:bg-gray-200">
+            <Button className="p-1 md:p-3 py-2 bg-blue-300 dark:bg-white rounded-sm font-bold mr-1 md:mr-2  hover:bg-gray-200 mb-1">
               Top Rated
             </Button>
+            <select
+              className="p-1 py-2 cursor-pointer rounded-sm md:p-3 border-0 outline-none bg-blue-300 dark:bg-white font-bold hover:bg-gray-200"
+              // value={enteredCategory}
+              // onChange={categoryChangeHandler}
+            >
+              <option disabled selected hidden>
+                Category
+              </option>
+              <option value="Web Development">Web Development</option>
+              <option value="Android Development">Android Development</option>
+              <option value="Technology">Technology</option>
+              <option value="Web Development">Web Development</option>
+              <option value="Android Development">Android Development</option>
+              <option value="Technology">Technology</option>
+            </select>
           </div>
           <AllArticles />
         </div>
