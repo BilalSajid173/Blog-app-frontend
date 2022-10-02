@@ -11,8 +11,10 @@ const TopAuths = (props) => {
             componentsProps={{
               tooltip: {
                 sx: {
+                  padding: "0",
                   bgcolor: "#A5F1E9",
                   minWidth: "25rem",
+                  borderRadius: "50px",
                 },
               },
             }}
