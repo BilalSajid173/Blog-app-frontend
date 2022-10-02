@@ -4,11 +4,11 @@ import React, { Fragment, useEffect, useRef } from "react";
 import Button from "../UI/Button/Button";
 import AllArticles from "../Article/AllArticles";
 import TopAuths from "./TopAuthors";
-import TopPicks from "./TopArticles";
+// import TopPicks from "./TopArticles";
 import lottie from "lottie-web";
 import classes from "../TextEffects/TextEffects.module.css";
 import TypedText from "../TextEffects/TypedText";
-
+import Carousel from "./Carousel";
 const articles = [
   {
     name: "Bilal Sajid",
@@ -147,7 +147,8 @@ const Home = () => {
           className="mb-10 md:mb-0 w-full container flex flex-wrap justify-center md:my-6 md:h-[20rem] lg:h-[25rem] md:w-[55%] xl:h-[30rem]"
         ></div>
       </div>
-      <TopPicks articles={articles.slice(0, 3)} />
+      {/* <TopPicks articles={articles.slice(0, 3)} /> */}
+      <Carousel />
       <div className="flex flex-wrap justify-center">
         {/*handle active state for button bg color */}
         <div className="w-11/12 sm:w-9/12 md:w-6/12 lg:w-5/12 md:mr-6">
