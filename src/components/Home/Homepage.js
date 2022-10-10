@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef } from "react";
+import React, { Fragment, useContext, useEffect, useRef } from "react";
 //import image from "../../Images/hpbgimg2.jpg";
 // import image1 from "../../Images/hpbgimg.png";
 import Button from "../UI/Button/Button";
@@ -9,6 +9,7 @@ import lottie from "lottie-web";
 import classes from "../TextEffects/TextEffects.module.css";
 import TypedText from "../TextEffects/TypedText";
 import Carousel from "./Carousel";
+import  DarkContextProvider  from "../../store/darkmode-context";
 
 const authors = [
   {
@@ -49,8 +50,8 @@ const authors = [
 ];
 
 const Home = () => {
-  //   const isDark = localStorage.getItem("theme");
-  //   console.log(isDark);
+    const {isDark} = useContext(DarkContextProvider)
+    console.log(isDark);
 
   const container = useRef(null);
   useEffect(() => {
@@ -59,11 +60,11 @@ const Home = () => {
       renderer: "svg",
       loop: true,
       autoplay: true,
-      animationData: require("../../Animations/animation.json"),
+      animationData: isDark ? require("../../Animations/animation.json") : require("../../Animations/animation2.json"),
     });
 
     return () => instance.destroy();
-  }, []);
+  }, [isDark]);
   return (
     <Fragment>
       {/* <div className="flex flex-wrap justify-center mb-5 md:my-10"> */}
