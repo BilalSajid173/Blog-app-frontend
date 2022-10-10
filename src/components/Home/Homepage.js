@@ -51,7 +51,6 @@ const authors = [
 
 const Home = () => {
     const {isDark} = useContext(DarkContextProvider)
-    console.log(isDark);
 
   const container = useRef(null);
   useEffect(() => {
