@@ -3,7 +3,10 @@ import LoginModal from "../SignUp&Login/LoginModal";
 import SignupModal from "../SignUp&Login/SignUpModal";
 import DarkContext from "../../store/darkmode-context";
 import AddNewArticle from "../AddArticle/AddArticle";
+import { useDispatch, useSelector } from "react-redux";
+
 const Navbar = () => {
+  // const isAuth = useSelector((state) => state.auth.isAuthenticated);
   const Darkctx = useContext(DarkContext);
   const [isLogin, setIsLogin] = useState(false);
   const [isDark, setIsDark] = useState(false);
@@ -12,22 +15,19 @@ const Navbar = () => {
   const [openSignupModal, setOpenSignupModal] = useState(false);
   const [openArticleModal, setOpenArticleModal] = useState(false);
 
-  const loginHandler = () => {
-    setOpenLoginModal((prev) => {
-      return !prev;
+  const loginModalHandler = () => {
+    setOpenSignupModal((prev) => {
+      return false;
     });
-    setIsLogin((prev) => {
-      return !prev;
-    });
-  };
-
-  const LoginCloseHandler = () => {
     setOpenLoginModal((prev) => {
       return !prev;
     });
   };
 
-  const SignupModalHandler = () => {
+  const signupModalHandler = () => {
+    setOpenLoginModal((prev) => {
+      return false;
+    });
     setOpenSignupModal((prev) => {
       return !prev;
     });
@@ -75,8 +75,16 @@ const Navbar = () => {
       {openArticleModal && (
         <AddNewArticle onClick={closeNewArticleModal}></AddNewArticle>
       )}
-      <LoginModal open={openLoginModal} handleClose={LoginCloseHandler} />
-      <SignupModal open={openSignupModal} handleClose={SignupModalHandler} />
+      <LoginModal
+        open={openLoginModal}
+        handleClose={loginModalHandler}
+        signUpHandler={signupModalHandler}
+      />
+      <SignupModal
+        open={openSignupModal}
+        handleClose={signupModalHandler}
+        loginHandler={loginModalHandler}
+      />
       <div className="sticky top-0 z-10 flex flex-wrap items-center p-2 pl-6 pr-6 sm:pl-8 sm:pr-8 lg:pl-12 lg:pr-12 bg-white border-b border-b-gray-200 shadow dark:bg-gray-900 dark:border-none dark:shadow-slate-600 dark:shadow-sm">
         <div className="w-fit font-serif text-3xl font-black mr-4 dark:text-white">
           BLOGIFY
@@ -102,7 +110,7 @@ const Navbar = () => {
           </button>
           {!isLogin && (
             <button
-              onClick={loginHandler}
+              onClick={loginModalHandler}
               className="transition-all duration-300 mr-2 px-2 py-1 hover:bg-blue-600 hover:text-white"
             >
               Login
@@ -110,7 +118,7 @@ const Navbar = () => {
           )}
           {!isLogin && (
             <button
-              onClick={SignupModalHandler}
+              onClick={signupModalHandler}
               className="transition-all duration-300 px-2 py-1 border border-blue-700 hover:bg-blue-600 hover:text-gray-100"
             >
               Create Account
@@ -169,7 +177,7 @@ const Navbar = () => {
         </div>
         {!isLogin && (
           <button
-            onClick={loginHandler}
+            onClick={loginModalHandler}
             className="transition-all duration-300 px-2 py-1 my-1 text-left hover:bg-blue-600 hover:text-white"
           >
             <i class="mr-2 p-2 fa-solid fa-arrow-right-to-bracket"></i> Login
@@ -177,7 +185,7 @@ const Navbar = () => {
         )}
         {!isLogin && (
           <button
-            onClick={SignupModalHandler}
+            onClick={signupModalHandler}
             className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"
           >
             <i class="mr-2 p-2 fa-sharp fa-solid fa-circle-plus"></i> Create
