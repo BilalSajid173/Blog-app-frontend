@@ -9,6 +9,8 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import DarkContext from "../../store/darkmode-context";
 import useHttp from "../../hooks/use-http";
 import useInput from "../../hooks/use-input";
@@ -49,6 +51,7 @@ const LoginModal = (props) => {
   const loginResponseHandler = (data) => {
     dispatch(authActions.login({ user: data.data, token: data.data.token }));
     props.handleClose();
+    toast.success("Login Successful!");
     resetEmail();
     resetpassword();
   };

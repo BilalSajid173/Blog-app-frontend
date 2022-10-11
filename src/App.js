@@ -1,9 +1,15 @@
 // import logo from './logo.svg';
 import "./App.css";
 import Mainpage from "./pages/Homepage";
+import { ToastContainer } from "react-toastify";
 
 function App() {
-  return <Mainpage />;
+  return (
+    <>
+      <Mainpage />
+      <ToastContainer />
+    </>
+  );
 }
 
 export default App;
