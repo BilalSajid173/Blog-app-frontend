@@ -3,7 +3,7 @@ import LoginModal from "../SignUp&Login/LoginModal";
 import SignupModal from "../SignUp&Login/SignUpModal";
 import DarkContext from "../../store/darkmode-context";
 import AddNewArticle from "../AddArticle/AddArticle";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = () => {
   // const isAuth = useSelector((state) => state.auth.isAuthenticated);

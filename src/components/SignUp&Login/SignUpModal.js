@@ -4,20 +4,22 @@ import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
-import { FormControl } from "@mui/material";
-import { InputLabel } from "@mui/material";
-import { OutlinedInput } from "@mui/material";
-import { Visibility } from "@mui/icons-material";
-import { VisibilityOff } from "@mui/icons-material";
+import { FormControl, InputLabel, OutlinedInput } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import DarkContext from "../../store/darkmode-context";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import useHttp from "../../hooks/use-http";
+import useInput from "../../hooks/use-input";
+// import { useDispatch } from "react-redux";
+// import { authActions } from "../../store/auth";
 
 const SignupModal = (props) => {
   const DarkCtx = useContext(DarkContext);
   const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
+  const { sendRequest: userSignup } = useHttp();
+  // const dispatch = useDispatch();
 
   const darkTheme = createTheme({
     palette: {
@@ -25,14 +27,64 @@ const SignupModal = (props) => {
     },
   });
 
+  const {
+    value: enteredEmail,
+    hasError: emailHasError,
+    valueChangeHandler: emailChangeHandler,
+    onBlurHandler: emailBlurHandler,
+    isValid: emailIsValid,
+    reset: resetEmail,
+  } = useInput((value) => value.trim().includes("@"));
+
+  const {
+    value: enteredName,
+    hasError: nameHasError,
+    valueChangeHandler: nameChangeHandler,
+    onBlurHandler: nameBlurHandler,
+    isValid: nameIsValid,
+    reset: resetName,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
+    value: enteredPassword,
+    hasError: passwordHasError,
+    valueChangeHandler: passwordChangeHandler,
+    onBlurHandler: passwordBlurHandler,
+    isValid: passwordIsValid,
+    reset: resetpassword,
+  } = useInput((value) => value.trim().length >= 6);
+
+  const signupResponseHandler = (data) => {
+    // console.log(data);
+    // dispatch(authActions.login({ user: data.data, token: data.data.token }));
+  };
+
+  const userSignupHandler = () => {
+    if (!emailIsValid || !passwordIsValid || !nameIsValid) return;
+    userSignup(
+      {
+        url: "http://localhost:8000/api/user/register/",
+        method: "POST",
+        body: {
+          name: enteredName,
+          email: enteredEmail,
+          password: enteredPassword,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      signupResponseHandler
+    );
+    resetEmail();
+    resetpassword();
+    resetName();
+  };
+
   const handleShowPassword = () => {
     setShowPassword((prev) => {
       return !prev;
     });
-  };
-
-  const passwordChangeHandler = (event) => {
-    setPassword(event.target.value);
   };
 
   //change input fields to error fields conditionally on errors
@@ -55,43 +107,62 @@ const SignupModal = (props) => {
             </div>
           </div>
           <div className="mb-4 w-[calc(100vw-5rem)] sm:w-96">
+            {nameHasError && (
+              <p className="text-red-600 mb-2">Please enter a name.</p>
+            )}
             <ThemeProvider theme={darkTheme}>
               <TextField
+                error={nameHasError}
                 className="w-full"
-                // color="red"
                 required
-                // sx={{ input: { color: "gray" } }}
                 id="outlined-basic"
-                label="Name"
+                label="text"
                 variant="outlined"
+                value={enteredName}
+                onChange={nameChangeHandler}
+                onBlur={nameBlurHandler}
               />
             </ThemeProvider>
           </div>
           <div className="mb-4 w-[calc(100vw-5rem)] sm:w-96">
+            {emailHasError && (
+              <p className="text-red-600 mb-2">Please enter a valid email.</p>
+            )}
             <ThemeProvider theme={darkTheme}>
               <TextField
+                error={emailHasError}
                 className="w-full"
-                // color="red"
                 required
-                // sx={{ input: { color: "gray" } }}
                 id="outlined-basic"
                 label="Email"
                 variant="outlined"
+                value={enteredEmail}
+                onChange={emailChangeHandler}
+                onBlur={emailBlurHandler}
               />
             </ThemeProvider>
           </div>
           <div className="mb-8 w-[calc(100vw-5rem)] sm:w-96">
+            {passwordHasError && (
+              <p className="text-red-600 mb-2">
+                Password should be a minimum of 8 characters long.
+              </p>
+            )}
             <ThemeProvider theme={darkTheme}>
-              <FormControl variant="outlined" className="w-full">
+              <FormControl
+                variant="outlined"
+                className="w-full"
+                error={passwordHasError}
+              >
                 <InputLabel htmlFor="outlined-adornment-password" required>
                   Password
                 </InputLabel>
-                {/*for the eye icon */}
                 <OutlinedInput
                   id="outlined-adornment-password"
                   type={showPassword ? "text" : "password"}
-                  value={password}
+                  value={enteredPassword}
                   onChange={passwordChangeHandler}
+                  onBlur={passwordBlurHandler}
                   required
                   endAdornment={
                     <InputAdornment position="end">
@@ -109,14 +180,17 @@ const SignupModal = (props) => {
               </FormControl>
             </ThemeProvider>
           </div>
-          <button className="mb-4 p-2 px-6 rounded bg-blue-500 hover:bg-blue-700 text-white">
+          <button
+            className="mb-4 p-2 px-6 rounded bg-blue-500 hover:bg-blue-700 text-white"
+            onClick={userSignupHandler}
+          >
             Sign Up!
           </button>
           <div className="flex flex-wrap justify-center">
-            {/* <span className="cursor-pointer mr-auto text-blue-600 dark:text-blue-300">
-              Forgot Password?
-            </span> */}
-            <span className="cursor-pointer text-blue-600 dark:text-blue-300">
+            <span
+              className="cursor-pointer text-blue-600 dark:text-blue-300"
+              onClick={props.loginHandler}
+            >
               Already Have an account? Sign In
             </span>
           </div>
