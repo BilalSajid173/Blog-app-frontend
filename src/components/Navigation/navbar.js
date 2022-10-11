@@ -3,17 +3,18 @@ import LoginModal from "../SignUp&Login/LoginModal";
 import SignupModal from "../SignUp&Login/SignUpModal";
 import DarkContext from "../../store/darkmode-context";
 import AddNewArticle from "../AddArticle/AddArticle";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "../../store/auth";
 
 const Navbar = () => {
-  // const isAuth = useSelector((state) => state.auth.isAuthenticated);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const Darkctx = useContext(DarkContext);
-  const [isLogin, setIsLogin] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [openSignupModal, setOpenSignupModal] = useState(false);
   const [openArticleModal, setOpenArticleModal] = useState(false);
+  const dispatch = useDispatch();
 
   const loginModalHandler = () => {
     setOpenSignupModal((prev) => {
@@ -34,9 +35,7 @@ const Navbar = () => {
   };
 
   const logoutHandler = () => {
-    setIsLogin((prev) => {
-      return !prev;
-    });
+    dispatch(authActions.logout());
   };
 
   const darkModeHandler = () => {
@@ -108,7 +107,7 @@ const Navbar = () => {
           <button className="transition-all duration-300 px-2 py-1 hover:bg-blue-600 hover:text-white">
             About
           </button>
-          {!isLogin && (
+          {!isLoggedIn && (
             <button
               onClick={loginModalHandler}
               className="transition-all duration-300 mr-2 px-2 py-1 hover:bg-blue-600 hover:text-white"
@@ -116,7 +115,7 @@ const Navbar = () => {
               Login
             </button>
           )}
-          {!isLogin && (
+          {!isLoggedIn && (
             <button
               onClick={signupModalHandler}
               className="transition-all duration-300 px-2 py-1 border border-blue-700 hover:bg-blue-600 hover:text-gray-100"
@@ -124,7 +123,7 @@ const Navbar = () => {
               Create Account
             </button>
           )}
-          {isLogin && (
+          {isLoggedIn && (
             <button
               onClick={openNewArticleModal}
               className="transition-all duration-300 px-2 py-1 hover:bg-blue-600 hover:text-white"
@@ -132,7 +131,7 @@ const Navbar = () => {
               New
             </button>
           )}
-          {isLogin && (
+          {isLoggedIn && (
             <button
               onClick={logoutHandler}
               className="transition-all duration-300 mr-2 px-2 py-1 hover:bg-blue-600 hover:text-white"
@@ -140,7 +139,7 @@ const Navbar = () => {
               Sign Out
             </button>
           )}
-          {isLogin && (
+          {isLoggedIn && (
             <button className="p-1.5 px-3 bg-slate-300 rounded-3xl">
               <i className="dark:text-black fa-regular fa-user"></i>
             </button>
@@ -175,7 +174,7 @@ const Navbar = () => {
             className="cursor-pointer fa-solid fa-xmark"
           ></i>
         </div>
-        {!isLogin && (
+        {!isLoggedIn && (
           <button
             onClick={loginModalHandler}
             className="transition-all duration-300 px-2 py-1 my-1 text-left hover:bg-blue-600 hover:text-white"
@@ -183,7 +182,7 @@ const Navbar = () => {
             <i class="mr-2 p-2 fa-solid fa-arrow-right-to-bracket"></i> Login
           </button>
         )}
-        {!isLogin && (
+        {!isLoggedIn && (
           <button
             onClick={signupModalHandler}
             className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"
@@ -192,12 +191,12 @@ const Navbar = () => {
             Account
           </button>
         )}
-        {isLogin && (
+        {isLoggedIn && (
           <button className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white">
             <i className="mr-2 p-2 px-2.5 fa-regular fa-user"></i> Account
           </button>
         )}
-        {isLogin && (
+        {isLoggedIn && (
           <button
             onClick={openNewArticleModal}
             className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"
@@ -205,7 +204,7 @@ const Navbar = () => {
             <i class="mr-2 p-2 px-2.5 fa-solid fa-plus"></i> New Article
           </button>
         )}
-        {isLogin && (
+        {isLoggedIn && (
           <button
             onClick={logoutHandler}
             className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"

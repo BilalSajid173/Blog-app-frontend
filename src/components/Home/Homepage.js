@@ -9,7 +9,7 @@ import lottie from "lottie-web";
 import classes from "../TextEffects/TextEffects.module.css";
 import TypedText from "../TextEffects/TypedText";
 import Carousel from "./Carousel";
-import  DarkContextProvider  from "../../store/darkmode-context";
+import DarkContextProvider from "../../store/darkmode-context";
 
 const authors = [
   {
@@ -50,7 +50,7 @@ const authors = [
 ];
 
 const Home = () => {
-    const {isDark} = useContext(DarkContextProvider)
+  const { isDark } = useContext(DarkContextProvider);
 
   const container = useRef(null);
   useEffect(() => {
@@ -59,7 +59,9 @@ const Home = () => {
       renderer: "svg",
       loop: true,
       autoplay: true,
-      animationData: isDark ? require("../../Animations/animation.json") : require("../../Animations/animation2.json"),
+      animationData: isDark
+        ? require("../../Animations/animation.json")
+        : require("../../Animations/animation2.json"),
     });
 
     return () => instance.destroy();

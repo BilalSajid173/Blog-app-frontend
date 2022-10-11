@@ -14,11 +14,12 @@ import useHttp from "../../hooks/use-http";
 import useInput from "../../hooks/use-input";
 // import { useDispatch } from "react-redux";
 // import { authActions } from "../../store/auth";
+import Loader from "../UI/Loader/Loader";
 
 const SignupModal = (props) => {
   const DarkCtx = useContext(DarkContext);
   const [showPassword, setShowPassword] = useState(false);
-  const { sendRequest: userSignup } = useHttp();
+  const { isLoading, sendRequest: userSignup } = useHttp();
   // const dispatch = useDispatch();
 
   const darkTheme = createTheme({
@@ -57,6 +58,10 @@ const SignupModal = (props) => {
   const signupResponseHandler = (data) => {
     // console.log(data);
     // dispatch(authActions.login({ user: data.data, token: data.data.token }));
+    props.handleClose();
+    resetEmail();
+    resetpassword();
+    resetName();
   };
 
   const userSignupHandler = () => {
@@ -76,9 +81,6 @@ const SignupModal = (props) => {
       },
       signupResponseHandler
     );
-    resetEmail();
-    resetpassword();
-    resetName();
   };
 
   const handleShowPassword = () => {
@@ -97,6 +99,11 @@ const SignupModal = (props) => {
         aria-describedby="modal-modal-description"
       >
         <div className="rounded-sm absolute flex flex-col top-2/4 left-2/4 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 p-4 py-10 dark:bg-slate-700 dark:text-white">
+          {isLoading && (
+            <div className="w-11/12 h-5/6 flex justify-center items-center absolute">
+              <Loader />
+            </div>
+          )}
           <div className="flex flex-wrap p-1 justify-center mb-4">
             <h2 className="text-xl sm:text-2xl text-gray-600 mr-auto dark:text-gray-200">
               Create Account
