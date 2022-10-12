@@ -4,12 +4,16 @@ import React, { Fragment, useEffect, useRef } from "react";
 import Button from "../UI/Button/Button";
 import AllArticles from "../Article/AllArticles";
 import TopAuths from "./TopAuthors";
-// import TopPicks from "./TopArticles";
 import lottie from "lottie-web";
 import classes from "../TextEffects/TextEffects.module.css";
 import TypedText from "../TextEffects/TypedText";
 import Carousel from "./Carousel";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import useHttp from "../../hooks/use-http";
+import { authActions } from "../../store/auth";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Loader from "../UI/Loader/Loader";
 
 const authors = [
   {
@@ -51,6 +55,32 @@ const authors = [
 
 const Home = () => {
   const isDark = useSelector((state) => state.mode.isDark);
+  const { isLoading, sendRequest: userAutoLogin } = useHttp();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const autoLoginHandler = (data) => {
+      dispatch(
+        authActions.login({
+          user: data.user,
+          token: localStorage.getItem("token"),
+        })
+      );
+      toast.success("Welcome Back!");
+    };
+    const token = localStorage.getItem("token");
+    if (token) {
+      userAutoLogin(
+        {
+          url: "http://localhost:8000/api/user/profile/",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        },
+        autoLoginHandler
+      );
+    }
+  }, [userAutoLogin, dispatch]);
 
   const container = useRef(null);
   useEffect(() => {
@@ -65,7 +95,7 @@ const Home = () => {
     });
 
     return () => instance.destroy();
-  }, [isDark]);
+  }, [isDark, isLoading]);
   return (
     <Fragment>
       {/* <div className="flex flex-wrap justify-center mb-5 md:my-10"> */}
@@ -78,97 +108,106 @@ const Home = () => {
           alt="img"
         ></img>
       </div> */}
-      <div className="flex flex-wrap justify-center dark:text-gray-100">
-        <div className="pt-10 mb-10 md:mb-0 w-full md:w-[45%] flex flex-col md:pt-24 items-center lg:pl-10">
-          <h1 className="text-2xl pl-2">WELCOME TO</h1>
-          <div className={`${classes.content} flex flex-wrap justify-center`}>
-            <h1 className="text-7xl sm:text-9xl md:text-7xl lg:text-8xl xl:text-9xl font-bold">
-              BLOGIFY
-            </h1>
-            <h1 className="text-7xl sm:text-9xl md:text-7xl lg:text-8xl xl:text-9xl font-bold">
-              BLOGIFY
-            </h1>
-          </div>
-          <TypedText />
+      {isLoading && (
+        <div className="w-11/12 h-5/6 flex justify-center items-center absolute">
+          <Loader />
         </div>
-        {/* get started button here */}
-        <div
-          ref={container}
-          className="mb-10 md:mb-0 w-full container flex flex-wrap justify-center md:my-6 md:h-[20rem] lg:h-[25rem] md:w-[55%] xl:h-[30rem]"
-        ></div>
-      </div>
+      )}
+      {!isLoading && (
+        <div className="flex flex-wrap justify-center dark:text-gray-100">
+          <div className="pt-10 mb-10 md:mb-0 w-full md:w-[45%] flex flex-col md:pt-24 items-center lg:pl-10">
+            <h1 className="text-2xl pl-2">WELCOME TO</h1>
+            <div className={`${classes.content} flex flex-wrap justify-center`}>
+              <h1 className="text-7xl sm:text-9xl md:text-7xl lg:text-8xl xl:text-9xl font-bold">
+                BLOGIFY
+              </h1>
+              <h1 className="text-7xl sm:text-9xl md:text-7xl lg:text-8xl xl:text-9xl font-bold">
+                BLOGIFY
+              </h1>
+            </div>
+            <TypedText />
+          </div>
+          {/* get started button here */}
+          <div
+            ref={container}
+            className="mb-10 md:mb-0 w-full container flex flex-wrap justify-center md:my-6 md:h-[20rem] lg:h-[25rem] md:w-[55%] xl:h-[30rem]"
+          ></div>
+        </div>
+      )}
       {/* <TopPicks articles={articles.slice(0, 3)} /> */}
-      <Carousel />
-      <div className="flex flex-wrap justify-center">
-        {/*handle active state for button bg color */}
-        <div className="w-11/12 sm:w-9/12 md:w-6/12 lg:w-5/12 md:mr-6">
-          <div className="mb-5">
-            <Button className="p-1 md:p-3 py-2 bg-blue-300 dark:bg-white rounded-sm font-bold mr-1 md:mr-2 hover:bg-gray-200 mb-1">
-              Latest
-            </Button>
-            <Button className="p-1 md:p-3 py-2 bg-blue-300 dark:bg-white rounded-sm font-bold mr-1 md:mr-2  hover:bg-gray-200 mb-1">
-              Top Rated
-            </Button>
-            <select
-              className="p-1 py-2 cursor-pointer rounded-sm md:p-3 border-0 outline-none bg-blue-300 dark:bg-white font-bold hover:bg-gray-200"
-              // value={enteredCategory}
-              // onChange={categoryChangeHandler}
-            >
-              <option disabled selected hidden>
-                Category
-              </option>
-              <option value="Web Development">Web Development</option>
-              <option value="Android Development">Android Development</option>
-              <option value="Technology">Technology</option>
-              <option value="Web Development">Web Development</option>
-              <option value="Android Development">Android Development</option>
-              <option value="Technology">Technology</option>
-            </select>
+      {!isLoading && <Carousel />}
+      {!isLoading && (
+        <div className="flex flex-wrap justify-center">
+          {/*handle active state for button bg color */}
+          <div className="w-11/12 sm:w-9/12 md:w-6/12 lg:w-5/12 md:mr-6">
+            <div className="mb-5">
+              <Button className="p-1 md:p-3 py-2 bg-blue-300 dark:bg-white rounded-sm font-bold mr-1 md:mr-2 hover:bg-gray-200 mb-1">
+                Latest
+              </Button>
+              <Button className="p-1 md:p-3 py-2 bg-blue-300 dark:bg-white rounded-sm font-bold mr-1 md:mr-2  hover:bg-gray-200 mb-1">
+                Top Rated
+              </Button>
+              <select
+                className="p-1 py-2 cursor-pointer rounded-sm md:p-3 border-0 outline-none bg-blue-300 dark:bg-white font-bold hover:bg-gray-200"
+                // value={enteredCategory}
+                // onChange={categoryChangeHandler}
+              >
+                <option disabled selected hidden>
+                  Category
+                </option>
+                <option value="Web Development">Web Development</option>
+                <option value="Android Development">Android Development</option>
+                <option value="Technology">Technology</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Android Development">Android Development</option>
+                <option value="Technology">Technology</option>
+              </select>
+            </div>
+            <AllArticles />
           </div>
-          <AllArticles />
-        </div>
-        <div className="hidden md:block sticky top-10 h-0 md:w-4/12 lg:w-3/12 dark:text-white">
-          <div className="mb-6">
-            <h2 className="font-semibold mb-4 mt-6">Top Authors</h2>
-            <TopAuths authors={authors} />
-          </div>
-          <div>
-            <h2 className="font-semibold">Popular Tags</h2>
-            <div className="flex flex-wrap mt-2">
-              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                <span>#javascript</span>
-              </div>
-              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                <span>#mongodb</span>
-              </div>
-              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                <span>#nodejs</span>
-              </div>
-              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                <span>#nextjs</span>
-              </div>
-              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                <span>#typescript</span>
-              </div>
-              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                <span>#javascript</span>
-              </div>
-              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                <span>#mongodb</span>
-              </div>
-              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                <span>#nodejs</span>
-              </div>
-              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                <span>#nextjs</span>
-              </div>
-              <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                <span>#typescript</span>
+          <div className="hidden md:block sticky top-10 h-0 md:w-4/12 lg:w-3/12 dark:text-white">
+            <div className="mb-6">
+              <h2 className="font-semibold mb-4 mt-6">Top Authors</h2>
+              <TopAuths authors={authors} />
+            </div>
+            <div>
+              <h2 className="font-semibold">Popular Tags</h2>
+              <div className="flex flex-wrap mt-2">
+                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                  <span>#javascript</span>
+                </div>
+                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                  <span>#mongodb</span>
+                </div>
+                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                  <span>#nodejs</span>
+                </div>
+                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                  <span>#nextjs</span>
+                </div>
+                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                  <span>#typescript</span>
+                </div>
+                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                  <span>#javascript</span>
+                </div>
+                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                  <span>#mongodb</span>
+                </div>
+                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                  <span>#nodejs</span>
+                </div>
+                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                  <span>#nextjs</span>
+                </div>
+                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
+                  <span>#typescript</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </Fragment>
   );
 };
