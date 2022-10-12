@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useRef } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 //import image from "../../Images/hpbgimg2.jpg";
 // import image1 from "../../Images/hpbgimg.png";
 import Button from "../UI/Button/Button";
@@ -9,7 +9,7 @@ import lottie from "lottie-web";
 import classes from "../TextEffects/TextEffects.module.css";
 import TypedText from "../TextEffects/TypedText";
 import Carousel from "./Carousel";
-import DarkContextProvider from "../../store/darkmode-context";
+import { useSelector } from "react-redux";
 
 const authors = [
   {
@@ -50,7 +50,7 @@ const authors = [
 ];
 
 const Home = () => {
-  const { isDark } = useContext(DarkContextProvider);
+  const isDark = useSelector((state) => state.mode.isDark);
 
   const container = useRef(null);
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
@@ -11,22 +11,21 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import DarkContext from "../../store/darkmode-context";
 import useHttp from "../../hooks/use-http";
 import useInput from "../../hooks/use-input";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/auth";
 import Loader from "../UI/Loader/Loader";
 
 const LoginModal = (props) => {
-  const DarkCtx = useContext(DarkContext);
   const [showPassword, setShowPassword] = useState(false);
   const { isLoading, sendRequest: userLogin } = useHttp();
   const dispatch = useDispatch();
+  const isDark = useSelector((state) => state.mode.isDark);
 
   const darkTheme = createTheme({
     palette: {
-      mode: DarkCtx.isDark ? "dark" : "light",
+      mode: isDark ? "dark" : "light",
     },
   });
 

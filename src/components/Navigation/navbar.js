@@ -1,14 +1,13 @@
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useState } from "react";
 import LoginModal from "../SignUp&Login/LoginModal";
 import SignupModal from "../SignUp&Login/SignUpModal";
-import DarkContext from "../../store/darkmode-context";
 import AddNewArticle from "../AddArticle/AddArticle";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/auth";
+import { modeActions } from "../../store/darkmode";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const Darkctx = useContext(DarkContext);
   const [isDark, setIsDark] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
@@ -39,7 +38,7 @@ const Navbar = () => {
   };
 
   const darkModeHandler = () => {
-    Darkctx.changeMode();
+    dispatch(modeActions.toggle());
     setIsDark((prev) => {
       if (prev) {
         document.body.classList.remove("bg-gray-800");
