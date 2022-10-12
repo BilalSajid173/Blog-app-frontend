@@ -61,7 +61,7 @@ const LoginModal = (props) => {
       {
         url: "http://localhost:8000/api/user/login/",
         method: "POST",
-        body: { email: enteredEmail, password: enteredPassword },
+        body: { email: enteredEmail.trim().toLowerCase(), password: enteredPassword.trim() },
         headers: {
           "Content-Type": "application/json",
         },

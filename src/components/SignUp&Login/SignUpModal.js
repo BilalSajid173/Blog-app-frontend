@@ -58,7 +58,7 @@ const SignupModal = (props) => {
     // console.log(data);
     // dispatch(authActions.login({ user: data.data, token: data.data.token }));
     props.handleClose();
-    toast.success("Login Successful!");
+    toast.success("Signup Successful!");
     resetEmail();
     resetpassword();
     resetName();
@@ -72,8 +72,8 @@ const SignupModal = (props) => {
         method: "POST",
         body: {
           name: enteredName,
-          email: enteredEmail,
-          password: enteredPassword,
+          email: enteredEmail.trim().toLowerCase(),
+          password: enteredPassword.trim(),
         },
         headers: {
           "Content-Type": "application/json",
