@@ -52,7 +52,7 @@ const SignupModal = (props) => {
     onBlurHandler: passwordBlurHandler,
     isValid: passwordIsValid,
     reset: resetpassword,
-  } = useInput((value) => value.trim().length >= 6);
+  } = useInput((value) => value.trim().length >= 8);
 
   const signupResponseHandler = (data) => {
     // console.log(data);

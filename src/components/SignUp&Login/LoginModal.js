@@ -45,7 +45,7 @@ const LoginModal = (props) => {
     onBlurHandler: passwordBlurHandler,
     isValid: passwordIsValid,
     reset: resetpassword,
-  } = useInput((value) => value.trim().length >= 6);
+  } = useInput((value) => value.trim().length >= 8);
 
   const loginResponseHandler = (data) => {
     dispatch(authActions.login({ user: data.data, token: data.data.token }));
