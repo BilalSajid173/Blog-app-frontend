@@ -43,11 +43,12 @@ const AllArticles = () => {
   return (
     <Fragment>
       {isLoading && (
-        <div className="w-11/12 h-5/6 flex justify-center items-center absolute">
+        <div className="w-full h-full flex justify-center items-center absolute">
           <Loader />
         </div>
       )}
-      {!isLoading && articles &&
+      {!isLoading &&
+        articles &&
         articles.map((article) => {
           return (
             <Article

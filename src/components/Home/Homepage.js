@@ -101,7 +101,7 @@ const Home = () => {
       {!isLoading && (
         <div className="flex flex-wrap justify-center">
           {/*handle active state for button bg color */}
-          <div className="w-11/12 sm:w-9/12 md:w-6/12 lg:w-5/12 md:mr-6">
+          <div className="w-11/12 sm:w-9/12 md:w-6/12 lg:w-5/12 md:mr-6 relative">
             <div className="mb-5">
               <Button className="p-1 md:p-3 py-2 bg-blue-300 dark:bg-white rounded-sm font-bold mr-1 md:mr-2 hover:bg-gray-200 mb-1">
                 Latest
