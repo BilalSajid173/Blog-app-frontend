@@ -27,7 +27,7 @@ const AllArticles = () => {
           tags: post.tags.split(", "),
         };
       });
-      console.log(posts);
+      // console.log(posts);
       setArticles(posts);
     };
     fetchArticles(

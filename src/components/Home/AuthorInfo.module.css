@@ -58,6 +58,7 @@
 }
 .media-buttons .link {
   display: flex;
+  cursor: pointer;
   align-items: center;
   justify-content: center;
   color: #fff;

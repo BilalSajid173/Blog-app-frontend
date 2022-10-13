@@ -24,21 +24,21 @@ const AuthInfo = (props) => {
 
         <div className={classes["media-buttons"]}>
           <a
-            href="hhtp"
+            href={props.fb}
             style={{ backgroundColor: "#4267b2" }}
             className={classes.link}
           >
             <i class="fa-brands fa-facebook-f"></i>
           </a>
           <a
-            href="hhtp"
+            href={props.twitter}
             style={{ backgroundColor: "#1da1f2" }}
             className={classes.link}
           >
             <i class="fa-brands fa-twitter"></i>
           </a>
           <a
-            href="hhtp"
+            href={props.linkedIn}
             style={{ backgroundColor: "#4070f4" }}
             className={classes.link}
           >
@@ -47,12 +47,12 @@ const AuthInfo = (props) => {
         </div>
         <div className="text-black w-full mt-2 dark:text-gray-50">
           <h2 className="text-[0.8rem]">{props.exp}</h2>
-          <h1 className="text-lg font-semibold">Location</h1>
+          {props.address && <h1 className="text-lg font-semibold">Location</h1>}
           <h2 className="text-[0.8rem]">{props.address}</h2>
-          <h1 className="text-lg font-semibold">Education</h1>
+          {props.edu && <h1 className="text-lg font-semibold">Education</h1>}
           <h2 className="text-[0.8rem]">{props.edu}</h2>
-          <h1 className="text-lg font-semibold">Work</h1>
-          <h2 className="text-[0.8rem]">Freelancer and Designer</h2>
+          {props.work && <h1 className="text-lg font-semibold">Work</h1>}
+          <h2 className="text-[0.8rem]">{props.work}</h2>
         </div>
       </div>
     </Fragment>

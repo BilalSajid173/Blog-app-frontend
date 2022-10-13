@@ -15,44 +15,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../UI/Loader/Loader";
 
-const authors = [
-  {
-    name: "Rashid",
-    address: "New York",
-    exp: "orem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    email: "rashid@gmail.com",
-    education: "Oxford Uni",
-  },
-  {
-    name: "Aatir",
-    address: "San Francisco",
-    exp: "orem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    email: "aatir@gmail.com",
-    education: "Cambridge Uni",
-  },
-  {
-    name: "Anzal",
-    address: "Paris",
-    exp: "orem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    email: "anzal@gmail.com",
-    education: "Yale Uni",
-  },
-  {
-    name: "Ijlal",
-    address: "Sambhal",
-    exp: "orem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    email: "ijlal@gmail.com",
-    education: "Oxford Uni",
-  },
-  {
-    name: "Faiz",
-    address: "Portugal",
-    exp: "orem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    email: "faiz@gmail.com",
-    education: "Cambridge Uni",
-  },
-];
-
 const Home = () => {
   const isDark = useSelector((state) => state.mode.isDark);
   const { isLoading, sendRequest: userAutoLogin } = useHttp();
@@ -168,7 +130,7 @@ const Home = () => {
           <div className="hidden md:block sticky top-10 h-0 md:w-4/12 lg:w-3/12 dark:text-white">
             <div className="mb-6">
               <h2 className="font-semibold mb-4 mt-6">Top Authors</h2>
-              <TopAuths authors={authors} />
+              <TopAuths />
             </div>
             <div>
               <h2 className="font-semibold">Popular Tags</h2>

@@ -1,11 +1,53 @@
 import { Avatar, Tooltip } from "@mui/material";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import image from "../../Images/userimg.png";
 import AuthInfo from "./AuthorInfo";
+import useHttp from "../../hooks/use-http";
 const TopAuths = (props) => {
+  const { sendRequest: fetchUsers } = useHttp();
+  const [authors, setAuthors] = useState(null);
+
+  useEffect(() => {
+    const compareFn = (a, b) => {
+      var x = a.followers.length + a.products.reduce(getSum, 0);
+      var y = b.followers.length + b.products.reduce(getSum, 0);
+      return x >= y;
+    };
+
+    const getSum = (total, itr) => {
+      return total + itr.commentCount + itr.likesCount;
+    };
+    const fetchUsersHandler = (data) => {
+      console.log(data);
+      data.sort(compareFn);
+      const writers = data.slice(0, 3).map((writer) => {
+        return {
+          name: writer.name,
+          education: writer.education,
+          address: writer.address,
+          email: writer.email,
+          exp: writer.experience,
+          userImgId: writer.profilePic,
+          fb: writer.facebook,
+          twitter: writer.twitter,
+          linkedIn: writer.linkedIn,
+        };
+      });
+      setAuthors(writers);
+    };
+    fetchUsers(
+      {
+        url: "http://localhost:8000/api/user/all/",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      fetchUsersHandler
+    );
+  }, [fetchUsers]);
   return (
     <Fragment>
-      {props.authors.map((author) => {
+      {authors && authors.map((author) => {
         return (
           <Tooltip
             componentsProps={{
