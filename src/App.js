@@ -2,11 +2,14 @@
 import "./App.css";
 import Mainpage from "./pages/Homepage";
 import { ToastContainer } from "react-toastify";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <Mainpage />
+      <Routes>
+        <Route path="/" element={<Mainpage />} />
+      </Routes>
       <ToastContainer />
     </>
   );

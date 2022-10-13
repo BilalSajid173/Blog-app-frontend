@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 import image from "../../Images/userimg.png";
 
 const Article = (props) => {
@@ -11,8 +12,10 @@ const Article = (props) => {
             <img src={image} className="" alt="img"></img>
           </div>
           <div className="ml-2 mr-auto flex flex-wrap flex-col items-start justify-start">
-            <h2 className="font-bold">{props.name}</h2>
-            <span>{props.time}</span>
+            <Link to="/profile" className="font-bold">
+              {props.name}
+            </Link>
+            <span>{props.createdAt}</span>
           </div>
           <div>
             <span>
@@ -22,8 +25,12 @@ const Article = (props) => {
           </div>
         </div>
         <div className="">
-          <h1 className="text-2xl font-bold">{props.heading}</h1>
-          <p>{props.content}</p>
+          <h1 className="text-2xl font-bold">{props.title}</h1>
+          <p>
+            {props.content}
+            {/*Single post + post id */}
+            <Link to="/singlepost">Read More</Link>
+          </p>
 
           <div className="flex flex-wrap mt-2">
             {props.tags.map((tag) => {

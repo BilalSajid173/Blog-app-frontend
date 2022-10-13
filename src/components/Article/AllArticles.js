@@ -1,75 +1,70 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Article from "./Article";
-
-const articles = [
-  {
-    name: "Bilal Sajid",
-    time: "10 minutes ago",
-    heading: "This is an Article and this is an article!!",
-    tags: ["javascript", "nodejs", "react", "mongodb"],
-    likes: 20,
-    comments: 10,
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    name: "Aatir Nadim",
-    time: "30 minutes ago",
-    heading: "This is an Article and this is an article!!",
-    tags: ["javascript", "react", "Algorithms"],
-    likes: 15,
-    comments: 50,
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    name: "Aaliyah Beg",
-    time: "20 minutes ago",
-    heading: "This is an Article and this is an article!!",
-    tags: ["javascript", "react", "Algorithms", "Mongodb"],
-    likes: 15,
-    comments: 20,
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    name: "Aatir Nadim",
-    time: "30 minutes ago",
-    heading: "This is an Article and this is an article!!",
-    tags: ["javascript", "react", "Algorithms"],
-    likes: 15,
-    comments: 50,
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    name: "Aaliyah Beg",
-    time: "20 minutes ago",
-    heading: "This is an Article and this is an article!!",
-    tags: ["javascript", "react", "Algorithms", "Mongodb"],
-    likes: 15,
-    comments: 20,
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.",
-  },
-];
+import useHttp from "../../hooks/use-http";
+import Loader from "../UI/Loader/Loader";
+// import { useSelector } from "react-redux";
 
 const AllArticles = () => {
+  const { isLoading, sendRequest: fetchArticles } = useHttp();
+  const [articles, setArticles] = useState(null);
+
+  useEffect(() => {
+    const autoLoginHandler = (data) => {
+      const posts = data.map((post) => {
+        return {
+          // isLiked: likedposts.includes(post._id) ? true : false,
+          // isSaved: savedposts.includes(post._id) ? true : false,
+          id: post.id,
+          name: post.user.name,
+          content: post.content.slice(0, 150) + "...",
+          createdAt: post.created_at,
+          authorId: post.user.id,
+          title: post.title,
+          imageId: post.imageId,
+          userimgId: post.user.profilePic,
+          commentsCount: post.commentCount,
+          likesCount: post.likesCount,
+          tags: post.tags.split(", "),
+        };
+      });
+      console.log(posts);
+      setArticles(posts);
+    };
+    fetchArticles(
+      {
+        url: "http://localhost:8000/api/products/all/",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      autoLoginHandler
+    );
+  }, [fetchArticles]);
   return (
     <Fragment>
-      {articles.map((article) => {
-        return (
-          <Article
-            name={article.name}
-            time={article.time}
-            heading={article.heading}
-            tags={article.tags}
-            likes={article.likes}
-            comments={article.comments}
-            content={article.content}
-          />
-        );
-      })}
+      {isLoading && (
+        <div className="w-11/12 h-5/6 flex justify-center items-center absolute">
+          <Loader />
+        </div>
+      )}
+      {!isLoading && articles &&
+        articles.map((article) => {
+          return (
+            <Article
+              name={article.name}
+              createdAt={article.createdAt}
+              title={article.title}
+              tags={article.tags}
+              likes={article.likesCount}
+              comments={article.commentsCount}
+              content={article.content}
+              userimgId={article.userimgId}
+              imageId={article.imageId}
+              authorId={article.authorId}
+              id={article.id}
+            />
+          );
+        })}
     </Fragment>
   );
 };
