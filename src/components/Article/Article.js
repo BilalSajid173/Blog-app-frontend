@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import image from "../../Images/userimg.png";
+import Moment from "react-moment";
 
 const Article = (props) => {
   return (
@@ -15,7 +16,7 @@ const Article = (props) => {
             <Link to="/profile" className="font-bold">
               {props.name}
             </Link>
-            <span>{props.createdAt}</span>
+            <Moment fromNow>{props.createdAt}</Moment>
           </div>
           <div>
             <span>
