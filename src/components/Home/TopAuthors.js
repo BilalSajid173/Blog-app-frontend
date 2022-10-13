@@ -3,6 +3,7 @@ import { Fragment, useEffect, useState } from "react";
 import image from "../../Images/userimg.png";
 import AuthInfo from "./AuthorInfo";
 import useHttp from "../../hooks/use-http";
+import { Link } from "react-router-dom";
 const TopAuths = (props) => {
   const { sendRequest: fetchUsers } = useHttp();
   const [authors, setAuthors] = useState(null);
@@ -18,7 +19,6 @@ const TopAuths = (props) => {
       return total + itr.commentCount + itr.likesCount;
     };
     const fetchUsersHandler = (data) => {
-      console.log(data);
       data.sort(compareFn);
       const writers = data.slice(0, 3).map((writer) => {
         return {
@@ -31,6 +31,7 @@ const TopAuths = (props) => {
           fb: writer.facebook,
           twitter: writer.twitter,
           linkedIn: writer.linkedIn,
+          id: writer.id,
         };
       });
       setAuthors(writers);
@@ -47,38 +48,42 @@ const TopAuths = (props) => {
   }, [fetchUsers]);
   return (
     <Fragment>
-      {authors && authors.map((author) => {
-        return (
-          <Tooltip
-            componentsProps={{
-              tooltip: {
-                sx: {
-                  padding: "0",
-                  bgcolor: "#A5F1E9",
-                  minWidth: "25rem",
-                  borderRadius: "50px",
+      {authors &&
+        authors.map((author) => {
+          return (
+            <Tooltip
+              componentsProps={{
+                tooltip: {
+                  sx: {
+                    padding: "0",
+                    bgcolor: "#A5F1E9",
+                    minWidth: "25rem",
+                    borderRadius: "50px",
+                  },
                 },
-              },
-            }}
-            title={
-              <AuthInfo
-                name={author.name}
-                edu={author.education}
-                address={author.address}
-                exp={author.exp}
-                email={author.email}
-              />
-            }
-            classes={{ tooltip: "dark:bg-gray-600" }}
-            placement="left"
-          >
-            <div className="cursor-pointer flex flex-wrap items-center rounded-sm p-2 my-1 bg-slate-200 hover:bg-slate-400 dark:bg-slate-600 dark:hover:bg-slate-500">
-              <Avatar className="mr-2 bg-white" src={image} />
-              <h2>{author.name}</h2>
-            </div>
-          </Tooltip>
-        );
-      })}
+              }}
+              title={
+                <AuthInfo
+                  name={author.name}
+                  edu={author.education}
+                  address={author.address}
+                  exp={author.exp}
+                  email={author.email}
+                />
+              }
+              classes={{ tooltip: "dark:bg-gray-600" }}
+              placement="left"
+            >
+              <Link to={`/${author.id}`}>
+                <div className="cursor-pointer flex flex-wrap items-center rounded-sm p-2 my-1 bg-slate-200 hover:bg-slate-400 dark:bg-slate-600 dark:hover:bg-slate-500">
+                  <Avatar className="mr-2 bg-white" src={image} />
+
+                  <h2>{author.name}</h2>
+                </div>
+              </Link>
+            </Tooltip>
+          );
+        })}
     </Fragment>
   );
 };
