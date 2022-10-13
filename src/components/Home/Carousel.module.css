@@ -3,3 +3,8 @@
   padding-bottom: 3rem;
   margin-bottom: 1rem;
 }
+
+/*same height rows*/
+.swiper-slide {
+  height: auto !important;
+}

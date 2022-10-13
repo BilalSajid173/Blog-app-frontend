@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -10,81 +10,58 @@ import classes from "./Carousel.module.css";
 
 import { Pagination } from "swiper";
 import TopArticle from "./TopArticle";
-
-const articles = [
-  {
-    name: "Bilal Sajid",
-    time: "10 minutes ago",
-    heading: "This is an Article and this is an article!!",
-    tags: ["javascript", "nodejs", "react", "mongodb"],
-    likes: 20,
-    comments: 10,
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    name: "Aatir Nadim",
-    time: "30 minutes ago",
-    heading: "This is an Article and this is an article!!",
-    tags: ["javascript", "react", "Algorithms"],
-    likes: 15,
-    comments: 50,
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    name: "Aaliyah Beg",
-    time: "20 minutes ago",
-    heading: "This is an Article and this is an article!!",
-    tags: ["javascript", "react", "Algorithms", "Mongodb"],
-    likes: 15,
-    comments: 20,
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    name: "Aatir Nadim",
-    time: "30 minutes ago",
-    heading: "This is an Article and this is an article!!",
-    tags: ["javascript", "react", "Algorithms"],
-    likes: 15,
-    comments: 50,
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    name: "Aaliyah Beg",
-    time: "20 minutes ago",
-    heading: "This is an Article and this is an article!!",
-    tags: ["javascript", "react", "Algorithms", "Mongodb"],
-    likes: 15,
-    comments: 20,
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    name: "Aatir Nadim",
-    time: "30 minutes ago",
-    heading: "This is an Article and this is an article!!",
-    tags: ["javascript", "react", "Algorithms"],
-    likes: 15,
-    comments: 50,
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    name: "Aaliyah Beg",
-    time: "20 minutes ago",
-    heading: "This is an Article and this is an article!!",
-    tags: ["javascript", "react", "Algorithms", "Mongodb"],
-    likes: 15,
-    comments: 20,
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.",
-  },
-];
+import useHttp from "../../hooks/use-http";
 
 const Carousel = () => {
+  const { sendRequest: fetchArticles } = useHttp();
+
+  const [articles, setArticles] = useState(null);
+
+  const shuffle = (arra1) => {
+    let ctr = arra1.length;
+    let temp;
+    let index;
+    while (ctr > 0) {
+      index = Math.floor(Math.random() * ctr);
+      ctr--;
+      temp = arra1[ctr];
+      arra1[ctr] = arra1[index];
+      arra1[index] = temp;
+    }
+    return arra1;
+  };
+
+  useEffect(() => {
+    const autoLoginHandler = (data) => {
+      data = shuffle(data).slice(0, 5);
+      const posts = data.map((post) => {
+        return {
+          id: post.id,
+          name: post.user.name,
+          content: post.content.slice(0, 200) + "...",
+          createdAt: post.created_at,
+          authorId: post.user.id,
+          title: post.title,
+          imageId: post.imageId,
+          userimgId: post.user.profilePic,
+          commentsCount: post.commentCount,
+          likesCount: post.likesCount,
+          tags: post.tags.split(", "),
+        };
+      });
+      setArticles(posts);
+    };
+    fetchArticles(
+      {
+        url: "http://localhost:8000/api/products/all/",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      autoLoginHandler
+    );
+  }, [fetchArticles]);
+
   return (
     <>
       <div className="px-[4%] md:px-[7%] lg:px-[7%] xl:px-[6%]">
@@ -114,13 +91,19 @@ const Carousel = () => {
           modules={[Pagination]}
           className={classes.mySwiper}
         >
-          {articles.map((article) => {
-            return (
-              <SwiperSlide>
-                <TopArticle title={article.heading} content={article.content} />
-              </SwiperSlide>
-            );
-          })}
+          {articles &&
+            articles.map((article) => {
+              return (
+                <SwiperSlide className={classes["swiper-slide"]}>
+                  <TopArticle
+                    title={article.heading}
+                    content={article.content}
+                    imageId={article.imageId}
+                    id={article.id}
+                  />
+                </SwiperSlide>
+              );
+            })}
         </Swiper>
       </div>
     </>
