@@ -17,6 +17,7 @@ import Loader from "../UI/Loader/Loader";
 
 const Home = () => {
   const isDark = useSelector((state) => state.mode.isDark);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const { isLoading, sendRequest: userAutoLogin } = useHttp();
   const dispatch = useDispatch();
 
@@ -31,7 +32,7 @@ const Home = () => {
       toast.success("Welcome Back!");
     };
     const token = localStorage.getItem("token");
-    if (token) {
+    if (token && !isLoggedIn) {
       userAutoLogin(
         {
           url: "http://localhost:8000/api/user/profile/",
@@ -42,7 +43,7 @@ const Home = () => {
         autoLoginHandler
       );
     }
-  }, [userAutoLogin, dispatch]);
+  }, [userAutoLogin, dispatch, isLoggedIn]);
 
   const container = useRef(null);
   useEffect(() => {
