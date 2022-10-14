@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useSelector, useDispatch } from "react-redux";
+import { postsActions } from "../../store/allposts";
 
 // Import Swiper styles
 import "swiper/css";
@@ -15,7 +17,9 @@ import useHttp from "../../hooks/use-http";
 const Carousel = () => {
   const { sendRequest: fetchArticles } = useHttp();
 
-  const [articles, setArticles] = useState(null);
+  // const [articles, setArticles] = useState(null);
+  const articles = useSelector((state) => state.posts.posts);
+  const dispatch = useDispatch();
 
   const shuffle = (arra1) => {
     let ctr = arra1.length;
@@ -49,18 +53,20 @@ const Carousel = () => {
           tags: post.tags.split(", "),
         };
       });
-      setArticles(posts);
+      dispatch(postsActions.savetopposts({ topposts: posts }));
     };
-    fetchArticles(
-      {
-        url: "http://localhost:8000/api/products/all/",
-        headers: {
-          "Content-Type": "application/json",
+    if (articles === null) {
+      fetchArticles(
+        {
+          url: "http://localhost:8000/api/products/all/",
+          headers: {
+            "Content-Type": "application/json",
+          },
         },
-      },
-      autoLoginHandler
-    );
-  }, [fetchArticles]);
+        autoLoginHandler
+      );
+    }
+  }, [fetchArticles, articles, dispatch]);
 
   return (
     <>

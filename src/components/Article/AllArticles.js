@@ -1,12 +1,14 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import Article from "./Article";
 import useHttp from "../../hooks/use-http";
 import Loader from "../UI/Loader/Loader";
-// import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { postsActions } from "../../store/allposts";
 
 const AllArticles = () => {
   const { isLoading, sendRequest: fetchArticles } = useHttp();
-  const [articles, setArticles] = useState(null);
+  const articles = useSelector((state) => state.posts.posts);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const autoLoginHandler = (data) => {
@@ -27,19 +29,20 @@ const AllArticles = () => {
           tags: post.tags.split(", "),
         };
       });
-      // console.log(posts);
-      setArticles(posts);
+      dispatch(postsActions.saveallposts({ posts: posts }));
     };
-    fetchArticles(
-      {
-        url: "http://localhost:8000/api/products/all/",
-        headers: {
-          "Content-Type": "application/json",
+    if (articles === null) {
+      fetchArticles(
+        {
+          url: "http://localhost:8000/api/products/all/",
+          headers: {
+            "Content-Type": "application/json",
+          },
         },
-      },
-      autoLoginHandler
-    );
-  }, [fetchArticles]);
+        autoLoginHandler
+      );
+    }
+  }, [fetchArticles, articles, dispatch]);
   return (
     <Fragment>
       {isLoading && (
