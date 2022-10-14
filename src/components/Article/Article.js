@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import image from "../../Images/userimg.png";
 import Moment from "react-moment";
+import BasicMenu from "./MenuOptions";
 
 const Article = (props) => {
   return (
@@ -19,10 +20,9 @@ const Article = (props) => {
             <Moment fromNow>{props.createdAt}</Moment>
           </div>
           <div>
-            <span>
-              <i class="fa-regular fa-star"></i>
-              {/* <i class="fa-solid fa-star"></i> */}
-            </span>
+            {/* <i class="fa-regular fa-star"></i> */}
+            {/* <i class="fa-solid fa-star"></i> */}
+            <BasicMenu authorId={props.authorId} />
           </div>
         </div>
         <div className="">

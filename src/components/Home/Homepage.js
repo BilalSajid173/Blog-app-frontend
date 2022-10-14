@@ -24,7 +24,7 @@ const Home = () => {
     const autoLoginHandler = (data) => {
       dispatch(
         authActions.login({
-          user: data.user,
+          user: data.User,
           token: localStorage.getItem("token"),
         })
       );
