@@ -11,8 +11,8 @@ import { useSelector } from "react-redux";
 
 const BasicMenu = (props) => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isDark = useSelector((state) => state.mode.isDark);
   const user = useSelector((state) => state.auth.user);
-  console.log(user);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -36,6 +36,12 @@ const BasicMenu = (props) => {
         <i class="fa-solid fa-ellipsis-vertical text-2xl"></i>
       </button>
       <Menu
+        PaperProps={{
+          style: {
+            background: isDark ? "#0369a1" : "#fff",
+            color: isDark ? "#fff" : "#000",
+          },
+        }}
         disableScrollLock={true}
         id="basic-menu"
         anchorEl={anchorEl}
@@ -44,6 +50,7 @@ const BasicMenu = (props) => {
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
+        classes={{ menu: "dark:bg-gray-600" }}
       >
         <MenuItem onClick={handleClose}>
           <StarBorderIcon className="mr-2" /> Save
