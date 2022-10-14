@@ -1,12 +1,16 @@
 import { Avatar, Tooltip } from "@mui/material";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import image from "../../Images/userimg.png";
 import AuthInfo from "./AuthorInfo";
 import useHttp from "../../hooks/use-http";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { userActions } from "../../store/topusers";
+
 const TopAuths = (props) => {
   const { sendRequest: fetchUsers } = useHttp();
-  const [authors, setAuthors] = useState(null);
+  const authors = useSelector((state) => state.users.topusers);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const compareFn = (a, b) => {
@@ -34,18 +38,21 @@ const TopAuths = (props) => {
           id: writer.id,
         };
       });
-      setAuthors(writers);
+      dispatch(userActions.savetopusers({ topusers: writers }));
     };
-    fetchUsers(
-      {
-        url: "http://localhost:8000/api/user/all/",
-        headers: {
-          "Content-Type": "application/json",
+    console.log(authors);
+    if (!authors) {
+      fetchUsers(
+        {
+          url: "http://localhost:8000/api/user/all/",
+          headers: {
+            "Content-Type": "application/json",
+          },
         },
-      },
-      fetchUsersHandler
-    );
-  }, [fetchUsers]);
+        fetchUsersHandler
+      );
+    }
+  }, [fetchUsers, dispatch, authors]);
   return (
     <Fragment>
       {authors &&

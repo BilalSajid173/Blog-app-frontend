@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialModeState = {
+const initialPostsState = {
   posts: null,
   topPosts: null,
 };
 
 const postsSlice = createSlice({
   name: "posts",
-  initialState: initialModeState,
+  initialState: initialPostsState,
   reducers: {
     saveallposts(state, action) {
       state.posts = action.payload.posts;
