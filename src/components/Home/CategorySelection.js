@@ -7,7 +7,7 @@ const CategoryPicker = () => {
     console.log(
       searchParams.get("tag"),
       searchParams.get("sort"),
-      searchParams.get("page_no")
+      searchParams.get("page")
     );
   };
   return (

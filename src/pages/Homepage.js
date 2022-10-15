@@ -7,7 +7,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 const Mainpage = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
-  console.log(search);
 
   React.useEffect(() => {
     if (search === "") {
