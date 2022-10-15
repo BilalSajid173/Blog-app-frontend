@@ -203,9 +203,9 @@ const AddNewArticle = (props) => {
                 <option value="Web Development">Web Development</option>
                 <option value="Android Development">Android Development</option>
                 <option value="Technology">Technology</option>
-                <option value="Web Development">Web Development</option>
-                <option value="Android Development">Android Development</option>
-                <option value="Technology">Technology</option>
+                <option value="ML/AI">ML/AI</option>
+                <option value="Cloud Computing">Cloud Computing</option>
+                <option value="BlockChain">BlockChain</option>
               </select>
               <div className="rounded-sm my-1 w-full border-0 outline-none">
                 <input

@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useRef } from "react";
 //import image from "../../Images/hpbgimg2.jpg";
 // import image1 from "../../Images/hpbgimg.png";
-import Button from "../UI/Button/Button";
 import AllArticles from "../Article/AllArticles";
 import TopAuths from "./TopAuthors";
 import lottie from "lottie-web";
@@ -14,6 +13,8 @@ import { authActions } from "../../store/auth";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../UI/Loader/Loader";
+import CategoryPicker from "./CategorySelection";
+import Tags from "./Tags";
 
 const Home = () => {
   const isDark = useSelector((state) => state.mode.isDark);
@@ -61,16 +62,6 @@ const Home = () => {
   }, [isDark, isLoading]);
   return (
     <Fragment>
-      {/* <div className="flex flex-wrap justify-center mb-5 md:my-10"> */}
-      {/* {isDark === null && (
-          <img className="h-96 w-9/12" src={image1} alt="img"></img>
-        )} */}
-      {/* <img
-          className="md:w-11/12 lg:w-9/12 lg:h-96"
-          src={image}
-          alt="img"
-        ></img>
-      </div> */}
       {isLoading && (
         <div className="w-11/12 h-5/6 flex justify-center items-center absolute">
           <Loader />
@@ -103,29 +94,7 @@ const Home = () => {
         <div className="flex flex-wrap justify-center">
           {/*handle active state for button bg color */}
           <div className="w-11/12 sm:w-9/12 md:w-6/12 lg:w-5/12 md:mr-6 relative">
-            <div className="mb-5">
-              <Button className="p-1 md:p-3 py-2 bg-blue-300 dark:bg-white rounded-sm font-bold mr-1 md:mr-2 hover:bg-gray-200 mb-1">
-                Latest
-              </Button>
-              <Button className="p-1 md:p-3 py-2 bg-blue-300 dark:bg-white rounded-sm font-bold mr-1 md:mr-2  hover:bg-gray-200 mb-1">
-                Top Rated
-              </Button>
-              <select
-                className="p-1 py-2 cursor-pointer rounded-sm md:p-3 border-0 outline-none bg-blue-300 dark:bg-white font-bold hover:bg-gray-200"
-                // value={enteredCategory}
-                // onChange={categoryChangeHandler}
-              >
-                <option disabled selected hidden>
-                  Category
-                </option>
-                <option value="Web Development">Web Development</option>
-                <option value="Android Development">Android Development</option>
-                <option value="Technology">Technology</option>
-                <option value="Web Development">Web Development</option>
-                <option value="Android Development">Android Development</option>
-                <option value="Technology">Technology</option>
-              </select>
-            </div>
+            <CategoryPicker />
             <AllArticles />
           </div>
           <div className="hidden md:block sticky top-10 h-0 md:w-4/12 lg:w-3/12 dark:text-white">
@@ -135,38 +104,7 @@ const Home = () => {
             </div>
             <div>
               <h2 className="font-semibold">Popular Tags</h2>
-              <div className="flex flex-wrap mt-2">
-                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                  <span>#javascript</span>
-                </div>
-                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                  <span>#mongodb</span>
-                </div>
-                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                  <span>#nodejs</span>
-                </div>
-                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                  <span>#nextjs</span>
-                </div>
-                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                  <span>#typescript</span>
-                </div>
-                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                  <span>#javascript</span>
-                </div>
-                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                  <span>#mongodb</span>
-                </div>
-                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                  <span>#nodejs</span>
-                </div>
-                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                  <span>#nextjs</span>
-                </div>
-                <div className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black">
-                  <span>#typescript</span>
-                </div>
-              </div>
+              <Tags />
             </div>
           </div>
         </div>
