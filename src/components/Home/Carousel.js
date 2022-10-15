@@ -18,7 +18,7 @@ const Carousel = () => {
   const { sendRequest: fetchArticles } = useHttp();
 
   // const [articles, setArticles] = useState(null);
-  const articles = useSelector((state) => state.posts.posts);
+  const articles = useSelector((state) => state.posts.topPosts);
   const dispatch = useDispatch();
 
   const shuffle = (arra1) => {
