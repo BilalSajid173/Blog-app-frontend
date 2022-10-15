@@ -11,7 +11,7 @@ const Mainpage = () => {
 
   React.useEffect(() => {
     if (search === "") {
-      navigate("/all?page=1&theme=black");
+      navigate("/all?page=1&sort=latest");
       return;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

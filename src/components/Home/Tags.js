@@ -14,7 +14,7 @@ const Tags = () => {
   const navigate = useNavigate();
 
   const clickHandler = (tag) => {
-    navigate(`/?tag=${tag.substr(1)}?page_no=1?sort=latest`);
+    navigate(`/all?page=1&sort=latest&tag=${tag.substr(1)}`);
   };
   return (
     <div className="flex flex-wrap mt-2">

@@ -8,7 +8,7 @@ const Article = (props) => {
   const navigate = useNavigate();
 
   const clickHandler = (tag) => {
-    navigate(`/?tag=${tag}&page_no=1&sort=latest`);
+    navigate(`/all?page=1&sort=latest&tag=${tag}`);
   };
   return (
     <Fragment>

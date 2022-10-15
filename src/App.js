@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<Navigate to="/all?page=1&theme=black" replace />}
+          element={<Navigate to="/all?page=1&sort=latest" replace />}
         />
         <Route path="/all" element={<Mainpage />} />
       </Routes>
