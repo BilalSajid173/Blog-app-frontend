@@ -6,6 +6,7 @@ const initialPostsState = {
   topPosts: null,
   tag: null,
   sort: "latest",
+  totalPosts: 100,
 };
 
 const postsSlice = createSlice({

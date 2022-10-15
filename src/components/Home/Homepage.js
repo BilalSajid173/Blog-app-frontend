@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Loader from "../UI/Loader/Loader";
 import CategoryPicker from "./CategorySelection";
 import Tags from "./Tags";
+import PaginationRounded from "../Paginator/Paginator";
 
 const Home = () => {
   const isDark = useSelector((state) => state.mode.isDark);
@@ -109,6 +110,9 @@ const Home = () => {
           </div>
         </div>
       )}
+      <div className="flex justify-center p-10">
+        <PaginationRounded />
+      </div>
     </Fragment>
   );
 };
