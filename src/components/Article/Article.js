@@ -1,10 +1,15 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import image from "../../Images/userimg.png";
 import Moment from "react-moment";
 import BasicMenu from "./MenuOptions";
 
 const Article = (props) => {
+  const navigate = useNavigate();
+
+  const clickHandler = (tag) => {
+    navigate(`/?tag=${tag}&page_no=1&sort=latest`);
+  };
   return (
     <Fragment>
       <div className="border border-gray-300 dark:border-gray-500 flex flex-col p-3 bg-white dark:bg-[#1a2027] dark:text-white my-3 first:mt-0 rounded-sm">
@@ -36,7 +41,10 @@ const Article = (props) => {
           <div className="flex flex-wrap mt-2">
             {props.tags.map((tag) => {
               return (
-                <div className="transition-all cursor-pointer rounded-sm w-fit p-1 mx-2 hover:bg-red-200 first:ml-0 dark:hover:text-black">
+                <div
+                  onClick={clickHandler.bind(null, tag)}
+                  className="transition-all cursor-pointer rounded-sm w-fit p-1 mx-2 hover:bg-red-200 first:ml-0 dark:hover:text-black"
+                >
                   <span>#{tag}</span>
                 </div>
               );

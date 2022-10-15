@@ -4,11 +4,13 @@ import useHttp from "../../hooks/use-http";
 import Loader from "../UI/Loader/Loader";
 import { useSelector, useDispatch } from "react-redux";
 import { postsActions } from "../../store/allposts";
+import { useNavigate } from "react-router-dom";
 
 const AllArticles = () => {
   const { isLoading, sendRequest: fetchArticles } = useHttp();
   const articles = useSelector((state) => state.posts.posts);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const autoLoginHandler = (data) => {
@@ -30,6 +32,7 @@ const AllArticles = () => {
         };
       });
       dispatch(postsActions.saveallposts({ posts: posts }));
+      navigate("/?sort=latest&page_no=1");
     };
     if (articles === null) {
       fetchArticles(
@@ -42,7 +45,7 @@ const AllArticles = () => {
         autoLoginHandler
       );
     }
-  }, [fetchArticles, articles, dispatch]);
+  }, [fetchArticles, articles, dispatch, navigate]);
   return (
     <Fragment>
       {isLoading && (
