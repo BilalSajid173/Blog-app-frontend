@@ -4,13 +4,13 @@ import useHttp from "../../hooks/use-http";
 import Loader from "../UI/Loader/Loader";
 import { useSelector, useDispatch } from "react-redux";
 import { postsActions } from "../../store/allposts";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const AllArticles = () => {
   const { isLoading, sendRequest: fetchArticles } = useHttp();
   const articles = useSelector((state) => state.posts.posts);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const autoLoginHandler = (data) => {
@@ -32,9 +32,10 @@ const AllArticles = () => {
         };
       });
       dispatch(postsActions.saveallposts({ posts: posts }));
-      navigate("/?sort=latest&page_no=1");
+      return;
     };
-    if (articles === null) {
+    if (articles === null && location.search !== "") {
+      console.log("here");
       fetchArticles(
         {
           url: "http://localhost:8000/api/products/all/",
@@ -45,7 +46,8 @@ const AllArticles = () => {
         autoLoginHandler
       );
     }
-  }, [fetchArticles, articles, dispatch, navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchArticles, articles, dispatch]);
   return (
     <Fragment>
       {isLoading && (

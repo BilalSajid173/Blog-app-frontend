@@ -2,13 +2,17 @@
 import "./App.css";
 import Mainpage from "./pages/Homepage";
 import { ToastContainer } from "react-toastify";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Mainpage />} />
+        <Route
+          path="/"
+          element={<Navigate to="/all?page=1&theme=black" replace />}
+        />
+        <Route path="/all" element={<Mainpage />} />
       </Routes>
       <ToastContainer />
     </>
