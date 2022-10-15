@@ -40,7 +40,7 @@ const TopAuths = (props) => {
       });
       dispatch(userActions.savetopusers({ topusers: writers }));
     };
-    console.log(authors);
+    // console.log(authors);
     if (!authors) {
       fetchUsers(
         {
