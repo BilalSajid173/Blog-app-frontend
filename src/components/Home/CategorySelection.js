@@ -1,24 +1,30 @@
 import Button from "../UI/Button/Button";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 const CategoryPicker = () => {
   const [searchParams] = useSearchParams();
-  const sortingOrderHandler = () => {
-    console.log(
-      searchParams.get("tag"),
-      searchParams.get("sort"),
-      searchParams.get("page")
-    );
+  const navigate = useNavigate();
+  const sortingOrderHandler = (sortingOrder) => {
+    console.log(searchParams.get("sort"), searchParams.get("page"));
+    const tag = searchParams.get("tag");
+    console.log(tag);
+    if (tag) navigate(`/all?page=1&sort=${sortingOrder}&tag=${tag}`);
+    else navigate(`/all?page=1&sort=${sortingOrder}`);
   };
   return (
     <div className="mb-5">
       <Button
-        onClick={sortingOrderHandler}
-        className="p-1 md:p-3 py-2 bg-blue-300 dark:bg-white rounded-sm font-bold mr-1 md:mr-2 hover:bg-gray-200 mb-1"
+        disabled={searchParams.get("sort") === "latest"}
+        onClick={sortingOrderHandler.bind(null, "latest")}
+        className="p-1 md:p-3 py-2 bg-blue-300 dark:bg-white rounded-sm font-bold mr-1 md:mr-2 hover:bg-gray-400 mb-1 disabled:bg-gray-200 disabled:hover:bg-gray-200 disabled:cursor-not-allowed"
       >
         Latest
       </Button>
-      <Button className="p-1 md:p-3 py-2 bg-blue-300 dark:bg-white rounded-sm font-bold mr-1 md:mr-2  hover:bg-gray-200 mb-1">
+      <Button
+        disabled={searchParams.get("sort") === "toprated"}
+        onClick={sortingOrderHandler.bind(null, "toprated")}
+        className="p-1 md:p-3 py-2 bg-blue-300 dark:bg-white rounded-sm font-bold mr-1 md:mr-2  hover:bg-gray-400 mb-1 disabled:bg-gray-200 disabled:hover:bg-gray-200 disabled:cursor-not-allowed"
+      >
         Top Rated
       </Button>
       {/* <select
