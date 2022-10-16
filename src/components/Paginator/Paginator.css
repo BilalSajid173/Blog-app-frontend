@@ -1,0 +1,19 @@
+.MuiPaginationItem-root.Mui-selected{
+    color: white !important;
+    background-color: #5103ff !important;
+}
+
+.MuiPaginationItem-root{
+    color: #370871 !important;
+    background-color: cyan !important;
+}
+
+.MuiPaginationItem-root.Mui-selected:hover{
+    color: white !important;
+    background-color: #6560ff !important;
+}
+
+.MuiPaginationItem-root:hover{
+    color: #370871 !important;
+    background-color: rgb(0, 191, 255) !important;
+}
