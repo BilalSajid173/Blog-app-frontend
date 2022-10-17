@@ -22,7 +22,7 @@ const Tags = () => {
         return (
           <div
             onClick={clickHandler.bind(null, tag)}
-            className="transition-all cursor-pointer rounded-sm w-fit p-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black"
+            className="transition-all cursor-pointer rounded-md mr-4 mb-2 w-fit p-2 border border-blue-300 hover:bg-blue-200 first:ml-0 dark:hover:text-black"
           >
             <span>{tag}</span>
           </div>

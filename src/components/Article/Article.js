@@ -12,7 +12,7 @@ const Article = (props) => {
   };
   return (
     <Fragment>
-      <div className="border border-gray-300 dark:border-gray-500 flex flex-col p-3 bg-white dark:bg-[#1a2027] dark:text-white my-3 first:mt-0 rounded-sm">
+      <div className="transition-all flex flex-col p-3 bg-white dark:bg-[#1a2027] dark:text-white my-3 first:mt-0 rounded shadow-lg">
         <div className="flex flex-wrap justify-center mb-2">
           {/*use cloudinary image component for image*/}
           <div className="rounded-full h-16 w-16 flex flex-wrap bg-gray-500 dark:bg-white">
@@ -35,15 +35,15 @@ const Article = (props) => {
           <p>
             {props.content}
             {/*Single post + post id */}
-            <Link to="/singlepost">Read More</Link>
+            <Link to="/singlepost" className="text-blue-500">Read More</Link>
           </p>
 
-          <div className="flex flex-wrap mt-2">
+          <div className="flex flex-wrap mt-4">
             {props.tags.map((tag) => {
               return (
                 <div
                   onClick={clickHandler.bind(null, tag)}
-                  className="transition-all cursor-pointer rounded-sm w-fit p-1 mx-2 hover:bg-red-200 first:ml-0 dark:hover:text-black"
+                  className="transition-all cursor-pointer rounded-md border border-blue-300 w-fit px-2 py-1 mx-2 hover:bg-blue-200 first:ml-0 dark:hover:text-black"
                 >
                   <span>#{tag}</span>
                 </div>
@@ -52,13 +52,13 @@ const Article = (props) => {
           </div>
           <div className="flex flex-wrap mt-3">
             <div className="flex flex-wrap transition-all cursor-pointer rounded-sm w-fit mx-2 ml-0  dark:hover:text-black">
-              <span className="p-1 px-2 border border-rose-400 rounded-sm  hover:bg-gray-100">
+              <span className="p-1 px-2 border border-blue-500 rounded-md  hover:bg-gray-100">
                 <i class="fas mr-2 fa-light fa-message"></i> {props.comments}{" "}
                 comments
               </span>
             </div>
             <div className="flex flex-wrap transition-all cursor-pointer rounded-sm w-fit mx-2  dark:hover:text-black">
-              <span className="p-1 px-2 border border-rose-400 rounded-sm  hover:bg-gray-100">
+              <span className="p-1 px-2 border border-blue-500 rounded-md  hover:bg-gray-100">
                 <i class="mr-2 fa-solid fa-heart"></i> {props.likes} likes
               </span>
             </div>
