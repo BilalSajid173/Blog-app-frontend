@@ -3,18 +3,20 @@ import "./App.css";
 import Mainpage from "./pages/Homepage";
 import { ToastContainer } from "react-toastify";
 import { Routes, Route, Navigate } from "react-router-dom";
-
+import ScrollToTop from "./components/UI/Scroll/ScrollToTop";
 function App() {
   return (
     <>
-      <Routes>
-        <Route
-          path="/"
-          element={<Navigate to="/all?page=1&sort=latest" replace />}
-        />
-        <Route path="/all" element={<Mainpage />} />
-      </Routes>
-      <ToastContainer />
+      <ScrollToTop>
+        <Routes>
+          <Route
+            path="/"
+            element={<Navigate to="/all?page=1&sort=latest" replace />}
+          />
+          <Route path="/all" element={<Mainpage />} />
+        </Routes>
+        <ToastContainer />
+      </ScrollToTop>
     </>
   );
 }
