@@ -16,7 +16,7 @@ const Content = () => {
   renderStuff = (
     <Pagination
       page={page}
-      count={Math.ceil(totalPosts / 5)}
+      count={Math.ceil(totalPosts / 10)}
       size="large"
       renderItem={(item) => (
         <PaginationItem
