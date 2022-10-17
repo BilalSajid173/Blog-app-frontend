@@ -11,10 +11,14 @@ const AllArticles = () => {
   const articles = useSelector((state) => state.posts.posts);
   const dispatch = useDispatch();
   const location = useLocation();
-
+  const query = new URLSearchParams(location.search);
+  const tag = query.get("tag");
+  const sort = query.get("sort");
+  const page = query.get("page");
+  console.log(tag, sort, page);
   useEffect(() => {
     const autoLoginHandler = (data) => {
-      const posts = data.map((post) => {
+      const posts = data.data.map((post) => {
         return {
           // isLiked: likedposts.includes(post._id) ? true : false,
           // isSaved: savedposts.includes(post._id) ? true : false,
@@ -31,14 +35,25 @@ const AllArticles = () => {
           tags: post.tags.split(", "),
         };
       });
-      dispatch(postsActions.saveallposts({ posts: posts }));
+      dispatch(
+        postsActions.saveallposts({ posts: posts, totalPosts: data.totalPosts })
+      );
       return;
     };
-    if (articles === null && location.search !== "") {
-      console.log("here");
+    if (location.search !== "") {
       fetchArticles(
         {
-          url: "http://localhost:8000/api/products/all/",
+          url: tag
+            ? "http://localhost:8000/api/products/filter/?page=" +
+              page +
+              "&sort=" +
+              sort +
+              "&tag=" +
+              tag
+            : "http://localhost:8000/api/products/filter/?page=" +
+              page +
+              "&sort=" +
+              sort,
           headers: {
             "Content-Type": "application/json",
           },
@@ -47,7 +62,7 @@ const AllArticles = () => {
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchArticles, articles, dispatch]);
+  }, [fetchArticles, dispatch, location.search]);
   return (
     <Fragment>
       {isLoading && (

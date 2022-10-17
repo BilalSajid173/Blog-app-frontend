@@ -11,12 +11,12 @@ const Content = () => {
   const page = parseInt(query.get("page") || "1", 10);
   const totalPosts = useSelector((state) => state.posts.totalPosts);
   const tag = query.get("tag");
-  const sort = query.get("sort")
+  const sort = query.get("sort");
   let renderStuff;
   renderStuff = (
     <Pagination
       page={page}
-      count={totalPosts / 5}
+      count={Math.ceil(totalPosts / 5)}
       size="large"
       renderItem={(item) => (
         <PaginationItem
