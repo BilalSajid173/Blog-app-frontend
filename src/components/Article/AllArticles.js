@@ -15,12 +15,17 @@ const AllArticles = () => {
   const tag = query.get("tag");
   const sort = query.get("sort");
   const page = query.get("page");
-  console.log(tag, sort, page);
+  const user = useSelector((state) => state.auth.user);
   useEffect(() => {
     const autoLoginHandler = (data) => {
+      let likedposts = user && user.likedPosts !== null ? user.likedPosts : [];
+      likedposts = likedposts.map((post) => {
+        return post.id;
+      });
+      // const savedposts = data.savedPosts ? data.savedPosts : [];
       const posts = data.data.map((post) => {
         return {
-          // isLiked: likedposts.includes(post._id) ? true : false,
+          isLiked: likedposts.includes(post.id) ? true : false,
           // isSaved: savedposts.includes(post._id) ? true : false,
           id: post.id,
           name: post.user.name,
@@ -40,7 +45,7 @@ const AllArticles = () => {
       );
       return;
     };
-    if (location.search !== "") {
+    if (location.search !== "" && user) {
       fetchArticles(
         {
           url: tag
@@ -62,7 +67,7 @@ const AllArticles = () => {
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchArticles, dispatch, location.search]);
+  }, [fetchArticles, dispatch, location.search, user]);
   return (
     <Fragment>
       {isLoading && (
@@ -79,13 +84,14 @@ const AllArticles = () => {
               createdAt={article.createdAt}
               title={article.title}
               tags={article.tags}
-              likes={article.likesCount}
+              likesCount={article.likesCount}
               comments={article.commentsCount}
               content={article.content}
               userimgId={article.userimgId}
               imageId={article.imageId}
               authorId={article.authorId}
               id={article.id}
+              isLiked={article.isLiked}
             />
           );
         })}

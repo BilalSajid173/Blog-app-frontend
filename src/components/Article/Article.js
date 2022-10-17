@@ -1,11 +1,46 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import image from "../../Images/userimg.png";
 import Moment from "react-moment";
 import BasicMenu from "./MenuOptions";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import CommentIcon from "@mui/icons-material/Comment";
+import useHttp from "../../hooks/use-http";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Article = (props) => {
   const navigate = useNavigate();
+  console.log(props.isLiked)
+  const [isLiked, setIsLiked] = useState(props.isLiked);
+  let likesCount = props.likesCount;
+  const { sendRequest: likePost } = useHttp();
+  const token = useSelector((state) => state.auth.token);
+
+  const likeResponseHandler = (data) => {
+    console.log(data);
+    likesCount = isLiked ? likesCount - 1 : likesCount + 1;
+    setIsLiked((prevState) => {
+      !prevState && toast.success("Post liked");
+      return !prevState;
+    });
+  };
+
+  const likeHandler = () => {
+    likePost(
+      {
+        url:
+          `http://localhost:8000/api/user/${isLiked ? `unlikepost/${props.id}/` : `likepost/${props.id}/`}`,
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      },
+      likeResponseHandler
+    );
+  };
 
   const clickHandler = (tag) => {
     navigate(`/all?page=1&sort=latest&tag=${tag}`);
@@ -35,7 +70,9 @@ const Article = (props) => {
           <p>
             {props.content}
             {/*Single post + post id */}
-            <Link to="/singlepost" className="text-blue-500">Read More</Link>
+            <Link to="/singlepost" className="text-blue-500">
+              Read More
+            </Link>
           </p>
 
           <div className="flex flex-wrap mt-4">
@@ -51,15 +88,19 @@ const Article = (props) => {
             })}
           </div>
           <div className="flex flex-wrap mt-3">
-            <div className="flex flex-wrap transition-all cursor-pointer rounded-sm w-fit mx-2 ml-0  dark:hover:text-black">
+            <div className="flex flex-wrap justify-center items-center transition-all cursor-pointer rounded-sm w-fit mx-2 ml-0  dark:hover:text-black">
               <span className="p-1 px-2 border border-blue-500 rounded-md  hover:bg-gray-100">
-                <i class="fas mr-2 fa-light fa-message"></i> {props.comments}{" "}
-                comments
+                <CommentIcon /> {props.comments} comments
               </span>
             </div>
-            <div className="flex flex-wrap transition-all cursor-pointer rounded-sm w-fit mx-2  dark:hover:text-black">
-              <span className="p-1 px-2 border border-blue-500 rounded-md  hover:bg-gray-100">
-                <i class="mr-2 fa-solid fa-heart"></i> {props.likes} likes
+            <div className="flex flex-wrap justify-center items-center transition-all cursor-pointer rounded-sm w-fit mx-2  dark:hover:text-black">
+              <span
+                className="p-1 px-2 border border-blue-500 rounded-md  hover:bg-gray-100"
+                onClick={likeHandler}
+              >
+                {isLiked && <FavoriteIcon className="mr-2" />}
+                {!isLiked && <FavoriteBorderIcon className="mr-2" />}
+                {likesCount} likes
               </span>
             </div>
           </div>
