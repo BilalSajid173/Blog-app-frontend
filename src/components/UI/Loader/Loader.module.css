@@ -41,7 +41,7 @@
   aspect-ratio: 1;
   border-radius: 50%;
   padding: 1px;
-  background: conic-gradient(#0000 10%, #251013) content-box;
+  background: conic-gradient(rgba(79, 77, 170, 0.986) 10%, #7680f8) content-box;
   -webkit-mask: repeating-conic-gradient(
       #0000 0deg,
       #000 1deg 20deg,

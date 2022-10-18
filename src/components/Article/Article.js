@@ -11,21 +11,27 @@ import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { authActions } from "../../store/auth";
+import Loader1 from "../UI/Loader/Loader1";
 
 const Article = (props) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [isLiked, setIsLiked] = useState(props.isLiked);
   const [likesCount, setLikesCount] = useState(props.likesCount);
-  const { sendRequest: likePost } = useHttp();
+  const { isLoading, sendRequest: likePost } = useHttp();
   const token = useSelector((state) => state.auth.token);
 
   const likeResponseHandler = (data) => {
-    const like = isLiked
-    dispatch(authActions.updateLikedPostsCount({increase: like ? false : true, id: props.id}))
-    setLikesCount(prev => {
-      return like ? likesCount - 1 : likesCount + 1
-    })
+    const like = isLiked;
+    dispatch(
+      authActions.updateLikedPostsCount({
+        increase: like ? false : true,
+        id: props.id,
+      })
+    );
+    setLikesCount((prev) => {
+      return like ? likesCount - 1 : likesCount + 1;
+    });
     setIsLiked((prevState) => {
       !prevState && toast.success("Post liked");
       return !prevState;
@@ -100,9 +106,14 @@ const Article = (props) => {
             </div>
             <div className="flex flex-wrap justify-center items-center transition-all cursor-pointer rounded-sm w-fit mx-2  dark:hover:text-black">
               <span
-                className="p-1 px-2 border border-blue-500 rounded-md  hover:bg-gray-100"
+                className="p-1 px-2 border border-blue-500 rounded-md  hover:bg-gray-100 relative"
                 onClick={likeHandler}
               >
+                {isLoading && (
+                  <div className="flex justify-center absolute w-full top-0 left-0 z-40">
+                    <Loader1 />
+                  </div>
+                )}
                 {isLiked && <FavoriteIcon className="mr-2" />}
                 {!isLiked && <FavoriteBorderIcon className="mr-2" />}
                 {likesCount} likes
