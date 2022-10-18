@@ -16,12 +16,11 @@ const AllArticles = () => {
   const sort = query.get("sort");
   const page = query.get("page");
   const user = useSelector((state) => state.auth.user);
+  const likedPosts = useSelector((state) => state.auth.likedPosts);
   useEffect(() => {
     const autoLoginHandler = (data) => {
-      let likedposts = user && user.likedPosts !== null ? user.likedPosts : [];
-      likedposts = likedposts.map((post) => {
-        return post.id;
-      });
+      let likedposts = likedPosts ? likedPosts : [];
+      console.log(likedposts);
       // const savedposts = data.savedPosts ? data.savedPosts : [];
       const posts = data.data.map((post) => {
         return {

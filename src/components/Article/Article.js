@@ -7,21 +7,25 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CommentIcon from "@mui/icons-material/Comment";
 import useHttp from "../../hooks/use-http";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { authActions } from "../../store/auth";
 
 const Article = (props) => {
   const navigate = useNavigate();
-  console.log(props.isLiked)
+  const dispatch = useDispatch()
   const [isLiked, setIsLiked] = useState(props.isLiked);
-  let likesCount = props.likesCount;
+  const [likesCount, setLikesCount] = useState(props.likesCount);
   const { sendRequest: likePost } = useHttp();
   const token = useSelector((state) => state.auth.token);
 
   const likeResponseHandler = (data) => {
-    console.log(data);
-    likesCount = isLiked ? likesCount - 1 : likesCount + 1;
+    const like = isLiked
+    dispatch(authActions.updateLikedPostsCount({increase: like ? false : true, id: props.id}))
+    setLikesCount(prev => {
+      return like ? likesCount - 1 : likesCount + 1
+    })
     setIsLiked((prevState) => {
       !prevState && toast.success("Post liked");
       return !prevState;
@@ -31,8 +35,9 @@ const Article = (props) => {
   const likeHandler = () => {
     likePost(
       {
-        url:
-          `http://localhost:8000/api/user/${isLiked ? `unlikepost/${props.id}/` : `likepost/${props.id}/`}`,
+        url: `http://localhost:8000/api/user/${
+          isLiked ? `unlikepost/${props.id}/` : `likepost/${props.id}/`
+        }`,
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,
