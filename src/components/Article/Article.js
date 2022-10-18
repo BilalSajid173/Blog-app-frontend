@@ -73,7 +73,11 @@ const Article = (props) => {
           <div>
             {/* <i class="fa-regular fa-star"></i> */}
             {/* <i class="fa-solid fa-star"></i> */}
-            <BasicMenu authorId={props.authorId} />
+            <BasicMenu
+              authorId={props.authorId}
+              postid={props.id}
+              isSaved={props.isSaved}
+            />
           </div>
         </div>
         <div className="">

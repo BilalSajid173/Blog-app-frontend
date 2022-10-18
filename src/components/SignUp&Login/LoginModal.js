@@ -55,6 +55,9 @@ const LoginModal = (props) => {
         likedPosts: data.data.likedPosts.map((post) => {
           return post.id;
         }),
+        savedPosts: data.data.savedPosts.map((post) => {
+          return post.id;
+        }),
       })
     );
     props.handleClose();

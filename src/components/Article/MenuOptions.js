@@ -1,19 +1,27 @@
-import * as React from "react";
+import { useState } from "react";
 // import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 // import MoreVertIcon from "@mui/icons-material/MoreVert";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import StarIcon from "@mui/icons-material/Star";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-// import StarIcon from '@mui/icons-material/Star';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import useHttp from "../../hooks/use-http";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { authActions } from "../../store/auth";
 
 const BasicMenu = (props) => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const isDark = useSelector((state) => state.mode.isDark);
   const user = useSelector((state) => state.auth.user);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const dispatch = useDispatch();
+  const [isSaved, setIsSaved] = useState(props.isSaved);
+  const { sendRequest: savePost } = useHttp();
+  const token = useSelector((state) => state.auth.token);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -22,6 +30,35 @@ const BasicMenu = (props) => {
     setAnchorEl(null);
   };
 
+  const saveResponseHandler = (data) => {
+    const like = isSaved;
+    dispatch(
+      authActions.updateSavedPosts({
+        save: like ? false : true,
+        id: props.postid,
+      })
+    );
+    setIsSaved((prevState) => {
+      !prevState && toast.success("Post liked");
+      return !prevState;
+    });
+    handleClose();
+  };
+
+  const saveHandler = () => {
+    savePost(
+      {
+        url: `http://localhost:8000/api/user/${
+          isSaved ? `unsavepost/${props.postid}/` : `savepost/${props.postid}/`
+        }`,
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      },
+      saveResponseHandler
+    );
+  };
   return (
     <div>
       <button
@@ -52,8 +89,10 @@ const BasicMenu = (props) => {
         }}
         classes={{ menu: "dark:bg-gray-600" }}
       >
-        <MenuItem onClick={handleClose}>
-          <StarBorderIcon className="mr-2" /> Save
+        <MenuItem onClick={saveHandler}>
+          {!isSaved && <StarBorderIcon className="mr-2" />}
+          {isSaved && <StarIcon className="mr-2" />}
+          {`${isSaved ? "Saved" : "Save"}`}
         </MenuItem>
         {isLoggedIn && user && user.id === props.authorId && (
           <MenuItem onClick={handleClose}>

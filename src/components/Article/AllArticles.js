@@ -17,14 +17,15 @@ const AllArticles = () => {
   const page = query.get("page");
   const user = useSelector((state) => state.auth.user);
   const likedPosts = useSelector((state) => state.auth.likedPosts);
+  const savedPosts = useSelector((state) => state.auth.savedPosts);
   useEffect(() => {
     const autoLoginHandler = (data) => {
       let likedposts = likedPosts ? likedPosts : [];
-      // const savedposts = data.savedPosts ? data.savedPosts : [];
+      let savedposts = savedPosts ? savedPosts : [];
       const posts = data.data.map((post) => {
         return {
           isLiked: likedposts.includes(post.id) ? true : false,
-          // isSaved: savedposts.includes(post._id) ? true : false,
+          isSaved: savedposts.includes(post.id) ? true : false,
           id: post.id,
           name: post.user.name,
           content: post.content.slice(0, 250) + "...",
@@ -90,6 +91,7 @@ const AllArticles = () => {
               authorId={article.authorId}
               id={article.id}
               isLiked={article.isLiked}
+              isSaved={article.isSaved}
             />
           );
         })}

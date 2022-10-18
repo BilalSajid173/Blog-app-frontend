@@ -32,6 +32,9 @@ const Home = () => {
           likedPosts: data.User.likedPosts.map((post) => {
             return post.id;
           }),
+          savedPosts: data.User.savedPosts.map((post) => {
+            return post.id;
+          }),
         })
       );
       toast.success("Welcome Back!");
