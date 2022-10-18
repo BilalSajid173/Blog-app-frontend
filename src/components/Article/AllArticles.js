@@ -20,7 +20,6 @@ const AllArticles = () => {
   useEffect(() => {
     const autoLoginHandler = (data) => {
       let likedposts = likedPosts ? likedPosts : [];
-      console.log(likedposts);
       // const savedposts = data.savedPosts ? data.savedPosts : [];
       const posts = data.data.map((post) => {
         return {
@@ -44,7 +43,7 @@ const AllArticles = () => {
       );
       return;
     };
-    if (location.search !== "" && user) {
+    if (location.search !== "") {
       fetchArticles(
         {
           url: tag

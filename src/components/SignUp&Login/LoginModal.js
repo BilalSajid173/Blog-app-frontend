@@ -48,7 +48,15 @@ const LoginModal = (props) => {
   } = useInput((value) => value.trim().length >= 8);
 
   const loginResponseHandler = (data) => {
-    dispatch(authActions.login({ user: data.data, token: data.data.token }));
+    dispatch(
+      authActions.login({
+        user: data.data,
+        token: data.data.token,
+        likedPosts: data.data.likedPosts.map((post) => {
+          return post.id;
+        }),
+      })
+    );
     props.handleClose();
     toast.success("Login Successful!");
     resetEmail();
@@ -61,7 +69,10 @@ const LoginModal = (props) => {
       {
         url: "http://localhost:8000/api/user/login/",
         method: "POST",
-        body: { email: enteredEmail.trim().toLowerCase(), password: enteredPassword.trim() },
+        body: {
+          email: enteredEmail.trim().toLowerCase(),
+          password: enteredPassword.trim(),
+        },
         headers: {
           "Content-Type": "application/json",
         },
