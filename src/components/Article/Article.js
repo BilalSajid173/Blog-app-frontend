@@ -12,11 +12,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { authActions } from "../../store/auth";
 import Loader1 from "../UI/Loader/Loader1";
+import ViewComments from "../Comments/Comment";
 
 const Article = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isLiked, setIsLiked] = useState(props.isLiked);
+  const [showCommentsModal, setShowCommentsModal] = useState(false);
   const [likesCount, setLikesCount] = useState(props.likesCount);
   const { isLoading, sendRequest: likePost } = useHttp();
   const token = useSelector((state) => state.auth.token);
@@ -53,11 +55,17 @@ const Article = (props) => {
     );
   };
 
+  const CommentsModalHandler = () => {
+    setShowCommentsModal((prev) => {
+      return !prev;
+    });
+  };
   const clickHandler = (tag) => {
     navigate(`/all?page=1&sort=latest&tag=${tag}`);
   };
   return (
     <Fragment>
+      {showCommentsModal && <ViewComments onClick={CommentsModalHandler} />}
       <div className="transition-all flex flex-col p-3 bg-white dark:bg-[#1a2027] dark:text-white my-3 first:mt-0 rounded shadow-lg">
         <div className="flex flex-wrap justify-center mb-2">
           {/*use cloudinary image component for image*/}
@@ -104,7 +112,10 @@ const Article = (props) => {
           </div>
           <div className="flex flex-wrap mt-3">
             <div className="flex flex-wrap justify-center items-center transition-all cursor-pointer rounded-sm w-fit mx-2 ml-0  dark:hover:text-black">
-              <span className="p-1 px-2 border border-blue-500 rounded-md  hover:bg-gray-100">
+              <span
+                onClick={CommentsModalHandler}
+                className="p-1 px-2 border border-blue-500 rounded-md  hover:bg-gray-100"
+              >
                 <CommentIcon /> {props.comments} comments
               </span>
             </div>
