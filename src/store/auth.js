@@ -6,6 +6,9 @@ const initialAuthState = {
   user: null,
   likedPosts: null,
   savedPosts: null,
+  comments: null,
+  likedComments: null,
+  dislikedComments: null,
 };
 
 const authSlice = createSlice({
@@ -19,6 +22,9 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       state.likedPosts = action.payload.likedPosts;
       state.savedPosts = action.payload.savedPosts;
+      state.comments = action.payload.comments;
+      state.likedComments = action.payload.likedComments;
+      state.dislikedComments = action.payload.dislikedComments;
     },
     logout(state) {
       localStorage.removeItem("token");
@@ -27,6 +33,9 @@ const authSlice = createSlice({
       state.user = null;
       state.likedPosts = null;
       state.savedPosts = null;
+      state.comments = null;
+      state.likedComments = null;
+      state.dislikedComments = null;
     },
     updateLikedPostsCount(state, action) {
       if (action.payload.increase) {
@@ -42,6 +51,33 @@ const authSlice = createSlice({
         state.savedPosts.push(action.payload.id);
       } else {
         state.savedPosts = state.savedPosts.filter((id) => {
+          return id !== action.payload.id;
+        });
+      }
+    },
+    updateComments(state, action) {
+      if (action.payload.add) {
+        state.comments.push(action.payload.id);
+      } else {
+        state.comments = state.comments.filter((id) => {
+          return id !== action.payload.id;
+        });
+      }
+    },
+    updateLikedComments(state, action) {
+      if (action.payload.like) {
+        state.likedComments.push(action.payload.id);
+      } else {
+        state.likedComments = state.likedComments.filter((id) => {
+          return id !== action.payload.id;
+        });
+      }
+    },
+    updateDislikedComments(state, action) {
+      if (action.payload.dislike) {
+        state.dislikedComments.push(action.payload.id);
+      } else {
+        state.dislikedComments = state.dislikedComments.filter((id) => {
           return id !== action.payload.id;
         });
       }

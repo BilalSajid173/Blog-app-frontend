@@ -113,7 +113,7 @@ const ViewComments = (props) => {
                 placeholder="add a comment"
                 variant="standard"
                 value={comment}
-                autoComplete="off"
+                autoComplete="false"
               />
             </ThemeProvider>
             {showOptions && (

@@ -58,6 +58,15 @@ const LoginModal = (props) => {
         savedPosts: data.data.savedPosts.map((post) => {
           return post.id;
         }),
+        comments: data.data.comments.map((comment) => {
+          return comment.id;
+        }),
+        likedComments: data.data.likedComments.map((comment) => {
+          return comment.id;
+        }),
+        dislikedComments: data.data.dislikedComments.map((comment) => {
+          return comment.id;
+        }),
       })
     );
     props.handleClose();

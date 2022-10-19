@@ -25,6 +25,7 @@ const Home = () => {
 
   useEffect(() => {
     const autoLoginHandler = (data) => {
+      console.log(data);
       dispatch(
         authActions.login({
           user: data.User,
@@ -34,6 +35,15 @@ const Home = () => {
           }),
           savedPosts: data.User.savedPosts.map((post) => {
             return post.id;
+          }),
+          comments: data.User.comments.map((comment) => {
+            return comment.id;
+          }),
+          likedComments: data.User.likedComments.map((comment) => {
+            return comment.id;
+          }),
+          dislikedComments: data.User.dislikedComments.map((comment) => {
+            return comment.id;
           }),
         })
       );
