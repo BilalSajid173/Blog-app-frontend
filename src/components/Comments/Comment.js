@@ -12,6 +12,8 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 const ViewComments = (props) => {
   const [showOptions, setShowOptions] = useState(false);
   const isDark = useSelector((state) => state.mode.isDark);
+  const [comment, setComment] = useState("");
+  const isdisabled = comment.trim() === "";
   const optionsHandler = () => {
     setShowOptions(true);
   };
@@ -25,6 +27,10 @@ const ViewComments = (props) => {
       mode: isDark ? "dark" : "light",
     },
   });
+
+  const commentChangeHandler = (event) => {
+    setComment(event.target.value);
+  };
 
   const CommentsModalContent = (
     <Fragment>
@@ -48,6 +54,7 @@ const ViewComments = (props) => {
           <div className="w-[80%] sm:w-[85%]">
             <ThemeProvider theme={darkTheme}>
               <TextField
+                onChange={commentChangeHandler}
                 onClick={optionsHandler}
                 className="w-full"
                 id="standard-basic"
@@ -56,18 +63,18 @@ const ViewComments = (props) => {
               />
             </ThemeProvider>
             {showOptions && (
-              <div className="mt-2 flex felx-wrap ">
+              <div className="mt-2 flex flex-wrap ">
                 <button
                   onClick={closeOptionsDiv}
                   className="p-2 ml-auto bg-gray-700 rounded-sm mr-2"
                 >
-                  Cancel
+                  CANCEL
                 </button>
                 <button
-                  disabled
-                  className="p-2 bg-gray-700 rounded-sm"
+                  disabled={isdisabled ? true : false}
+                  className="p-2 bg-gray-700 rounded-sm disabled:bg-zinc-700 disabled:text-gray-500"
                 >
-                  Comment
+                  COMMENT
                 </button>
               </div>
             )}
