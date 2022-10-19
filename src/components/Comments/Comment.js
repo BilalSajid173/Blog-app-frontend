@@ -10,6 +10,7 @@ import { TextField } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
+import EditDeleteComment from "./EditDeleteComment";
 
 const dummycomments = [
   {
@@ -112,6 +113,7 @@ const ViewComments = (props) => {
                 placeholder="add a comment"
                 variant="standard"
                 value={comment}
+                autoComplete="off"
               />
             </ThemeProvider>
             {showOptions && (
@@ -141,10 +143,10 @@ const ViewComments = (props) => {
                   alt="user"
                   className="w-10 h-10 rounded-full bg-white mr-4"
                 />
-                <div className="">
+                <div className="mr-auto">
                   <div className="flex flex-wrap items-center">
                     <span className="font mr-2">{comment.name}</span>
-                    <span className=" font-thin text-sm">
+                    <span className="font-thin text-sm">
                       {comment.created_at}
                     </span>
                   </div>
@@ -160,6 +162,9 @@ const ViewComments = (props) => {
                       {comment.dislikes}
                     </span>
                   </div>
+                </div>
+                <div>
+                  <EditDeleteComment />
                 </div>
               </div>
             );
