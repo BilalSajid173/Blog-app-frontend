@@ -1,13 +1,17 @@
 import React, { Fragment, useState } from "react";
 import CommentsModal from "../UI/CommentsModal/CommentsModal";
+import { useSelector } from "react-redux";
 import image from "../../Images/userimg.png";
 // import { toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 import CloseIcon from "@mui/icons-material/Close";
 import OptionsMenu from "./CommentOptions";
 import { TextField } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
 const ViewComments = (props) => {
   const [showOptions, setShowOptions] = useState(false);
+  const isDark = useSelector((state) => state.mode.isDark);
   const optionsHandler = () => {
     setShowOptions(true);
   };
@@ -15,6 +19,13 @@ const ViewComments = (props) => {
   const closeOptionsDiv = () => {
     setShowOptions(false);
   };
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: isDark ? "dark" : "light",
+    },
+  });
+
   const CommentsModalContent = (
     <Fragment>
       <div className="p-2 dark:text-white">
@@ -28,29 +39,34 @@ const ViewComments = (props) => {
             />
           </div>
         </div>
-        <div className="flex flex-wrap mt-4">
+        <div className="flex flex-wrap mt-4 w-full">
           <img
             src={image}
             alt="user"
             className="w-12 h-12 rounded-full bg-white mr-4"
           />
-          <div className=" w-5/6">
-            <TextField
-              onClick={optionsHandler}
-              className="w-full"
-              id="standard-basic"
-              placeholder="add a comment"
-              variant="standard"
-            />
+          <div className="w-[80%] sm:w-[85%]">
+            <ThemeProvider theme={darkTheme}>
+              <TextField
+                onClick={optionsHandler}
+                className="w-full"
+                id="standard-basic"
+                placeholder="add a comment"
+                variant="standard"
+              />
+            </ThemeProvider>
             {showOptions && (
-              <div className="mt-2">
+              <div className="mt-2 flex felx-wrap ">
                 <button
                   onClick={closeOptionsDiv}
-                  className="p-2 ml-[56.5%] bg-gray-700 rounded-sm mr-2"
+                  className="p-2 ml-auto bg-gray-700 rounded-sm mr-2"
                 >
                   Cancel
                 </button>
-                <button disabled className="p-2 bg-gray-700 rounded-sm">
+                <button
+                  disabled
+                  className="p-2 bg-gray-700 rounded-sm"
+                >
                   Comment
                 </button>
               </div>
