@@ -3,6 +3,7 @@ import authReducer from "./auth";
 import modeReducer from "./darkmode";
 import postsReducer from "./allposts";
 import usersReducer from "./topusers";
+import commentsReducer from "./comments";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     mode: modeReducer,
     posts: postsReducer,
     users: usersReducer,
+    comments: commentsReducer,
   },
 });
 
