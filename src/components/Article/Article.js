@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { authActions } from "../../store/auth";
 import Loader1 from "../UI/Loader/Loader1";
-import ViewComments from "../Comments/Comment";
+import ViewComments from "../Comments/Comments";
 
 const Article = (props) => {
   const navigate = useNavigate();
