@@ -70,6 +70,7 @@ const ViewComments = (props) => {
 
   const closeOptionsDiv = () => {
     setShowOptions(false);
+    setComment("");
   };
 
   const darkTheme = createTheme({
@@ -95,13 +96,13 @@ const ViewComments = (props) => {
             />
           </div>
         </div>
-        <div className="flex flex-wrap mt-4 w-full">
+        <div className="flex mt-4 w-full">
           <img
             src={image}
             alt="user"
             className="w-10 h-10 rounded-full bg-white mr-4"
           />
-          <div className="w-[80%] sm:w-[85%]">
+          <div className="w-full">
             <ThemeProvider theme={darkTheme}>
               <TextField
                 onChange={commentChangeHandler}
@@ -110,6 +111,7 @@ const ViewComments = (props) => {
                 id="standard-basic"
                 placeholder="add a comment"
                 variant="standard"
+                value={comment}
               />
             </ThemeProvider>
             {showOptions && (
@@ -130,23 +132,23 @@ const ViewComments = (props) => {
             )}
           </div>
         </div>
-        <div className="flex flex-wrap mt-8">
+        <div className="mt-8">
           {dummycomments.map((comment) => {
             return (
-              <div className="flex flex-wrap mb-4">
+              <div className="flex mb-4">
                 <img
                   src={image}
                   alt="user"
                   className="w-10 h-10 rounded-full bg-white mr-4"
                 />
-                <div className="flex flex-wrap w-[80%]">
+                <div className="">
                   <div className="flex flex-wrap items-center">
                     <span className="font mr-2">{comment.name}</span>
                     <span className=" font-thin text-sm">
                       {comment.created_at}
                     </span>
                   </div>
-                  <div className="">
+                  <div className="flex flex-wrap">
                     <p>{comment.content}</p>
                   </div>
                   <div className="mt-2">
