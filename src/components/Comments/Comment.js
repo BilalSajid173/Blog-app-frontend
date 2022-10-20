@@ -17,6 +17,7 @@ const SingleComment = (props) => {
   const { sendRequest: commentReaction } = useHttp();
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
 
   const reactionResponseHandler = (action, data) => {
     console.log(action);
@@ -158,9 +159,7 @@ const SingleComment = (props) => {
           </span>
         </div>
       </div>
-      <div>
-        <EditDeleteComment />
-      </div>
+      <div>{user.id === props.authorId && <EditDeleteComment />}</div>
     </div>
   );
 };
