@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { authActions } from "../../store/auth";
+import { commentsActions } from "../../store/comments";
 import Loader1 from "../UI/Loader/Loader1";
 import ViewComments from "../Comments/Comments";
 
@@ -56,6 +57,7 @@ const Article = (props) => {
   };
 
   const CommentsModalHandler = () => {
+    dispatch(commentsActions.removeComments());
     setShowCommentsModal((prev) => {
       return !prev;
     });

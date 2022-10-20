@@ -11,6 +11,9 @@ const commentsSlice = createSlice({
     addComments(state, action) {
       state.comments = action.payload.comments;
     },
+    removeComments(state, action) {
+      state.comments = null;
+    },
     addNewComment(state, action) {
       state.comments.push(action.payload.comment);
     },

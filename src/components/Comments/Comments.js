@@ -12,15 +12,19 @@ import AddComment from "./AddComment";
 
 const ViewComments = (props) => {
   const comments = useSelector((state) => state.comments.comments);
+  const likedComments = useSelector((state) => state.auth.likedComments);
+  const dislikedComments = useSelector((state) => state.auth.dislikedComments);
   const dispatch = useDispatch();
   const { sendRequest: fetchComments } = useHttp();
   useEffect(() => {
     const commentsHandler = (data) => {
       console.log(data);
+      const likedcomments = likedComments ? likedComments : [];
+      const dislikedcomments = dislikedComments ? dislikedComments : [];
       const comments = data.map((comment) => {
         return {
-          // isLiked: likedposts.includes(post.id) ? true : false,
-          // isSaved: savedposts.includes(post.id) ? true : false,
+          isLiked: likedcomments.includes(comment.id) ? true : false,
+          isDisliked: dislikedcomments.includes(comment.id) ? true : false,
           id: comment.id,
           name: comment.name,
           content: comment.comment,
@@ -50,7 +54,7 @@ const ViewComments = (props) => {
     <Fragment>
       <div className="p-2 dark:text-white">
         <div className="flex flex-wrap justify-center">
-          <span className="mr-auto">Comments {comments.length}</span>
+          <span className="mr-auto">Comments {comments && comments.length}</span>
           <div className="flex flex-wrap justify-center items-center">
             <OptionsMenu className="cursor-pointer" />
             <CloseIcon
@@ -61,7 +65,7 @@ const ViewComments = (props) => {
         </div>
         <AddComment />
         <div className="mt-8">
-          {comments.map((comment) => {
+          {comments && comments.map((comment) => {
             return (
               <SingleComment
                 name={comment.name}
@@ -70,6 +74,8 @@ const ViewComments = (props) => {
                 likes={comment.likesCount}
                 dislikes={comment.dislikesCount}
                 id={comment.id}
+                isLiked={comment.isLiked}
+                isDisliked={comment.isDisliked}
               />
             );
           })}
