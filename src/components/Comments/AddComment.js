@@ -3,6 +3,7 @@ import { TextField } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { commentsActions } from "../../store/comments";
+import { postsActions } from "../../store/allposts";
 import useHttp from "../../hooks/use-http";
 import image from "../../Images/userimg.png";
 
@@ -50,6 +51,7 @@ const AddComment = (props) => {
         },
       })
     );
+    dispatch(postsActions.increaseCommentsCount({ id: props.postid }));
     setShowOptions(false);
     setComment("");
   };

@@ -79,6 +79,7 @@ const ViewComments = (props) => {
                   isLiked={comment.isLiked}
                   isDisliked={comment.isDisliked}
                   authorId={comment.authorId}
+                  postid={props.id}
                 />
               );
             })}

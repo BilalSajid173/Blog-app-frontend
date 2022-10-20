@@ -194,7 +194,11 @@ const SingleComment = (props) => {
           </div>
           <div>
             {user.id === props.authorId && (
-              <EditDeleteComment commentId={props.id} onClick={openEditing} />
+              <EditDeleteComment
+                commentId={props.id}
+                onClick={openEditing}
+                postid={props.postid}
+              />
             )}
           </div>
         </>
