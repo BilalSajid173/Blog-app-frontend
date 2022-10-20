@@ -6,25 +6,108 @@ import EditDeleteComment from "./EditDeleteComment";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import useHttp from "../../hooks/use-http";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { authActions } from "../../store/auth";
 
 const SingleComment = (props) => {
   const [isLiked, setIsLiked] = useState(props.isLiked);
   const [isDisliked, setIsDisliked] = useState(props.isDisliked);
+  const [likes, setLikes] = useState(props.likes);
+  const [dislikes, setDislikes] = useState(props.dislikes);
   const { sendRequest: commentReaction } = useHttp();
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
 
-  const reactionResponseHandler = () => {};
+  const reactionResponseHandler = (action, data) => {
+    console.log(action);
+    if (action === "like") {
+      setIsLiked(true);
+      dispatch(authActions.updateLikedComments({ like: true, id: props.id }));
+      dispatch(
+        authActions.updateDislikedComments({ dislike: false, id: props.id })
+      );
+      setLikes((prev) => {
+        return prev + 1;
+      });
+      let isdisliked = isDisliked;
+      if (isdisliked) {
+        setDislikes((prev) => {
+          return prev - 1;
+        });
+      }
+      setIsDisliked(false);
+    }
+    if (action === "dislike") {
+      setDislikes((prev) => {
+        return prev + 1;
+      });
+      dispatch(authActions.updateLikedComments({ like: false, id: props.id }));
+      dispatch(
+        authActions.updateDislikedComments({ dislike: true, id: props.id })
+      );
+      let isliked = isLiked;
+      if (isliked) {
+        setLikes((prev) => {
+          return prev - 1;
+        });
+      }
+      setIsLiked(false);
+      setIsDisliked(true);
+    }
+    if (action === "removelike") {
+      dispatch(authActions.updateLikedComments({ like: false, id: props.id }));
+      setIsLiked(false);
+      setLikes((prev) => {
+        return prev - 1;
+      });
+    }
+    if (action === "removedislike") {
+      dispatch(
+        authActions.updateDislikedComments({ dislike: false, id: props.id })
+      );
+      setIsDisliked(false);
+      setDislikes((prev) => {
+        return prev - 1;
+      });
+    }
+  };
 
-  const likeDislikeHandler = () => {
+  const likeDislikeHandler = (action) => {
+    let url = "";
+    switch (action) {
+      case "removelike":
+        url =
+          "http://localhost:8000/api/user/removelikecomment/" + props.id + "/";
+        break;
+      case "like":
+        url = "http://localhost:8000/api/user/likecomment/" + props.id + "/";
+        break;
+      case "dislike":
+        url = "http://localhost:8000/api/user/unlikecomment/" + props.id + "/";
+        break;
+      case "removedislike":
+        url =
+          "http://localhost:8000/api/user/removeunlikecomment/" +
+          props.id +
+          "/";
+        break;
+      default:
+        url = "";
+    }
     commentReaction(
       {
-        url: "http://localhost:8000/api/user/login/",
+        url: url,
         method: "POST",
-        body: {},
+        body: {
+          like: action === "dislike" && isLiked ? true : false,
+          unlike: action === "like" && isDisliked ? true : false,
+        },
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
         },
       },
-      reactionResponseHandler
+      reactionResponseHandler.bind(null, action)
     );
   };
   return (
@@ -44,13 +127,34 @@ const SingleComment = (props) => {
         </div>
         <div className="mt-2">
           <span className="mr-4">
-            {isLiked && <ThumbUpIcon className="mr-2" />}{" "}
-            {!isLiked && <ThumbUpOffAltIcon className="mr-2" />} {props.likes}
+            {isLiked && (
+              <ThumbUpIcon
+                className="mr-2 cursor-pointer"
+                onClick={likeDislikeHandler.bind(null, "removelike")}
+              />
+            )}{" "}
+            {!isLiked && (
+              <ThumbUpOffAltIcon
+                className="mr-2 cursor-pointer"
+                onClick={likeDislikeHandler.bind(null, "like")}
+              />
+            )}{" "}
+            {likes}
           </span>
           <span>
-            {isDisliked && <ThumbDownIcon className="mr-2" />}
-            {!isDisliked && <ThumbDownOffAltIcon className="mr-2" />}{" "}
-            {props.dislikes}
+            {isDisliked && (
+              <ThumbDownIcon
+                className="mr-2 cursor-pointer"
+                onClick={likeDislikeHandler.bind(null, "removedislike")}
+              />
+            )}
+            {!isDisliked && (
+              <ThumbDownOffAltIcon
+                className="mr-2 cursor-pointer"
+                onClick={likeDislikeHandler.bind(null, "dislike")}
+              />
+            )}{" "}
+            {dislikes}
           </span>
         </div>
       </div>
