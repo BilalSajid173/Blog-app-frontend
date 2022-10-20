@@ -45,6 +45,11 @@ const EditDeleteComment = (props) => {
     );
   };
 
+  const editCommentHandler = () => {
+    props.onClick();
+    handleClose();
+  };
+
   return (
     <div>
       <button
@@ -76,7 +81,7 @@ const EditDeleteComment = (props) => {
         }}
         classes={{ menu: "dark:bg-gray-600" }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={editCommentHandler}>
           <EditIcon className="mr-2" /> Edit
         </MenuItem>
         <MenuItem onClick={commentDeleteHandler}>

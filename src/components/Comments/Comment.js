@@ -8,11 +8,13 @@ import useHttp from "../../hooks/use-http";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
+import EditComment from "./EditComment";
 
 const SingleComment = (props) => {
   const [isLiked, setIsLiked] = useState(props.isLiked);
   const [isDisliked, setIsDisliked] = useState(props.isDisliked);
   const [likes, setLikes] = useState(props.likes);
+  const [isEditing, setIsEditing] = useState(false);
   const [dislikes, setDislikes] = useState(props.dislikes);
   const { sendRequest: commentReaction } = useHttp();
   const token = useSelector((state) => state.auth.token);
@@ -111,59 +113,78 @@ const SingleComment = (props) => {
       reactionResponseHandler.bind(null, action)
     );
   };
+
+  const openEditing = () => {
+    setIsEditing(true);
+  };
+
+  const closeEditing = () => {
+    setIsEditing(false);
+  };
   return (
     <div className="flex mb-4">
-      <img
-        src={image}
-        alt="user"
-        className="w-10 h-10 rounded-full bg-white mr-4"
-      />
-      <div className="mr-auto">
-        <div className="flex flex-wrap items-center">
-          <span className="font mr-2">{props.name}</span>
-          <span className="font-thin text-sm">{props.created_at}</span>
-        </div>
-        <div className="flex flex-wrap">
-          <p>{props.content}</p>
-        </div>
-        <div className="mt-2">
-          <span className="mr-4">
-            {isLiked && (
-              <ThumbUpIcon
-                className="mr-2 cursor-pointer"
-                onClick={likeDislikeHandler.bind(null, "removelike")}
-              />
-            )}{" "}
-            {!isLiked && (
-              <ThumbUpOffAltIcon
-                className="mr-2 cursor-pointer"
-                onClick={likeDislikeHandler.bind(null, "like")}
-              />
-            )}{" "}
-            {likes}
-          </span>
-          <span>
-            {isDisliked && (
-              <ThumbDownIcon
-                className="mr-2 cursor-pointer"
-                onClick={likeDislikeHandler.bind(null, "removedislike")}
-              />
+      {isEditing && (
+        <EditComment
+          onClick={closeEditing}
+          comment={props.content}
+          id={props.id}
+        />
+      )}
+      {!isEditing && (
+        <>
+          <img
+            src={image}
+            alt="user"
+            className="w-10 h-10 rounded-full bg-white mr-4"
+          />
+          <div className="mr-auto">
+            <div className="flex flex-wrap items-center">
+              <span className="font mr-2">{props.name}</span>
+              <span className="font-thin text-sm">{props.created_at}</span>
+            </div>
+            <div className="flex flex-wrap">
+              <p>{props.content}</p>
+            </div>
+            <div className="mt-2">
+              <span className="mr-4">
+                {isLiked && (
+                  <ThumbUpIcon
+                    className="mr-2 cursor-pointer"
+                    onClick={likeDislikeHandler.bind(null, "removelike")}
+                  />
+                )}{" "}
+                {!isLiked && (
+                  <ThumbUpOffAltIcon
+                    className="mr-2 cursor-pointer"
+                    onClick={likeDislikeHandler.bind(null, "like")}
+                  />
+                )}{" "}
+                {likes}
+              </span>
+              <span>
+                {isDisliked && (
+                  <ThumbDownIcon
+                    className="mr-2 cursor-pointer"
+                    onClick={likeDislikeHandler.bind(null, "removedislike")}
+                  />
+                )}
+                {!isDisliked && (
+                  <ThumbDownOffAltIcon
+                    className="mr-2 cursor-pointer"
+                    onClick={likeDislikeHandler.bind(null, "dislike")}
+                  />
+                )}{" "}
+                {dislikes}
+              </span>
+            </div>
+          </div>
+          <div>
+            {user.id === props.authorId && (
+              <EditDeleteComment commentId={props.id} onClick={openEditing} />
             )}
-            {!isDisliked && (
-              <ThumbDownOffAltIcon
-                className="mr-2 cursor-pointer"
-                onClick={likeDislikeHandler.bind(null, "dislike")}
-              />
-            )}{" "}
-            {dislikes}
-          </span>
-        </div>
-      </div>
-      <div>
-        {user.id === props.authorId && (
-          <EditDeleteComment commentId={props.id} />
-        )}
-      </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

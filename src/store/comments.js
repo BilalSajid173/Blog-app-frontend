@@ -23,14 +23,10 @@ const commentsSlice = createSlice({
       });
     },
     updateComment(state, action) {
-      let comment = state.comments.filter((comment) => {
-        return comment.id === action.payload.id;
-      });
-      comment.content = action.payload.content;
-      state.comments = state.comments.filter((comment) => {
-        return comment.id !== action.payload.id;
-      });
-      state.comments.push(comment);
+      const index = state.comments.findIndex(
+        (comment) => comment.id === action.payload.id
+      );
+      state.comments[index].content = action.payload.comment;
     },
   },
 });
