@@ -53,7 +53,9 @@ const ViewComments = (props) => {
     <Fragment>
       <div className="p-2 dark:text-white">
         <div className="flex flex-wrap justify-center">
-          <span className="mr-auto">Comments {comments && comments.length}</span>
+          <span className="mr-auto">
+            Comments {comments && comments.length}
+          </span>
           <div className="flex flex-wrap justify-center items-center">
             <OptionsMenu className="cursor-pointer" />
             <CloseIcon
@@ -62,22 +64,23 @@ const ViewComments = (props) => {
             />
           </div>
         </div>
-        <AddComment />
+        <AddComment postid={props.id} />
         <div className="mt-8">
-          {comments && comments.map((comment) => {
-            return (
-              <SingleComment
-                name={comment.name}
-                content={comment.content}
-                created_at={comment.created_at}
-                likes={comment.likesCount}
-                dislikes={comment.dislikesCount}
-                id={comment.id}
-                isLiked={comment.isLiked}
-                isDisliked={comment.isDisliked}
-              />
-            );
-          })}
+          {comments &&
+            comments.map((comment) => {
+              return (
+                <SingleComment
+                  name={comment.name}
+                  content={comment.content}
+                  created_at={comment.created_at}
+                  likes={comment.likesCount}
+                  dislikes={comment.dislikesCount}
+                  id={comment.id}
+                  isLiked={comment.isLiked}
+                  isDisliked={comment.isDisliked}
+                />
+              );
+            })}
         </div>
       </div>
     </Fragment>
