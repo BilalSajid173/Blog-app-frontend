@@ -159,7 +159,11 @@ const SingleComment = (props) => {
           </span>
         </div>
       </div>
-      <div>{user.id === props.authorId && <EditDeleteComment />}</div>
+      <div>
+        {user.id === props.authorId && (
+          <EditDeleteComment commentId={props.id} />
+        )}
+      </div>
     </div>
   );
 };

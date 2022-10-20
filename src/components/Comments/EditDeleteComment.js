@@ -3,13 +3,18 @@ import { useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 // import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import useHttp from "../../hooks/use-http";
+import { commentsActions } from "../../store/comments";
 
 const EditDeleteComment = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
+  const { sendRequest: commentDelete } = useHttp();
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -17,6 +22,27 @@ const EditDeleteComment = (props) => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const deleteResponse = (data) => {
+    dispatch(commentsActions.deleteComment({ id: props.commentId }));
+    handleClose();
+  };
+
+  const commentDeleteHandler = () => {
+    commentDelete(
+      {
+        url:
+          "http://localhost:8000/api/products/deletecomment/" +
+          props.commentId +
+          "/",
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      },
+      deleteResponse
+    );
   };
 
   return (
@@ -53,7 +79,7 @@ const EditDeleteComment = (props) => {
         <MenuItem onClick={handleClose}>
           <EditIcon className="mr-2" /> Edit
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={commentDeleteHandler}>
           <DeleteIcon className="mr-2" />
           Delete
         </MenuItem>
