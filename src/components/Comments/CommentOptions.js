@@ -3,11 +3,13 @@ import { useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 // import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SortIcon from "@mui/icons-material/Sort";
+import { commentsActions } from "../../store/comments";
 
 const OptionsMenu = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -15,6 +17,16 @@ const OptionsMenu = (props) => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const sortLatest = () => {
+    dispatch(commentsActions.sortLatest());
+    handleClose();
+  };
+
+  const sortTopRated = () => {
+    dispatch(commentsActions.sortTopRated());
+    handleClose();
   };
 
   return (
@@ -48,8 +60,8 @@ const OptionsMenu = (props) => {
         }}
         classes={{ menu: "dark:bg-gray-600" }}
       >
-        <MenuItem onClick={handleClose}>Top Rated</MenuItem>
-        <MenuItem onClick={handleClose}>Newest</MenuItem>
+        <MenuItem onClick={sortTopRated}>Top Rated</MenuItem>
+        <MenuItem onClick={sortLatest}>Newest</MenuItem>
       </Menu>
     </div>
   );

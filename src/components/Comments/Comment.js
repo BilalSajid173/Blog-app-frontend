@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
 import EditComment from "./EditComment";
 import Moment from "react-moment";
+import { useEffect } from "react";
 
 const SingleComment = (props) => {
   const [isLiked, setIsLiked] = useState(props.isLiked);
@@ -21,6 +22,13 @@ const SingleComment = (props) => {
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    setIsLiked(props.isLiked);
+    setIsDisliked(props.isDisliked);
+    setLikes(props.likes);
+    setDislikes(props.dislikes);
+  }, [props.isLiked, props.isDisliked, props.likes, props.dislikes]);
 
   const reactionResponseHandler = (action, data) => {
     console.log(action);

@@ -28,6 +28,16 @@ const commentsSlice = createSlice({
       );
       state.comments[index].content = action.payload.comment;
     },
+    sortLatest(state) {
+      state.comments.sort((a, b) => {
+        return b.id - a.id;
+      });
+    },
+    sortTopRated(state) {
+      state.comments.sort((a, b) => {
+        return b.likesCount - a.likesCount;
+      });
+    },
   },
 });
 
