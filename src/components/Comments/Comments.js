@@ -72,7 +72,7 @@ const ViewComments = (props) => {
                 <SingleComment
                   name={comment.name}
                   content={comment.content}
-                  created_at={comment.created_at}
+                  created_at={comment.createdAt}
                   likes={comment.likesCount}
                   dislikes={comment.dislikesCount}
                   id={comment.id}

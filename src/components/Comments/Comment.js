@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
 import EditComment from "./EditComment";
+import Moment from "react-moment";
 
 const SingleComment = (props) => {
   const [isLiked, setIsLiked] = useState(props.isLiked);
@@ -139,8 +140,10 @@ const SingleComment = (props) => {
           />
           <div className="mr-auto">
             <div className="flex flex-wrap items-center">
-              <span className="font mr-2">{props.name}</span>
-              <span className="font-thin text-sm">{props.created_at}</span>
+              <span className="font-bold mr-2">{props.name}</span>
+              <span className="text-sm">
+                <Moment fromNow>{props.created_at}</Moment>
+              </span>
             </div>
             <div className="flex flex-wrap">
               <p>{props.content}</p>
