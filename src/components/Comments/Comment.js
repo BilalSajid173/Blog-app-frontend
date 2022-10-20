@@ -10,7 +10,6 @@ import { useState } from "react";
 const SingleComment = (props) => {
   const [isLiked, setIsLiked] = useState(props.isLiked);
   const [isDisliked, setIsDisliked] = useState(props.isDisliked);
-  console.log(isLiked, isDisliked);
   const { sendRequest: commentReaction } = useHttp();
 
   const reactionResponseHandler = () => {};
