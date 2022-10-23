@@ -51,7 +51,7 @@ const UserProfile = (props) => {
         {showMenu && (
           <div
             onClick={showMenuHandler}
-            className="fixed top-0 left-0 w-full h-screen z-10 bg-gray-500 opacity-50"
+            className="fixed top-0 left-0 w-full h-screen z-10 bg-gray-900 opacity-50"
           ></div>
         )}
         <Sidebar showMenu={showMenu} showMenuHandler={showMenuHandler} />
