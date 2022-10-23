@@ -195,7 +195,7 @@ const Navbar = () => {
         )}
         {isLoggedIn && (
           <Link to="/profile">
-            <button className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white">
+            <button className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white w-full">
               <i className="mr-2 p-2 px-2.5 fa-regular fa-user"></i> Account
             </button>
           </Link>

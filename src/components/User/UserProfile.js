@@ -32,7 +32,17 @@ const UserProfile = (props) => {
   return (
     <>
       <div className="flex flex-wrap justify-center px-4 py-10 sm:p-10">
-        <LeftCard />
+        <LeftCard
+          name={user.name}
+          work={user.work}
+          bio={user.bio}
+          followers={user.followers.length}
+          following={user.following.length}
+          github={user.github}
+          facebook={user.facebook}
+          linkedIn={user.linkedIn}
+          twitter={user.twitter}
+        />
         <div className="w-full md:w-10/12 lg:w-7/12 lg:ml-6 bg-gray-200 dark:bg-gray-900 rounded-md p-4 sm:p-6 py-8 dark:text-white shadow-lg">
           <div className="dark:text-gray-400">
             <div
@@ -55,12 +65,28 @@ const UserProfile = (props) => {
             <div className="flex flex-wrap mt-2 pt-2 justify-between">
               <div className=" only:grow p-4 w-full md:w-[48%] dark:bg-[#201d36] rounded-md shadow-lg bg-gray-300">
                 <DataField title="Email" value={user.email} />
-                <DataField title="Address" value={user.address ? user.address : "Where do you live?"} />
-                <DataField title="Age" value={user.age ? user.age : "How old are you?"} />
+                <DataField
+                  title="Address"
+                  value={user.address ? user.address : "Where do you live?"}
+                />
+                <DataField
+                  title="Age"
+                  value={user.age ? user.age : "How old are you?"}
+                />
               </div>
               <div className="p-4 w-full mt-4 md:mt-0 md:w-[48%] rounded-md dark:bg-[#201d36] shadow-lg bg-gray-300">
-                <DataField title="Education" value={user.education ? user.education : "Your educational background!"} />
-                <DataField title="Number" value={user.number ? user.number : "Add a phone!"} />
+                <DataField
+                  title="Education"
+                  value={
+                    user.education
+                      ? user.education
+                      : "Your educational background!"
+                  }
+                />
+                <DataField
+                  title="Number"
+                  value={user.number ? user.number : "Add a phone!"}
+                />
               </div>
             </div>
           </div>
