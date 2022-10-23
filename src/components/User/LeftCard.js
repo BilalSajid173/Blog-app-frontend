@@ -9,7 +9,7 @@ import classes from "./UserProfile.module.css";
 const LeftCard = () => {
   return (
     <div
-      className={`${classes["profile-card"]} before:bg-[#9db4f4] dark:before:bg-[#4e409d] hidden md:flex min-h-[82vh] flex-wrap flex-col items-center bg-gray-200 dark:bg-gray-900 rounded-md sticky top-10 md:w-4/12 lg:w-3/12 dark:text-white p-6 py-8 shadow-lg`}
+      className={`${classes["profile-card"]} before:bg-[#9db4f4] dark:before:bg-[#4e409d] hidden lg:flex min-h-[82vh] flex-wrap flex-col items-center bg-gray-200 dark:bg-gray-900 rounded-md sticky top-10 lg:w-4/12 dark:text-white p-6 py-8 shadow-lg`}
     >
       <img
         className="relative rounded-full w-150 h-150 bg-blue-900 border-white border-4"
