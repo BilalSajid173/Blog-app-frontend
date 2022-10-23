@@ -5,6 +5,7 @@ import AddNewArticle from "../AddArticle/AddArticle";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/auth";
 import { modeActions } from "../../store/darkmode";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -139,9 +140,11 @@ const Navbar = () => {
             </button>
           )}
           {isLoggedIn && (
-            <button className="p-1.5 px-3 bg-slate-300 rounded-3xl">
-              <i className="dark:text-black fa-regular fa-user"></i>
-            </button>
+            <Link to="/profile">
+              <button className="p-1.5 px-3 bg-slate-300 rounded-3xl">
+                <i className="dark:text-black fa-regular fa-user"></i>
+              </button>
+            </Link>
           )}
         </div>
         <div className="md:hidden flex w-fit flex-wrap ml-auto justify-center align-middle dark:text-white">
@@ -191,9 +194,11 @@ const Navbar = () => {
           </button>
         )}
         {isLoggedIn && (
-          <button className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white">
-            <i className="mr-2 p-2 px-2.5 fa-regular fa-user"></i> Account
-          </button>
+          <Link to="/profile">
+            <button className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white">
+              <i className="mr-2 p-2 px-2.5 fa-regular fa-user"></i> Account
+            </button>
+          </Link>
         )}
         {isLoggedIn && (
           <button
