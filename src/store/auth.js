@@ -40,11 +40,31 @@ const authSlice = createSlice({
     updateLikedPostsCount(state, action) {
       if (action.payload.increase) {
         state.likedPosts.push(action.payload.id);
+        const index = state.user.products.findIndex(
+          (post) => post.id === action.payload.id
+        );
+        state.user.products[index].likesCount += 1;
       } else {
         state.likedPosts = state.likedPosts.filter((id) => {
           return id !== action.payload.id;
         });
+        const index = state.user.products.findIndex(
+          (post) => post.id === action.payload.id
+        );
+        state.user.products[index].likesCount -= 1;
       }
+    },
+    increaseCommentsCount(state, action) {
+      const index = state.user.products.findIndex(
+        (post) => post.id === action.payload.id
+      );
+      state.user.products[index].commentCount += 1;
+    },
+    decreaseCommentsCount(state, action) {
+      const index = state.user.products.findIndex(
+        (post) => post.id === action.payload.id
+      );
+      state.user.products[index].commentCount -= 1;
     },
     updateSavedPosts(state, action) {
       if (action.payload.save) {
@@ -82,9 +102,9 @@ const authSlice = createSlice({
         });
       }
     },
-    updateUser(state, action){
-      state.user = action.payload.user
-    }
+    updateUser(state, action) {
+      state.user = action.payload.user;
+    },
   },
 });
 

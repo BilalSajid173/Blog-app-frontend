@@ -25,7 +25,6 @@ const Home = () => {
 
   useEffect(() => {
     const autoLoginHandler = (data) => {
-      console.log(data);
       dispatch(
         authActions.login({
           user: data.User,

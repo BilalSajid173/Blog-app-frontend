@@ -6,6 +6,7 @@ import { commentsActions } from "../../store/comments";
 import { postsActions } from "../../store/allposts";
 import useHttp from "../../hooks/use-http";
 import image from "../../Images/userimg.png";
+import { authActions } from "../../store/auth";
 
 const AddComment = (props) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -52,6 +53,7 @@ const AddComment = (props) => {
       })
     );
     dispatch(postsActions.increaseCommentsCount({ id: props.postid }));
+    dispatch(authActions.increaseCommentsCount({ id: props.postid }));
     setShowOptions(false);
     setComment("");
   };

@@ -10,6 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import useHttp from "../../hooks/use-http";
 import { commentsActions } from "../../store/comments";
 import { postsActions } from "../../store/allposts";
+import { authActions } from "../../store/auth";
 
 const EditDeleteComment = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
@@ -28,6 +29,7 @@ const EditDeleteComment = (props) => {
   const deleteResponse = (data) => {
     dispatch(commentsActions.deleteComment({ id: props.commentId }));
     dispatch(postsActions.decreaseCommentsCount({ id: props.postid }));
+    dispatch(authActions.decreaseCommentsCount({ id: props.postid }));
     handleClose();
   };
 
