@@ -1,6 +1,7 @@
 import classes from "./UserProfile.module.css";
 import { useSelector } from "react-redux";
 import LeftCard from "./LeftCard";
+import DataField from "./DataField";
 
 const UserProfile = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
@@ -29,28 +30,13 @@ const UserProfile = (props) => {
             </div>
             <div className="flex flex-wrap mt-2 pt-2 justify-between">
               <div className=" only:grow p-4 w-full md:w-[48%] dark:bg-[#201d36] rounded-md shadow-lg bg-gray-300">
-                <div className="mt-2">
-                  <h1 className="font-bold">Email</h1>
-                  <span>bsajid173@gmail.com</span>
-                </div>
-                <div className="mt-2">
-                  <h1 className="font-bold">Address</h1>
-                  <span>Where do you live?</span>
-                </div>
-                <div className="mt-2">
-                  <h1 className="font-bold">Age</h1>
-                  <span>How old are you?</span>
-                </div>
+                <DataField title="Email" value="bsajid173@gmail.com" />
+                <DataField title="Address" value="Where Do you live?" />
+                <DataField title="Age" value="How old are you?" />
               </div>
               <div className="p-4 w-full mt-4 md:mt-0 md:w-[48%] rounded-md dark:bg-[#201d36] shadow-lg bg-gray-300">
-                <div className="mt-2">
-                  <h1 className="font-bold">Education</h1>
-                  <span>Jamia Millia Islamia</span>
-                </div>
-                <div className="mt-2">
-                  <h1 className="font-bold">Number</h1>
-                  <span>Add a number!</span>
-                </div>
+                <DataField title="Education" value="Jamia Millia Islamia" />
+                <DataField title="Number" value="Add a number." />
               </div>
             </div>
           </div>
