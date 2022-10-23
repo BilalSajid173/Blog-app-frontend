@@ -10,7 +10,6 @@ const UserProfile = (props) => {
   const articles = useSelector((state) => state.auth.user.products);
   const likedPosts = useSelector((state) => state.auth.likedPosts);
   const savedPosts = useSelector((state) => state.auth.savedPosts);
-
   let likedposts = likedPosts ? likedPosts : [];
   let savedposts = savedPosts ? savedPosts : [];
   const posts = articles.map((post) => {
@@ -55,13 +54,13 @@ const UserProfile = (props) => {
             </div>
             <div className="flex flex-wrap mt-2 pt-2 justify-between">
               <div className=" only:grow p-4 w-full md:w-[48%] dark:bg-[#201d36] rounded-md shadow-lg bg-gray-300">
-                <DataField title="Email" value="bsajid173@gmail.com" />
-                <DataField title="Address" value="Where Do you live?" />
-                <DataField title="Age" value="How old are you?" />
+                <DataField title="Email" value={user.email} />
+                <DataField title="Address" value={user.address ? user.address : "Where do you live?"} />
+                <DataField title="Age" value={user.age ? user.age : "How old are you?"} />
               </div>
               <div className="p-4 w-full mt-4 md:mt-0 md:w-[48%] rounded-md dark:bg-[#201d36] shadow-lg bg-gray-300">
-                <DataField title="Education" value="Jamia Millia Islamia" />
-                <DataField title="Number" value="Add a number." />
+                <DataField title="Education" value={user.education ? user.education : "Your educational background!"} />
+                <DataField title="Number" value={user.number ? user.number : "Add a phone!"} />
               </div>
             </div>
           </div>
