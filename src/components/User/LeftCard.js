@@ -9,7 +9,7 @@ import classes from "./UserProfile.module.css";
 const LeftCard = () => {
   return (
     <div
-      className={`${classes["profile-card"]} before:bg-[#9db4f4] dark:before:bg-[#4e409d] flex h-[82vh] flex-wrap flex-col items-center bg-gray-200 dark:bg-gray-900 rounded-md relative lg:sticky mb-6 lg:mb-0 md:w-10/12 lg:w-4/12 dark:text-white p-6 py-8 shadow-lg`}
+      className={`${classes["profile-card"]} before:bg-[#9db4f4] dark:before:bg-[#4e409d] lg:h-[84vh] flex flex-wrap flex-col items-center bg-gray-200 dark:bg-gray-900 rounded-md relative lg:sticky lg:top-20 mb-6 lg:mb-0 md:w-10/12 lg:w-4/12 dark:text-white p-6 py-8 shadow-lg`}
     >
       <img
         className="relative rounded-full w-150 h-150 bg-blue-900 border-white border-4"
@@ -19,9 +19,9 @@ const LeftCard = () => {
       <h1 className="font-bold text-3xl pt-4">Bilal Sajid</h1>
       <h1 className="font-bold pt-1 italic">UI Designer</h1>
       <div className="flex flex-wrap mt-2 justify-between">
-        <span className="text-blue-500"> 29 Followers</span>
+        <span className="text-blue-500"> 0 Followers</span>
         <span className="mx-4">.</span>
-        <span className="text-blue-500"> 60 Following</span>
+        <span className="text-blue-500"> 0 Following</span>
       </div>
       <div className="pt-4">
         <p className="text-center font-serif italic">
