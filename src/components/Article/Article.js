@@ -70,7 +70,7 @@ const Article = (props) => {
       {showCommentsModal && (
         <ViewComments onClick={CommentsModalHandler} id={props.id} />
       )}
-      <div className="transition-all flex flex-col p-3 bg-white dark:bg-[#1a2027] dark:text-white my-3 first:mt-0 rounded shadow-lg">
+      <div className="transition-all flex flex-col p-3 bg-white dark:bg-[#201d36] dark:text-white my-3 first:mt-0 rounded shadow-lg">
         <div className="flex flex-wrap justify-center mb-2">
           {/*use cloudinary image component for image*/}
           <div className="rounded-full h-16 w-16 flex flex-wrap bg-gray-500 dark:bg-white">

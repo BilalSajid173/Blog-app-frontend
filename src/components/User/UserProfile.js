@@ -2,9 +2,34 @@ import classes from "./UserProfile.module.css";
 import { useSelector } from "react-redux";
 import LeftCard from "./LeftCard";
 import DataField from "./DataField";
+import Article from "../Article/Article";
 
 const UserProfile = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
+  const user = useSelector((state) => state.auth.user);
+  const articles = useSelector((state) => state.auth.user.products);
+  const likedPosts = useSelector((state) => state.auth.likedPosts);
+  const savedPosts = useSelector((state) => state.auth.savedPosts);
+
+  let likedposts = likedPosts ? likedPosts : [];
+  let savedposts = savedPosts ? savedPosts : [];
+  const posts = articles.map((post) => {
+    return {
+      isLiked: likedposts.includes(post.id) ? true : false,
+      isSaved: savedposts.includes(post.id) ? true : false,
+      id: post.id,
+      name: post.user.name,
+      content: post.content.slice(0, 250) + "...",
+      createdAt: post.created_at,
+      authorId: post.user.id,
+      title: post.title,
+      imageId: post.imageId,
+      userimgId: post.user.profilePic,
+      commentsCount: post.commentCount,
+      likesCount: post.likesCount,
+      tags: post.tags.split(", "),
+    };
+  });
   return (
     <>
       <div className="flex flex-wrap justify-center px-4 py-10 sm:p-10 ">
@@ -41,7 +66,29 @@ const UserProfile = (props) => {
             </div>
           </div>
           <div className="mt-6 flex flex-wrap justify-center">
-            <h1 className="font-bold text-2xl">Your Posts</h1>
+            <h1 className="font-bold text-2xl mb-4">Your Posts</h1>
+            <div>
+              {user &&
+                posts.map((article) => {
+                  return (
+                    <Article
+                      name={article.name}
+                      createdAt={article.createdAt}
+                      title={article.title}
+                      tags={article.tags}
+                      likesCount={article.likesCount}
+                      comments={article.commentsCount}
+                      content={article.content}
+                      userimgId={article.userimgId}
+                      imageId={article.imageId}
+                      authorId={article.authorId}
+                      id={article.id}
+                      isLiked={article.isLiked}
+                      isSaved={article.isSaved}
+                    />
+                  );
+                })}
+            </div>
           </div>
         </div>
       </div>
