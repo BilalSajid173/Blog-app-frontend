@@ -9,7 +9,7 @@ const UserProfile = (props) => {
     <>
       <div className="flex flex-wrap justify-center px-4 py-10 sm:p-10 ">
         <LeftCard />
-        <div className="w-full md:w-10/12 lg:w-7/12 md:ml-6 bg-gray-200 dark:bg-gray-900 rounded-md p-4 sm:p-6 py-8 dark:text-white shadow-lg">
+        <div className="w-full md:w-10/12 lg:w-7/12 lg:ml-6 bg-gray-200 dark:bg-gray-900 rounded-md p-4 sm:p-6 py-8 dark:text-white shadow-lg">
           <div className="dark:text-gray-400">
             <div
               className={`${

@@ -3,18 +3,23 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useSelector } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
 import DoneIcon from "@mui/icons-material/Done";
+import { useState } from "react";
 
 //pass updated values to user in redux and extract that data on profile page
 
 const EditField = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
-  const fieldValue = props.value;
+  const [fieldValue, setFieldValue] = useState(props.value);
 
   const darkTheme = createTheme({
     palette: {
       mode: isDark ? "dark" : "light",
     },
   });
+
+  const fieldChangeHandler = (event) => {
+    setFieldValue(event.target.value);
+  };
 
   return (
     <div className="w-full mt-2">
@@ -33,6 +38,7 @@ const EditField = (props) => {
           id="standard-basic"
           variant="standard"
           autoComplete="off"
+          onChange={fieldChangeHandler}
           value={fieldValue}
         />
       </ThemeProvider>
