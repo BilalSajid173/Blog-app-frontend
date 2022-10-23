@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import LeftCard from "./LeftCard";
 import DataField from "./DataField";
 import Article from "../Article/Article";
+import { useState } from "react";
+import Sidebar from "./Sidebar";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const UserProfile = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
@@ -10,6 +13,7 @@ const UserProfile = (props) => {
   const articles = useSelector((state) => state.auth.user.products);
   const likedPosts = useSelector((state) => state.auth.likedPosts);
   const savedPosts = useSelector((state) => state.auth.savedPosts);
+  const [showMenu, setShowMenu] = useState(false);
   let likedposts = likedPosts ? likedPosts : [];
   let savedposts = savedPosts ? savedPosts : [];
   const posts = articles.map((post) => {
@@ -29,9 +33,28 @@ const UserProfile = (props) => {
       tags: post.tags.split(", "),
     };
   });
+
+  const showMenuHandler = () => {
+    setShowMenu((prev) => {
+      return !prev;
+    });
+  };
   return (
     <>
       <div className="flex flex-wrap justify-center px-4 py-10 sm:p-10">
+        <span
+          className="fixed left-0 top-96 z-10 rounded-md cursor-pointer"
+          onClick={showMenuHandler}
+        >
+          <ArrowForwardIosIcon fontSize="large" />
+        </span>
+        {showMenu && (
+          <div
+            onClick={showMenuHandler}
+            className="fixed top-0 left-0 w-full h-screen z-10 bg-gray-500 opacity-50"
+          ></div>
+        )}
+        <Sidebar showMenu={showMenu} showMenuHandler={showMenuHandler} />
         <LeftCard
           name={user.name}
           work={user.work}
