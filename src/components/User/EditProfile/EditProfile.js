@@ -8,6 +8,7 @@ import EditProfileModal from "../../UI/EditProfileModal/EditProfileModal";
 import PersonalInfo from "./PersonalInfo";
 import WorkInfo from "./Work";
 import About from "./About";
+import SocialLinks from "./Socials";
 
 const EditProfile = (props) => {
   const [page, setPage] = useState(1);
@@ -21,6 +22,10 @@ const EditProfile = (props) => {
   const [experience, setExperience] = useState(props.experience);
   const [bio, setBio] = useState(props.bio);
   const [about, setAbout] = useState(props.about);
+  const [twitter, setTwitter] = useState(props.twitter);
+  const [linkedIn, setLinkedIn] = useState(props.linkedIn);
+  const [github, setGithub] = useState(props.github);
+  const [facebook, setFacebook] = useState(props.facebook);
 
   const valueChangeHandler = (field, e) => {
     if (field === "name") {
@@ -39,10 +44,18 @@ const EditProfile = (props) => {
       setWork(e.target.value);
     } else if (field === "experience") {
       setExperience(e.target.value);
-    }else if (field === "about") {
+    } else if (field === "about") {
       setAbout(e.target.value);
     } else if (field === "bio") {
       setBio(e.target.value);
+    } else if (field === "twitter") {
+      setTwitter(e.target.value);
+    } else if (field === "facebook") {
+      setFacebook(e.target.value);
+    } else if (field === "linkedIn") {
+      setLinkedIn(e.target.value);
+    } else if (field === "github") {
+      setGithub(e.target.value);
     }
   };
 
@@ -98,6 +111,17 @@ const EditProfile = (props) => {
             about={about}
             nextHandler={nextHandler}
             prevHandler={prevHandler}
+          />
+        )}
+        {page === 4 && (
+          <SocialLinks
+            valueChangeHandler={valueChangeHandler}
+            prevHandler={prevHandler}
+            nextHandler={nextHandler}
+            facebook={facebook}
+            twitter={twitter}
+            linkedIn={linkedIn}
+            github={github}
           />
         )}
       </div>

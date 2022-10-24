@@ -66,6 +66,10 @@ const UserProfile = (props) => {
             experience={user.experience}
             bio={user.bio}
             about={user.about}
+            linkedIn={user.linkedIn}
+            facebook={user.facebook}
+            twitter={user.twitter}
+            github={user.github}
           />
         )}
         <span

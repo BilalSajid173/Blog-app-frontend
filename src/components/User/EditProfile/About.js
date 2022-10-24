@@ -39,7 +39,7 @@ const About = (props) => {
             variant="standard"
             autoComplete="off"
             multiline
-            rows={3}
+            rows={5}
             onChange={props.valueChangeHandler.bind(null, "about")}
             placeholder="About"
             value={props.about}
