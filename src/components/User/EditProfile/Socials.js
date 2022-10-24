@@ -74,7 +74,7 @@ const SocialLinks = (props) => {
           Previous
         </button>
         <button
-          onClick={props.nextHandler}
+          onClick={props.submitHandler}
           className="border-2 text-lg border-blue-500 p-2 px-6 mt-4 rounded-md hover:bg-blue-500"
         >
           Submit

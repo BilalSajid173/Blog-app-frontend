@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 import { useState } from "react";
 import EditProfileModal from "../../UI/EditProfileModal/EditProfileModal";
 // import { useSelector, useDispatch } from "react-redux";
-// import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import useHttp from "../../hooks/use-http";
 import PersonalInfo from "./PersonalInfo";
 import WorkInfo from "./Work";
@@ -70,6 +70,19 @@ const EditProfile = (props) => {
       return prev - 1;
     });
   };
+
+  const submitHandler = () => {
+    if (name.trim() === "") {
+      console.log("name cannot be empty");
+      toast.error("Name cannot be empty.");
+      return;
+    } else if (!email.trim().includes("@")) {
+      console.log("please enter a valid email");
+      toast.error("Please enter a valid email!");
+      return;
+    }
+    props.onClick();
+  };
   //   fetchComments(
   //     {
   //       url: "http://localhost:8000/api/products/getcomments/" + props.id + "/",
@@ -117,7 +130,7 @@ const EditProfile = (props) => {
           <SocialLinks
             valueChangeHandler={valueChangeHandler}
             prevHandler={prevHandler}
-            nextHandler={nextHandler}
+            submitHandler={submitHandler}
             facebook={facebook}
             twitter={twitter}
             linkedIn={linkedIn}
