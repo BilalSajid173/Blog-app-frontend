@@ -1,21 +1,26 @@
-import image from "../../Images/userimg.png";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { Link } from "react-router-dom";
 import classes from "./UserProfile.module.css";
+import { Image } from "cloudinary-react";
 
 const LeftCard = (props) => {
   return (
     <div
       className={`${classes["profile-card"]} before:bg-[#9db4f4] dark:before:bg-[#4e409d] lg:h-[84vh] flex flex-wrap flex-col items-center bg-gray-200 dark:bg-gray-900 rounded-md relative lg:sticky lg:top-20 mb-6 lg:mb-0 w-full md:w-10/12 lg:w-4/12 dark:text-white p-6 py-8 shadow-lg`}
     >
-      <img
-        className="relative rounded-full w-150 h-150 bg-blue-900 border-white border-4"
-        src={image}
-        alt="userimg"
-      ></img>
+      <div className="relative rounded-full w-200 h-200 bg-blue-900 border-[#4e409d] border-4">
+        <Image
+          className="rounded-full"
+          cloudName="dntn0wocu"
+          publicId={props.imageId}
+          width="200"
+          height="200"
+          crop="scale"
+        />
+      </div>
       <h1 className="font-bold text-3xl pt-4">{props.name}</h1>
       <h1 className="font-bold pt-1 italic">{props.work}</h1>
       <div className="flex flex-wrap mt-2 justify-between">
