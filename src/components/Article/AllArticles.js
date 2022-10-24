@@ -33,7 +33,9 @@ const AllArticles = () => {
           authorId: post.user.id,
           title: post.title,
           imageId: post.imageId,
-          userimgId: post.user.profilePic,
+          userimgId: post.user.profilePic
+            ? post.user.profilePic
+            : "chat-app/noynwdkfnsyt33lrsyld",
           commentsCount: post.commentCount,
           likesCount: post.likesCount,
           tags: post.tags.split(", "),

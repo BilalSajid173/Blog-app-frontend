@@ -34,7 +34,7 @@ const UserProfile = (props) => {
       authorId: post.user.id,
       title: post.title,
       imageId: post.imageId,
-      userimgId: post.user.profilePic,
+      // userimgId: post.user.profilePic,
       commentsCount: post.commentCount,
       likesCount: post.likesCount,
       tags: post.tags.split(", "),
@@ -121,7 +121,9 @@ const UserProfile = (props) => {
           facebook={user.facebook}
           linkedIn={user.linkedIn}
           twitter={user.twitter}
-          imageId={user.profilePic}
+          imageId={
+            user.profilePic ? user.profilePic : "chat-app/noynwdkfnsyt33lrsyld"
+          }
         />
         <div className="w-full md:w-10/12 lg:w-7/12 lg:ml-6 bg-gray-200 dark:bg-gray-900 rounded-md p-4 sm:p-6 py-8 dark:text-white shadow-lg">
           <div className="dark:text-gray-400">
@@ -196,7 +198,7 @@ const UserProfile = (props) => {
                       likesCount={article.likesCount}
                       comments={article.commentsCount}
                       content={article.content}
-                      userimgId={article.userimgId}
+                      userimgId={user.profilePic}
                       imageId={article.imageId}
                       authorId={article.authorId}
                       id={article.id}

@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import image from "../../Images/userimg.png";
 import Moment from "react-moment";
 import BasicMenu from "./MenuOptions";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -14,6 +13,7 @@ import { authActions } from "../../store/auth";
 import { commentsActions } from "../../store/comments";
 import Loader1 from "../UI/Loader/Loader1";
 import ViewComments from "../Comments/Comments";
+import { Image } from "cloudinary-react";
 
 const Article = (props) => {
   const navigate = useNavigate();
@@ -73,8 +73,16 @@ const Article = (props) => {
       <div className="transition-all flex flex-col p-3 bg-white dark:bg-[#201d36] dark:text-white my-3 first:mt-0 rounded shadow-lg">
         <div className="flex flex-wrap justify-center mb-2">
           {/*use cloudinary image component for image*/}
-          <div className="rounded-full h-16 w-16 flex flex-wrap bg-gray-500 dark:bg-white">
-            <img src={image} className="" alt="img"></img>
+          <div className="rounded-full h-16 w-16">
+            {/* <img src={image} className="" alt="img"></img> */}
+            <Image
+              className="rounded-full"
+              cloudName="dntn0wocu"
+              publicId={props.userimgId}
+              width="80"
+              height="80"
+              crop="scale"
+            />
           </div>
           <div className="ml-2 mr-auto flex flex-wrap flex-col items-start justify-start">
             <Link to="/profile" className="font-bold">
