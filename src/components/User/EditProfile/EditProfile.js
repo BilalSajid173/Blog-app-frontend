@@ -7,6 +7,7 @@ import EditProfileModal from "../../UI/EditProfileModal/EditProfileModal";
 // import useHttp from "../../hooks/use-http";
 import PersonalInfo from "./PersonalInfo";
 import WorkInfo from "./Work";
+import About from "./About";
 
 const EditProfile = (props) => {
   const [page, setPage] = useState(1);
@@ -18,6 +19,8 @@ const EditProfile = (props) => {
   const [education, setEducation] = useState(props.education);
   const [work, setWork] = useState(props.work);
   const [experience, setExperience] = useState(props.experience);
+  const [bio, setBio] = useState(props.bio);
+  const [about, setAbout] = useState(props.about);
 
   const valueChangeHandler = (field, e) => {
     if (field === "name") {
@@ -36,6 +39,10 @@ const EditProfile = (props) => {
       setWork(e.target.value);
     } else if (field === "experience") {
       setExperience(e.target.value);
+    }else if (field === "about") {
+      setAbout(e.target.value);
+    } else if (field === "bio") {
+      setBio(e.target.value);
     }
   };
 
@@ -80,6 +87,15 @@ const EditProfile = (props) => {
             education={education}
             work={work}
             experience={experience}
+            nextHandler={nextHandler}
+            prevHandler={prevHandler}
+          />
+        )}
+        {page === 3 && (
+          <About
+            bio={bio}
+            valueChangeHandler={valueChangeHandler}
+            about={about}
             nextHandler={nextHandler}
             prevHandler={prevHandler}
           />
