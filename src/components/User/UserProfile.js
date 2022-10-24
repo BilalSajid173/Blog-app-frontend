@@ -6,7 +6,7 @@ import Article from "../Article/Article";
 import { useState } from "react";
 import Sidebar from "./Sidebar";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import EditProfile from "./EditProfile";
+import EditProfile from "./EditProfile/EditProfile";
 
 const UserProfile = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
