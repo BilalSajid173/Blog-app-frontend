@@ -8,6 +8,7 @@ import Sidebar from "./Sidebar";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import EditProfile from "./EditProfile/EditProfile";
 import AddNewArticle from "../AddArticle/AddArticle";
+import EditImage from "./ProfileImage";
 
 const UserProfile = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
@@ -17,6 +18,7 @@ const UserProfile = (props) => {
   const likedPosts = useSelector((state) => state.auth.likedPosts);
   const savedPosts = useSelector((state) => state.auth.savedPosts);
   const [showEditProfile, setShowEditProfile] = useState(false);
+  const [showImageModal, setShowImageModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   let likedposts = likedPosts ? likedPosts : [];
   let savedposts = savedPosts ? savedPosts : [];
@@ -57,12 +59,19 @@ const UserProfile = (props) => {
     setShowMenu(false);
   };
 
+  const imageModalHandler = () => {
+    setShowImageModal((prev) => {
+      return !prev;
+    });
+    setShowMenu(false);
+  };
   const closeEdit = () => {
     setShowEditProfile(false);
   };
   return (
     <>
       <div className="flex flex-wrap justify-center px-4 py-10 sm:p-10">
+        {showImageModal && <EditImage onClick={imageModalHandler} />}
         {showArticleModal && <AddNewArticle onClick={articleModalHandler} />}
         {showEditProfile && (
           <EditProfile
@@ -96,6 +105,7 @@ const UserProfile = (props) => {
           ></div>
         )}
         <Sidebar
+          imageModal={imageModalHandler}
           showMenu={showMenu}
           showMenuHandler={showMenuHandler}
           showEdit={showEdit}

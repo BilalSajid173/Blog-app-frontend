@@ -31,7 +31,7 @@ const Sidebar = (props) => {
         Edit Profile
       </button>
       <button
-        //   onClick={logoutHandler}
+          onClick={props.imageModal}
         className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"
       >
         <span className="mr-2 p-2">
