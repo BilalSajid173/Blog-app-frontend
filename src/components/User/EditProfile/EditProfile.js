@@ -76,7 +76,6 @@ const EditProfile = (props) => {
   };
 
   const editProfileResponseHandler = (data) => {
-    console.log(data);
     dispatch(authActions.updateUser({ user: data }));
     props.onClick();
   };
