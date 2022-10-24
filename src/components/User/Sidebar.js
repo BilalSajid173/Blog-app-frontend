@@ -5,13 +5,14 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import GroupIcon from "@mui/icons-material/Group";
 import PortraitIcon from "@mui/icons-material/Portrait";
+import KeyIcon from "@mui/icons-material/Key";
 
 const Sidebar = (props) => {
   return (
     <div
       className={`duration-300 ease-in-out transition-all transform ${
         props.showMenu ? "-translate-x-0" : "-translate-x-full"
-      } p-2 py-3 flex flex-col w-[20rem] top-0 left-0 fixed h-screen bg-white z-20 ml-auto dark:bg-gray-800 dark:text-white`}
+      } py-3 flex flex-col w-[20rem] top-0 left-0 fixed h-screen bg-white z-20 ml-auto dark:bg-gray-800 dark:text-white`}
     >
       <div className="px-2 text-right text-lg">
         <i
@@ -73,6 +74,15 @@ const Sidebar = (props) => {
           <BookmarkIcon />
         </span>{" "}
         Saved Articles
+      </button>
+      <button
+        //   onClick={logoutHandler}
+        className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"
+      >
+        <span className="mr-2 p-2">
+          <KeyIcon />
+        </span>{" "}
+        Change Password
       </button>
       <button
         //   onClick={logoutHandler}
