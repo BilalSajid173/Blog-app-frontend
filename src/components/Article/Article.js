@@ -85,7 +85,7 @@ const Article = (props) => {
             />
           </div>
           <div className="ml-2 mr-auto flex flex-wrap flex-col items-start justify-start">
-            <Link to="/profile" className="font-bold">
+            <Link to={`/profile/${props.authorId}`} className="font-bold">
               {props.name}
             </Link>
             <Moment fromNow>{props.createdAt}</Moment>

@@ -38,6 +38,8 @@ const AuthInfo = (props) => {
             <i class="fa-brands fa-twitter"></i>
           </a>
           <a
+            rel="noreferrer"
+            target="_blank"
             href={props.linkedIn}
             style={{ backgroundColor: "#4070f4" }}
             className={classes.link}

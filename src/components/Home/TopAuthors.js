@@ -81,7 +81,7 @@ const TopAuths = (props) => {
               classes={{ tooltip: "dark:bg-gray-600" }}
               placement="left"
             >
-              <Link to={`/${author.id}`}>
+              <Link to={`/profile/${author.id}`}>
                 <div className="cursor-pointer flex flex-wrap items-center rounded-sm p-2 my-1 bg-slate-200 hover:bg-slate-400 dark:bg-slate-600 dark:hover:bg-slate-500">
                   <Avatar className="mr-2 bg-white" src={image} />
 
