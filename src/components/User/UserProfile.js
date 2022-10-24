@@ -7,17 +7,20 @@ import { useState } from "react";
 import Sidebar from "./Sidebar";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import EditProfile from "./EditProfile/EditProfile";
+import AddNewArticle from "../AddArticle/AddArticle";
 
 const UserProfile = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
   const user = useSelector((state) => state.auth.user);
   const articles = useSelector((state) => state.auth.user.products);
+  const [showArticleModal, setShowArticleModal] = useState(false);
   const likedPosts = useSelector((state) => state.auth.likedPosts);
   const savedPosts = useSelector((state) => state.auth.savedPosts);
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   let likedposts = likedPosts ? likedPosts : [];
   let savedposts = savedPosts ? savedPosts : [];
+
   const posts = articles.map((post) => {
     return {
       isLiked: likedposts.includes(post.id) ? true : false,
@@ -47,12 +50,20 @@ const UserProfile = (props) => {
     setShowMenu(false);
   };
 
+  const articleModalHandler = () => {
+    setShowArticleModal((prev) => {
+      return !prev;
+    });
+    setShowMenu(false);
+  };
+
   const closeEdit = () => {
     setShowEditProfile(false);
   };
   return (
     <>
       <div className="flex flex-wrap justify-center px-4 py-10 sm:p-10">
+        {showArticleModal && <AddNewArticle onClick={articleModalHandler} />}
         {showEditProfile && (
           <EditProfile
             onClick={closeEdit}
@@ -88,6 +99,7 @@ const UserProfile = (props) => {
           showMenu={showMenu}
           showMenuHandler={showMenuHandler}
           showEdit={showEdit}
+          articleModal={articleModalHandler}
         />
         <LeftCard
           name={user.name}
