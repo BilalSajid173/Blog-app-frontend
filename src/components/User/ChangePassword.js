@@ -5,9 +5,10 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useSelector } from "react-redux";
-// import { authActions } from "../../store/auth";
 import { useState } from "react";
-// import useHttp from "../../hooks/use-http";
+import useHttp from "../../hooks/use-http";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ChangePassword = (props) => {
   const [showOldPassword, setShowOldPassword] = useState(false);
@@ -15,11 +16,41 @@ const ChangePassword = (props) => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const isDark = useSelector((state) => state.mode.isDark);
+  const { sendRequest: editPasswordRequest } = useHttp();
+  const token = useSelector((state) => state.auth.token);
   const darkTheme = createTheme({
     palette: {
       mode: isDark ? "dark" : "light",
     },
   });
+
+  const responseHandler = (data) => {
+    toast.success("Password updated successfully!");
+    props.onClick()
+  };
+
+  const submitHandler = () => {
+    if (oldPassword.trim().length < 8 || newPassword.trim().length < 8) {
+      toast.error("Password length cannot be less than 8!");
+      return;
+    }
+
+    editPasswordRequest(
+      {
+        url: "http://localhost:8000/api/user/changepassword/",
+        method: "PUT",
+        body: {
+          old_password: oldPassword,
+          new_password: newPassword,
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      },
+      responseHandler
+    );
+  };
 
   const handleShowOldPassword = () => {
     setShowOldPassword((prev) => {
@@ -102,7 +133,7 @@ const ChangePassword = (props) => {
       </ThemeProvider>
       <div className="p-2 flex flex-wrap justify-center">
         <button
-          //   onClick={imageUploadHandler}
+          onClick={submitHandler}
           className="p-2 px-6 mr-2 border-2 border-blue-500 rounded-md hover:bg-blue-500"
         >
           Submit
