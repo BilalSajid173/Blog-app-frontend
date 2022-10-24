@@ -9,6 +9,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import EditProfile from "./EditProfile/EditProfile";
 import AddNewArticle from "../AddArticle/AddArticle";
 import EditImage from "./ProfileImage";
+import ChangePassword from "./ChangePassword";
 
 const UserProfile = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
@@ -20,6 +21,7 @@ const UserProfile = (props) => {
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [showImageModal, setShowImageModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
   let likedposts = likedPosts ? likedPosts : [];
   let savedposts = savedPosts ? savedPosts : [];
 
@@ -68,11 +70,20 @@ const UserProfile = (props) => {
   const closeEdit = () => {
     setShowEditProfile(false);
   };
+
+  const passwordModalHandler = () => {
+    setShowPasswordModal((prev) => {
+      return !prev;
+    });
+    setShowMenu(false);
+  };
+
   return (
     <>
       <div className="flex flex-wrap justify-center px-4 py-10 sm:p-10">
         {showImageModal && <EditImage onClick={imageModalHandler} />}
         {showArticleModal && <AddNewArticle onClick={articleModalHandler} />}
+        {showPasswordModal && <ChangePassword onClick={passwordModalHandler} />}
         {showEditProfile && (
           <EditProfile
             onClick={closeEdit}
@@ -107,6 +118,7 @@ const UserProfile = (props) => {
         <Sidebar
           imageModal={imageModalHandler}
           showMenu={showMenu}
+          passwordModal={passwordModalHandler}
           showMenuHandler={showMenuHandler}
           showEdit={showEdit}
           articleModal={articleModalHandler}
