@@ -24,7 +24,7 @@ const LeftCard = (props) => {
         <span className="text-blue-500"> {props.following} Following</span>
       </div>
       <div className="pt-4">
-        <p className="text-center font-serif italic">{props.bio}</p>
+        <p className="text-center font-serif italic">{props.about}</p>
       </div>
       <div className="pt-8 text-2xl flex flex-wrap space-x-4 text-blue-600">
         {props.facebook && (

@@ -47,6 +47,7 @@ const WorkInfo = (props) => {
             id="standard-basic"
             variant="standard"
             autoComplete="off"
+            multiline
             onChange={props.valueChangeHandler.bind(null, "experience")}
             placeholder="Experience"
             value={props.experience}

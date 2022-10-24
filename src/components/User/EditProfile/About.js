@@ -41,7 +41,7 @@ const About = (props) => {
             multiline
             rows={5}
             onChange={props.valueChangeHandler.bind(null, "about")}
-            placeholder="About"
+            placeholder="About(not more than 150 characters)"
             value={props.about}
           />
         </div>

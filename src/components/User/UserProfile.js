@@ -92,7 +92,7 @@ const UserProfile = (props) => {
         <LeftCard
           name={user.name}
           work={user.work}
-          bio={user.bio}
+          about={user.about}
           followers={user.followers.length}
           following={user.following.length}
           github={user.github}
@@ -111,12 +111,12 @@ const UserProfile = (props) => {
             >
               <h1 className="font-bold text-lg">BIO</h1>
               <p className="pt-1 font-semibold font-['Nunito Sans']">
-                Tell others about yourself!
+                {user.bio ? user.bio : "Tell others about yourself!"}
               </p>
 
               <h1 className="font-bold text-lg mt-4">Experience</h1>
               <p className="pt-1 font-semibold font-['Nunito Sans']">
-                What is your experience??
+                {user.experience ? user.experience : "What is your experience?"}
               </p>
             </div>
             <div className="flex flex-wrap mt-2 pt-2 justify-between">

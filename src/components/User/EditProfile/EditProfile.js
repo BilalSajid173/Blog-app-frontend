@@ -1,14 +1,15 @@
 import React, { Fragment } from "react";
 import { useState } from "react";
 import EditProfileModal from "../../UI/EditProfileModal/EditProfileModal";
-// import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import useHttp from "../../hooks/use-http";
+import useHttp from "../../../hooks/use-http";
 import PersonalInfo from "./PersonalInfo";
 import WorkInfo from "./Work";
 import About from "./About";
 import SocialLinks from "./Socials";
+import { authActions } from "../../../store/auth";
 
 const EditProfile = (props) => {
   const [page, setPage] = useState(1);
@@ -26,6 +27,9 @@ const EditProfile = (props) => {
   const [linkedIn, setLinkedIn] = useState(props.linkedIn);
   const [github, setGithub] = useState(props.github);
   const [facebook, setFacebook] = useState(props.facebook);
+  const { sendRequest: sendEditRequest } = useHttp();
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
 
   const valueChangeHandler = (field, e) => {
     if (field === "name") {
@@ -71,27 +75,48 @@ const EditProfile = (props) => {
     });
   };
 
+  const editProfileResponseHandler = (data) => {
+    console.log(data);
+    dispatch(authActions.updateUser({ user: data }));
+    props.onClick();
+  };
+
   const submitHandler = () => {
     if (name.trim() === "") {
-      console.log("name cannot be empty");
       toast.error("Name cannot be empty.");
       return;
     } else if (!email.trim().includes("@")) {
-      console.log("please enter a valid email");
       toast.error("Please enter a valid email!");
       return;
     }
-    props.onClick();
+    sendEditRequest(
+      {
+        url: "http://localhost:8000/api/user/editprofile/",
+        method: "PUT",
+        body: {
+          name: name,
+          email: email,
+          number: number,
+          age: age,
+          address: address,
+          education: education,
+          work: work,
+          experience: experience,
+          about: about.substr(0, 150),
+          bio: bio,
+          twitter: twitter,
+          facebook: facebook,
+          linkedIn: linkedIn,
+          github: github,
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      },
+      editProfileResponseHandler
+    );
   };
-  //   fetchComments(
-  //     {
-  //       url: "http://localhost:8000/api/products/getcomments/" + props.id + "/",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     },
-  //     commentsHandler
-  //   );
 
   const EditModalContent = (
     <Fragment>
