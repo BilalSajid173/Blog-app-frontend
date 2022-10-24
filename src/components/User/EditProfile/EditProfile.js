@@ -6,6 +6,7 @@ import EditProfileModal from "../../UI/EditProfileModal/EditProfileModal";
 // import "react-toastify/dist/ReactToastify.css";
 // import useHttp from "../../hooks/use-http";
 import PersonalInfo from "./PersonalInfo";
+import WorkInfo from "./Work";
 
 const EditProfile = (props) => {
   const [page, setPage] = useState(1);
@@ -14,6 +15,9 @@ const EditProfile = (props) => {
   const [address, setAddress] = useState(props.address);
   const [age, setAge] = useState(props.age);
   const [number, setNumber] = useState(props.number);
+  const [education, setEducation] = useState(props.education);
+  const [work, setWork] = useState(props.work);
+  const [experience, setExperience] = useState(props.experience);
 
   const valueChangeHandler = (field, e) => {
     if (field === "name") {
@@ -26,12 +30,24 @@ const EditProfile = (props) => {
       setAge(e.target.value);
     } else if (field === "address") {
       setAddress(e.target.value);
+    } else if (field === "education") {
+      setEducation(e.target.value);
+    } else if (field === "work") {
+      setWork(e.target.value);
+    } else if (field === "experience") {
+      setExperience(e.target.value);
     }
   };
 
   const nextHandler = () => {
     setPage((prev) => {
       return prev + 1;
+    });
+  };
+
+  const prevHandler = () => {
+    setPage((prev) => {
+      return prev - 1;
     });
   };
   //   fetchComments(
@@ -56,6 +72,16 @@ const EditProfile = (props) => {
             number={number}
             valueChangeHandler={valueChangeHandler}
             nextHandler={nextHandler}
+          />
+        )}
+        {page === 2 && (
+          <WorkInfo
+            valueChangeHandler={valueChangeHandler}
+            education={education}
+            work={work}
+            experience={experience}
+            nextHandler={nextHandler}
+            prevHandler={prevHandler}
           />
         )}
       </div>

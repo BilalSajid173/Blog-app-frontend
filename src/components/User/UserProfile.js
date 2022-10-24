@@ -61,6 +61,9 @@ const UserProfile = (props) => {
             address={user.address}
             age={user.age}
             number={user.number}
+            education={user.education}
+            work={user.work}
+            experience={user.experience}
           />
         )}
         <span
