@@ -172,7 +172,7 @@ const AddNewArticle = (props) => {
           <form onSubmit={formSubmitHandler}>
             <div className="w-full">
               <input
-                className="rounded-sm p-2 w-full border-0 outline-none dark:bg-gray-800 dark:border dark:border-gray-600"
+                className="rounded-sm p-2 w-full border-0 outline-none dark:bg-gray-800"
                 placeholder="Enter Title (at least 20 characters)"
                 type="text"
                 id="title"
@@ -186,7 +186,7 @@ const AddNewArticle = (props) => {
                 rows="12"
                 name="content"
                 id="content"
-                className="rounded-sm p-2 my-1 w-full resize-none border-0 outline-none dark:bg-gray-800 dark:border dark:border-gray-600 scrollbar"
+                className="rounded-sm p-2 my-1 w-full resize-none border-0 outline-none dark:bg-gray-800 scrollbar"
                 placeholder="Whats this about? (min. 100 characters, enclose subheadings in {})"
                 required
                 value={enteredContent}
@@ -194,7 +194,7 @@ const AddNewArticle = (props) => {
                 onBlur={contentBlurHandler}
               />
               <select
-                className="rounded-sm p-2 w-full border-0 outline-none dark:bg-gray-800 dark:border dark:border-gray-600"
+                className="rounded-sm p-2 w-full border-0 outline-none dark:bg-gray-800"
                 onChange={categoryChangeHandler}
               >
                 <option disabled selected hidden>
@@ -209,7 +209,7 @@ const AddNewArticle = (props) => {
               </select>
               <div className="rounded-sm my-1 w-full border-0 outline-none">
                 <input
-                  className="rounded-sm p-2 w-9/12 border-0 outline-none  dark:bg-gray-800 dark:border dark:border-gray-600"
+                  className="rounded-sm p-2 w-9/12 border-0 outline-none  dark:bg-gray-800"
                   placeholder="Add Tags (max 5)"
                   type="text"
                   value={enteredTag}
@@ -233,7 +233,7 @@ const AddNewArticle = (props) => {
               ></input>
               <label
                 htmlFor="imagepick"
-                className="p-1 px-3 bg-blue-400 cursor-pointer rounded-sm hover:bg-blue-500 mr-3 dark:bg-slate-600  dark:hover:bg-slate-700"
+                className="p-1 px-3 bg-blue-500 cursor-pointer rounded-sm hover:bg-blue-600 mr-3"
                 type="button"
               >
                 Choose Image
@@ -247,7 +247,7 @@ const AddNewArticle = (props) => {
                 </div>
               )}
               <button
-                className="p-1 px-3 my-3 bg-blue-400 cursor-pointer rounded-sm w-full hover:bg-blue-500 dark:bg-slate-600 dark:hover:bg-slate-700"
+                className="p-1 px-3 my-3 bg-blue-500 cursor-pointer rounded-sm w-full hover:bg-blue-600"
                 type="submit"
               >
                 Submit
@@ -256,7 +256,7 @@ const AddNewArticle = (props) => {
           </form>
           <button
             onClick={showPreviewHandler}
-            className="p-2 bg-blue-300 rounded-sm font-semibold hover:bg-blue-400 dark:bg-gray-600  dark:hover:bg-slate-700"
+            className="p-2 bg-blue-500 rounded-sm font-semibold hover:bg-blue-600"
           >
             {showPreview ? "Hide Preview" : "Show Preview"}
           </button>
