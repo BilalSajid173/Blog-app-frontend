@@ -13,7 +13,7 @@ const Backdrop = (props) => {
 //make it responsive as well by using calc(50% - 2rem)
 const ModalOverlay = (props) => {
   return (
-    <div className="overflow-y-auto scrollbar fixed top-16 left-[4%] w-11/12 md:w-[40rem] md:left-[calc(50%-20rem)] h-2/6 bg-gray-200 p-2 sm:p-4 z-40 rounded-sm dark:bg-gray-900">
+    <div className="overflow-y-auto scrollbar fixed top-16 left-[4%] w-11/12 md:w-[40rem] md:left-[calc(50%-20rem)] h-3/6 bg-gray-200 p-2 sm:p-4 z-40 rounded-sm dark:bg-gray-900">
       {props.children}
     </div>
   );
