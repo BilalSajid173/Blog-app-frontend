@@ -44,7 +44,7 @@ const UserProfile = (props) => {
 
   const showEdit = () => {
     setShowEditProfile(true);
-    setShowMenu(false)
+    setShowMenu(false);
   };
 
   const closeEdit = () => {
@@ -66,7 +66,11 @@ const UserProfile = (props) => {
             className="fixed top-0 left-0 w-full h-screen z-10 bg-gray-900 opacity-50"
           ></div>
         )}
-        <Sidebar showMenu={showMenu} showMenuHandler={showMenuHandler} showEdit={showEdit} />
+        <Sidebar
+          showMenu={showMenu}
+          showMenuHandler={showMenuHandler}
+          showEdit={showEdit}
+        />
         <LeftCard
           name={user.name}
           work={user.work}
@@ -98,7 +102,13 @@ const UserProfile = (props) => {
               </p>
             </div>
             <div className="flex flex-wrap mt-2 pt-2 justify-between">
-              <div className=" only:grow p-4 w-full md:w-[48%] dark:bg-[#201d36] rounded-md shadow-lg bg-gray-300">
+              <div
+                className={`${
+                  isDark
+                    ? classes["top-div-gradient2"]
+                    : classes["top-div-gradient-light2"]
+                } only:grow p-4 w-full md:w-[48%] dark:bg-[#201d36] rounded-md shadow-lg bg-gray-300`}
+              >
                 <DataField title="Email" value={user.email} />
                 <DataField
                   title="Address"
@@ -109,7 +119,13 @@ const UserProfile = (props) => {
                   value={user.age ? user.age : "How old are you?"}
                 />
               </div>
-              <div className="p-4 w-full mt-4 md:mt-0 md:w-[48%] rounded-md dark:bg-[#201d36] shadow-lg bg-gray-300">
+              <div
+                className={`${
+                  isDark
+                    ? classes["top-div-gradient3"]
+                    : classes["top-div-gradient-light3"]
+                } p-4 w-full mt-4 md:mt-0 md:w-[48%] rounded-md dark:bg-[#201d36] shadow-lg bg-gray-300`}
+              >
                 <DataField
                   title="Education"
                   value={
