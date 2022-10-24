@@ -53,7 +53,16 @@ const UserProfile = (props) => {
   return (
     <>
       <div className="flex flex-wrap justify-center px-4 py-10 sm:p-10">
-        {showEditProfile && <EditProfile onClick={closeEdit} />}
+        {showEditProfile && (
+          <EditProfile
+            onClick={closeEdit}
+            name={user.name}
+            email={user.email}
+            address={user.address}
+            age={user.age}
+            number={user.number}
+          />
+        )}
         <span
           className="fixed left-0 top-96 z-10 rounded-md cursor-pointer"
           onClick={showMenuHandler}
