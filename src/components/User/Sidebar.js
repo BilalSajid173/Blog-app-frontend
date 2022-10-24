@@ -6,8 +6,15 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import GroupIcon from "@mui/icons-material/Group";
 import PortraitIcon from "@mui/icons-material/Portrait";
 import KeyIcon from "@mui/icons-material/Key";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/auth";
 
 const Sidebar = (props) => {
+  const dispatch = useDispatch();
+
+  const logoutHandler = () => {
+    dispatch(authActions.logout());
+  };
   return (
     <div
       className={`duration-300 ease-in-out transition-all transform ${
@@ -85,7 +92,7 @@ const Sidebar = (props) => {
         Change Password
       </button>
       <button
-        //   onClick={logoutHandler}
+        onClick={logoutHandler}
         className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"
       >
         <span className="mr-2 p-2">
