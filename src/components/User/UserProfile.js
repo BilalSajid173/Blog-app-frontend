@@ -10,6 +10,8 @@ import EditProfile from "./EditProfile/EditProfile";
 import AddNewArticle from "../AddArticle/AddArticle";
 import EditImage from "./ProfileImage";
 import ChangePassword from "./ChangePassword";
+import GetFollowers from "./GetFollowers";
+import GetFollowing from "./GetFollowing";
 
 const UserProfile = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
@@ -22,6 +24,8 @@ const UserProfile = (props) => {
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [showImageModal, setShowImageModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [showFollowers, setShowFollowers] = useState(false);
+  const [showFollowing, setShowFollowing] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   let likedposts = likedPosts ? likedPosts : [];
   let savedposts = savedPosts ? savedPosts : [];
@@ -38,7 +42,6 @@ const UserProfile = (props) => {
       authorId: post.user.id,
       title: post.title,
       imageId: post.imageId,
-      // userimgId: post.user.profilePic,
       commentsCount: post.commentCount,
       likesCount: post.likesCount,
       tags: post.tags.split(", "),
@@ -80,12 +83,28 @@ const UserProfile = (props) => {
     setShowMenu(false);
   };
 
+  const followersHandler = () => {
+    setShowFollowers((prev) => {
+      return !prev;
+    });
+    setShowMenu(false);
+  };
+
+  const followingHandler = () => {
+    setShowFollowing((prev) => {
+      return !prev;
+    });
+    setShowMenu(false);
+  };
+
   return (
     <>
       <div className="flex flex-wrap justify-center px-4 py-10 sm:p-10">
         {showImageModal && <EditImage onClick={imageModalHandler} />}
         {showArticleModal && <AddNewArticle onClick={articleModalHandler} />}
         {showPasswordModal && <ChangePassword onClick={passwordModalHandler} />}
+        {showFollowers && <GetFollowers onClick={followersHandler} />}
+        {showFollowing && <GetFollowing onClick={followingHandler} />}
         {showEditProfile && (
           <EditProfile
             onClick={closeEdit}
@@ -122,6 +141,8 @@ const UserProfile = (props) => {
           showMenu={showMenu}
           passwordModal={passwordModalHandler}
           showMenuHandler={showMenuHandler}
+          followersHandler={followersHandler}
+          followingHandler={followingHandler}
           showEdit={showEdit}
           articleModal={articleModalHandler}
         />
