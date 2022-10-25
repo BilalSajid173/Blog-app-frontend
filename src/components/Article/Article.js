@@ -71,7 +71,7 @@ const Article = (props) => {
       {showCommentsModal && (
         <ViewComments onClick={CommentsModalHandler} id={props.id} />
       )}
-      <div className="transition-all flex flex-col p-3 bg-white dark:bg-[#201d36] dark:text-white my-3 first:mt-0 rounded shadow-lg">
+      <div className="transition-all flex flex-col p-3 bg-gray-300 dark:bg-[#201d36] dark:text-white my-3 first:mt-0 rounded shadow-lg">
         <div className="flex flex-wrap justify-center mb-2">
           {/*use cloudinary image component for image*/}
           <div className="rounded-full h-16 w-16">
@@ -134,14 +134,14 @@ const Article = (props) => {
             <div className="flex flex-wrap justify-center items-center transition-all cursor-pointer rounded-sm w-fit mx-2 ml-0  dark:hover:text-black">
               <span
                 onClick={CommentsModalHandler}
-                className="p-1 px-2 border border-blue-500 rounded-md  hover:bg-gray-100"
+                className="p-1 px-2 border border-blue-500 rounded-md  hover:bg-blue-300"
               >
                 <CommentIcon /> {props.comments} comments
               </span>
             </div>
             <div className="flex flex-wrap justify-center items-center transition-all cursor-pointer rounded-sm w-fit mx-2  dark:hover:text-black">
               <span
-                className="p-1 px-2 border border-blue-500 rounded-md  hover:bg-gray-100 relative"
+                className="p-1 px-2 border border-blue-500 rounded-md  hover:bg-blue-300 relative"
                 onClick={likeHandler}
               >
                 {isLoading && (
