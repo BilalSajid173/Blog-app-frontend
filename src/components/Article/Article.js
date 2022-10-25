@@ -23,6 +23,7 @@ const Article = (props) => {
   const [likesCount, setLikesCount] = useState(props.likesCount);
   const { isLoading, sendRequest: likePost } = useHttp();
   const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.auth.user);
 
   const likeResponseHandler = (data) => {
     const like = isLiked;
@@ -85,8 +86,15 @@ const Article = (props) => {
             />
           </div>
           <div className="ml-2 mr-auto flex flex-wrap flex-col items-start justify-start">
-            <Link to={`/userprofile/${props.authorId}`} className="font-bold">
-              {props.name}
+            <Link
+              to={`${
+                user && user.id === props.authorId
+                  ? "/profile"
+                  : `/userprofile/${props.authorId}`
+              }`}
+              className="font-bold"
+            >
+              {user && props.authorId === user.id ? "You" : props.name}
             </Link>
             <Moment fromNow>{props.createdAt}</Moment>
           </div>

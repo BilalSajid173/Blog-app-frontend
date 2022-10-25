@@ -11,6 +11,7 @@ const TopAuths = (props) => {
   const { sendRequest: fetchUsers } = useHttp();
   const authors = useSelector((state) => state.users.topusers);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     const compareFn = (a, b) => {
@@ -81,7 +82,13 @@ const TopAuths = (props) => {
               classes={{ tooltip: "dark:bg-gray-600" }}
               placement="left"
             >
-              <Link to={`/userprofile/${author.id}`}>
+              <Link
+                to={`${
+                  user && user.id === author.id
+                    ? "/profile"
+                    : `/userprofile/${author.id}`
+                }`}
+              >
                 <div className="cursor-pointer flex flex-wrap items-center rounded-sm p-2 my-1 bg-slate-200 hover:bg-slate-400 dark:bg-slate-600 dark:hover:bg-slate-500">
                   <Avatar className="mr-2 bg-white" src={image} />
 
