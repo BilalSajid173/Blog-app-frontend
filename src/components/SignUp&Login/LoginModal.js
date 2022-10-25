@@ -67,6 +67,9 @@ const LoginModal = (props) => {
         dislikedComments: data.data.dislikedComments.map((comment) => {
           return comment.id;
         }),
+        following: data.data.following.map((user) => {
+          return user.following_user_id;
+        }),
       })
     );
     props.handleClose();

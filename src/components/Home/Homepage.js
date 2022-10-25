@@ -44,6 +44,9 @@ const Home = () => {
           dislikedComments: data.User.dislikedComments.map((comment) => {
             return comment.id;
           }),
+          following: data.User.following.map((user) => {
+            return user.following_user_id;
+          }),
         })
       );
       toast.success("Welcome Back!");

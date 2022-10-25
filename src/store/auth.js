@@ -9,6 +9,7 @@ const initialAuthState = {
   comments: null,
   likedComments: null,
   dislikedComments: null,
+  following: null,
 };
 
 const authSlice = createSlice({
@@ -25,6 +26,7 @@ const authSlice = createSlice({
       state.comments = action.payload.comments;
       state.likedComments = action.payload.likedComments;
       state.dislikedComments = action.payload.dislikedComments;
+      state.following = action.payload.following;
     },
     logout(state) {
       localStorage.removeItem("token");
@@ -36,6 +38,7 @@ const authSlice = createSlice({
       state.comments = null;
       state.likedComments = null;
       state.dislikedComments = null;
+      state.following = null;
     },
     updateLikedPostsCount(state, action) {
       if (action.payload.increase) {
@@ -104,6 +107,15 @@ const authSlice = createSlice({
     },
     updateUser(state, action) {
       state.user = action.payload.user;
+    },
+    updateFollowing(state, action) {
+      if (action.payload.add) {
+        state.following.push(action.payload.id);
+      } else {
+        state.following = state.following.filter((x) => {
+          return x !== action.payload.id;
+        });
+      }
     },
   },
 });

@@ -14,8 +14,10 @@ const OtherUserProfile = (props) => {
   const [articles, setArticles] = useState([]);
   const likedPosts = useSelector((state) => state.auth.likedPosts);
   const savedPosts = useSelector((state) => state.auth.savedPosts);
+  const Following = useSelector((state) => state.auth.following);
   let likedposts = likedPosts ? likedPosts : [];
   let savedposts = savedPosts ? savedPosts : [];
+  let following = Following ? Following : [];
   const { userId } = useParams();
 
   useEffect(() => {
@@ -59,6 +61,8 @@ const OtherUserProfile = (props) => {
       <div className="flex flex-wrap justify-center px-4 py-10 sm:p-10">
         {user && (
           <LeftCard
+            isFollowed={following.includes(user.id) ? true : false}
+            id={user.id}
             name={user.name}
             work={user.work}
             about={user.about}
@@ -92,9 +96,7 @@ const OtherUserProfile = (props) => {
 
                 <h1 className="font-bold text-lg mt-4">Experience</h1>
                 <p className="pt-1 font-semibold font-['Nunito Sans']">
-                  {user.experience
-                    ? user.experience
-                    : "None?!"}
+                  {user.experience ? user.experience : "None?!"}
                 </p>
               </div>
               <div className="flex flex-wrap mt-2 pt-2 justify-between">
@@ -125,9 +127,7 @@ const OtherUserProfile = (props) => {
                   <DataField
                     title="Education"
                     value={
-                      user.education
-                        ? user.education
-                        : "Could be illiterate :/"
+                      user.education ? user.education : "Could be illiterate :/"
                     }
                   />
                   <DataField
