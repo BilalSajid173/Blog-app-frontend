@@ -18,12 +18,14 @@ const UserProfile = (props) => {
   const [showArticleModal, setShowArticleModal] = useState(false);
   const likedPosts = useSelector((state) => state.auth.likedPosts);
   const savedPosts = useSelector((state) => state.auth.savedPosts);
+  const Following = useSelector((state) => state.auth.following);
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [showImageModal, setShowImageModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   let likedposts = likedPosts ? likedPosts : [];
   let savedposts = savedPosts ? savedPosts : [];
+  let following = Following ? Following : [];
 
   const posts = articles.map((post) => {
     return {
@@ -128,7 +130,7 @@ const UserProfile = (props) => {
           work={user.work}
           about={user.about}
           followers={user.followers.length}
-          following={user.following.length}
+          following={following.length}
           github={user.github}
           facebook={user.facebook}
           linkedIn={user.linkedIn}
