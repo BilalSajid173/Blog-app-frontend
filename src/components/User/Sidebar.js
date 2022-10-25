@@ -8,9 +8,26 @@ import PortraitIcon from "@mui/icons-material/Portrait";
 import KeyIcon from "@mui/icons-material/Key";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
+import GetFollowers from "./GetFollowers";
+import GetFollowing from "./GetFollowing";
+import { useState } from "react";
 
 const Sidebar = (props) => {
   const dispatch = useDispatch();
+  const [showFollowers, setShowFollowers] = useState(false);
+  const [showFollowing, setShowFollowing] = useState(false);
+
+  const followersHandler = () => {
+    setShowFollowers((prev) => {
+      return !prev;
+    });
+  };
+
+  const followingHandler = () => {
+    setShowFollowing((prev) => {
+      return !prev;
+    });
+  };
 
   const logoutHandler = () => {
     dispatch(authActions.logout());
@@ -21,6 +38,8 @@ const Sidebar = (props) => {
         props.showMenu ? "-translate-x-0" : "-translate-x-full"
       } py-3 flex flex-col w-[20rem] top-0 left-0 fixed h-screen bg-white z-20 ml-auto dark:bg-gray-800 dark:text-white`}
     >
+      {showFollowers && <GetFollowers onClick={followersHandler} />}
+      {showFollowing && <GetFollowing onClick={followingHandler} />}
       <div className="px-2 text-right text-lg">
         <i
           onClick={props.showMenuHandler}
@@ -28,7 +47,6 @@ const Sidebar = (props) => {
         ></i>
       </div>
       <button
-        //   onClick={logoutHandler}
         onClick={props.showEdit}
         className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"
       >
@@ -56,7 +74,7 @@ const Sidebar = (props) => {
         Add Article
       </button>
       <button
-        //   onClick={logoutHandler}
+        onClick={followersHandler}
         className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"
       >
         <span className="mr-2 p-2">
@@ -65,7 +83,7 @@ const Sidebar = (props) => {
         Followers
       </button>
       <button
-        //   onClick={logoutHandler}
+        onClick={followingHandler}
         className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"
       >
         <span className="mr-2 p-2">
