@@ -17,7 +17,7 @@ function App() {
             element={<Navigate to="/all?page=1&sort=latest" replace />}
           />
           <Route path="/all" element={<Mainpage />} />
-          {<Route path="/profile/:userId" element={<Profile />}></Route>}
+          {isLoggedIn && <Route path="/profile" element={<Profile />}></Route>}
         </Routes>
         <ToastContainer />
       </ScrollToTop>

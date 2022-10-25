@@ -210,7 +210,11 @@ const UserProfile = (props) => {
                       likesCount={article.likesCount}
                       comments={article.commentsCount}
                       content={article.content}
-                      userimgId={user.profilePic}
+                      userimgId={
+                        user.profilePic
+                          ? user.profilePic
+                          : "chat-app/noynwdkfnsyt33lrsyld"
+                      }
                       imageId={article.imageId}
                       authorId={article.authorId}
                       id={article.id}

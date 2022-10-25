@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const user = useSelector((state) => state.auth.user);
   const [isDark, setIsDark] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
@@ -141,7 +140,7 @@ const Navbar = () => {
             </button>
           )}
           {isLoggedIn && (
-            <Link to={`/profile/${user.id}`}>
+            <Link to={`/profile`}>
               <button className="p-1.5 px-3 bg-slate-300 rounded-3xl">
                 <i className="dark:text-black fa-regular fa-user"></i>
               </button>
@@ -195,7 +194,7 @@ const Navbar = () => {
           </button>
         )}
         {isLoggedIn && (
-          <Link to={`/profile/${user.id}`}>
+          <Link to={`/profile`}>
             <button className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white w-full">
               <i className="mr-2 p-2 px-2.5 fa-regular fa-user"></i> Account
             </button>

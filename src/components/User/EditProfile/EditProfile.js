@@ -101,7 +101,7 @@ const EditProfile = (props) => {
           education: education,
           work: work,
           experience: experience,
-          about: about.substr(0, 150),
+          about: about ? about.substr(0, 150) : "",
           bio: bio,
           twitter: twitter,
           facebook: facebook,
