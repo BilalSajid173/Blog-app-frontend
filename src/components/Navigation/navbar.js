@@ -9,12 +9,20 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const [isDark, setIsDark] = useState(false);
+  const isDark = useSelector((state) => state.mode.isDark);
   const [showMenu, setShowMenu] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [openSignupModal, setOpenSignupModal] = useState(false);
   const [openArticleModal, setOpenArticleModal] = useState(false);
   const dispatch = useDispatch();
+
+  if (!isDark) {
+    document.body.classList.remove("bg-gray-800");
+    document.documentElement.classList.remove("dark");
+  } else {
+    document.body.classList.add("bg-gray-800");
+    document.documentElement.classList.add("dark");
+  }
 
   const loginModalHandler = () => {
     setOpenSignupModal((prev) => {
@@ -40,16 +48,6 @@ const Navbar = () => {
 
   const darkModeHandler = () => {
     dispatch(modeActions.toggle());
-    setIsDark((prev) => {
-      if (prev) {
-        document.body.classList.remove("bg-gray-800");
-        document.documentElement.classList.remove("dark");
-      } else {
-        document.body.classList.add("bg-gray-800");
-        document.documentElement.classList.add("dark");
-      }
-      return !prev;
-    });
   };
 
   const showMenuHandler = () => {
