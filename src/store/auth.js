@@ -46,7 +46,9 @@ const authSlice = createSlice({
         const index = state.user.products.findIndex(
           (post) => post.id === action.payload.id
         );
-        state.user.products[index].likesCount += 1;
+        if (index !== -1) {
+          state.user.products[index].likesCount += 1;
+        }
       } else {
         state.likedPosts = state.likedPosts.filter((id) => {
           return id !== action.payload.id;
@@ -54,7 +56,9 @@ const authSlice = createSlice({
         const index = state.user.products.findIndex(
           (post) => post.id === action.payload.id
         );
-        state.user.products[index].likesCount -= 1;
+        if (index !== -1) {
+          state.user.products[index].likesCount -= 1;
+        }
       }
     },
     increaseCommentsCount(state, action) {
