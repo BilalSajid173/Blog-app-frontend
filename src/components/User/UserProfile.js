@@ -12,6 +12,7 @@ import EditImage from "./ProfileImage";
 import ChangePassword from "./ChangePassword";
 import GetFollowers from "./GetFollowers";
 import GetFollowing from "./GetFollowing";
+import GetSavedPosts from "./GetSavedPosts";
 
 const UserProfile = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
@@ -26,6 +27,7 @@ const UserProfile = (props) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showFollowers, setShowFollowers] = useState(false);
   const [showFollowing, setShowFollowing] = useState(false);
+  const [showSaved, setShowSaved] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   let likedposts = likedPosts ? likedPosts : [];
   let savedposts = savedPosts ? savedPosts : [];
@@ -97,6 +99,13 @@ const UserProfile = (props) => {
     setShowMenu(false);
   };
 
+  const savedPostsHandler = () => {
+    setShowSaved((prev) => {
+      return !prev;
+    });
+    setShowMenu(false);
+  };
+
   return (
     <>
       <div className="flex flex-wrap justify-center px-4 py-10 sm:p-10">
@@ -105,6 +114,7 @@ const UserProfile = (props) => {
         {showPasswordModal && <ChangePassword onClick={passwordModalHandler} />}
         {showFollowers && <GetFollowers onClick={followersHandler} />}
         {showFollowing && <GetFollowing onClick={followingHandler} />}
+        {showSaved && <GetSavedPosts onClick={savedPostsHandler} />}
         {showEditProfile && (
           <EditProfile
             onClick={closeEdit}
@@ -143,6 +153,7 @@ const UserProfile = (props) => {
           showMenuHandler={showMenuHandler}
           followersHandler={followersHandler}
           followingHandler={followingHandler}
+          savedPostsHandler={savedPostsHandler}
           showEdit={showEdit}
           articleModal={articleModalHandler}
         />
