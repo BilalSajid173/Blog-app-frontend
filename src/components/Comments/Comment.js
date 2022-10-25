@@ -193,7 +193,7 @@ const SingleComment = (props) => {
             </div>
           </div>
           <div>
-            {user.id === props.authorId && (
+            {user && user.id === props.authorId && (
               <EditDeleteComment
                 commentId={props.id}
                 onClick={openEditing}

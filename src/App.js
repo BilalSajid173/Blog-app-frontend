@@ -6,6 +6,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import ScrollToTop from "./components/UI/Scroll/ScrollToTop";
 import { useSelector } from "react-redux";
 import Profile from "./pages/Profile";
+import OtherProfile from "./pages/OtherProfile";
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   return (
@@ -18,6 +19,7 @@ function App() {
           />
           <Route path="/all" element={<Mainpage />} />
           {isLoggedIn && <Route path="/profile" element={<Profile />}></Route>}
+          <Route path="/userprofile/:userId" element={<OtherProfile />} />
         </Routes>
         <ToastContainer />
       </ScrollToTop>
