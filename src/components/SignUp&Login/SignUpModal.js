@@ -7,8 +7,8 @@ import IconButton from "@mui/material/IconButton";
 import { FormControl, InputLabel, OutlinedInput } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import FacebookIcon from "@mui/icons-material/Facebook";
+// import TwitterIcon from "@mui/icons-material/Twitter";
+// import FacebookIcon from "@mui/icons-material/Facebook";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useHttp from "../../hooks/use-http";
@@ -108,10 +108,10 @@ const SignupModal = (props) => {
             <h2 className="text-xl sm:text-2xl text-gray-600 mr-auto dark:text-gray-200">
               Create Account
             </h2>
-            <div className="flex flex-wrap justify-center pt-1">
+            {/* <div className="flex flex-wrap justify-center pt-1">
               <FacebookIcon className="cursor-pointer text-blue-700 mr-1 dark:text-gray-200" />
               <TwitterIcon className="cursor-pointer text-blue-700 dark:text-blue-400" />
-            </div>
+            </div> */}
           </div>
           <div className="mb-4 w-[calc(100vw-5rem)] sm:w-96">
             {nameHasError && (
