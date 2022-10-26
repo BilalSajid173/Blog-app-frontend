@@ -86,7 +86,7 @@ const Navbar = () => {
         <div className="w-fit font-serif text-3xl font-black mr-4 dark:text-white">
           BLOGIFY
         </div>
-        <div className="hidden md:flex w-3/12 p-1 pl-2 pr-2 border border-gray-400 rounded mr-auto dark:border-gray-700">
+        <div className="hidden md:flex w-3/12 p-1 pl-2 pr-2 border border-gray-300 rounded mr-auto dark:border-gray-800">
           <form className="w-full flex flex-wrap flex-row justify-between">
             <input
               className="w-11/12 pl-1 rounded focus:border-none focus:outline-none dark:bg-gray-900 dark:text-white"
