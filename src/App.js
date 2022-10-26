@@ -7,6 +7,7 @@ import ScrollToTop from "./components/UI/Scroll/ScrollToTop";
 import { useSelector } from "react-redux";
 import Profile from "./pages/Profile";
 import OtherProfile from "./pages/OtherProfile";
+import SinglePost from "./pages/SinglePost";
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/all" element={<Mainpage />} />
           {isLoggedIn && <Route path="/profile" element={<Profile />}></Route>}
           <Route path="/userprofile/:userId" element={<OtherProfile />} />
+          <Route path="/post/:postId" element={<SinglePost />} />
         </Routes>
         <ToastContainer />
       </ScrollToTop>

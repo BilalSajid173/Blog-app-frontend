@@ -113,7 +113,7 @@ const Article = (props) => {
           <p>
             {props.content}
             {/*Single post + post id */}
-            <Link to="/singlepost" className="text-blue-500">
+            <Link to={`/post/${props.id}`} className="text-blue-500">
               Read More
             </Link>
           </p>

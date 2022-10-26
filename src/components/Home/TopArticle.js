@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const TopArticle = (props) => {
   return (
-    <Link to={`/${props.id}`}>
+    <Link to={`/post/${props.id}`}>
       <div className="h-[100%] transition-all duration-300 bg-gray-200 w-[100%] rounded-md shadow-md shadow-gray-400 hover:scale-90 cursor-pointer dark:shadow-none dark:bg-gray-700">
         {/* <img className="rounded-t-md" src={image2} alt="img"></img> */}
         <Image
