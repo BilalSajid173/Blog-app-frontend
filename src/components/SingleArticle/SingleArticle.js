@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
-import classes from "../User/UserProfile.module.css";
 import { useParams } from "react-router-dom";
 import useHttp from "../../hooks/use-http";
 import { useDispatch } from "react-redux";
 import ViewComments from "../Comments/Comments";
 import { commentsActions } from "../../store/comments";
 import PostContent from "./PostContent";
+import AboutTheAuthor from "./AboutTheAuthor";
 
 const SingleArticle = (props) => {
   const { postId } = useParams();
   const [showCommentsModal, setShowCommentsModal] = useState(false);
   const dispatch = useDispatch();
   const [article, setArticle] = useState(null);
-  //   const [author, setAuthor] = useState(null);
+  const [author, setAuthor] = useState(null);
   const [paras, setParas] = useState(null);
   const { sendRequest } = useHttp();
+
   const responseHandler = (data) => {
-    console.log(data);
     const post = {
       id: data.id,
       name: data.user.name,
@@ -34,8 +34,10 @@ const SingleArticle = (props) => {
       tags: data.tags.split(", "),
     };
     setParas(post.content.split("\n"));
+    setAuthor(data.user);
     setArticle(post);
   };
+
   useEffect(() => {
     sendRequest(
       {
@@ -70,9 +72,23 @@ const SingleArticle = (props) => {
             />
           )}
         </div>
-        <div
-          className={`${classes["profile-card"]} before:bg-[#9db4f4] dark:before:bg-[#4e409d] lg:h-[84vh] hidden lg:flex flex-wrap flex-col items-center bg-gray-200 dark:bg-gray-900 rounded-md lg:sticky lg:top-20 mb-6 lg:mb-0 w-full md:w-10/12 lg:w-4/12 dark:text-white p-6 py-8 shadow-lg`}
-        ></div>
+        {author && (
+          <AboutTheAuthor
+            id={author.id}
+            name={author.name}
+            work={author.work}
+            about={author.about}
+            github={author.github}
+            facebook={author.facebook}
+            linkedIn={author.linkedIn}
+            twitter={author.twitter}
+            imageId={
+              author.profilePic
+                ? author.profilePic
+                : "chat-app/noynwdkfnsyt33lrsyld"
+            }
+          />
+        )}
       </div>
     </>
   );
