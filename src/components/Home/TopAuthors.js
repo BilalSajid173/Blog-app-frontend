@@ -77,6 +77,9 @@ const TopAuths = (props) => {
                   address={author.address}
                   exp={author.exp}
                   email={author.email}
+                  facebook={author.fb}
+                  twitter={author.twitter}
+                  linkedIn={author.linkedIn}
                 />
               }
               classes={{ tooltip: "dark:bg-gray-600" }}
