@@ -22,6 +22,7 @@ const AboutTheAuthor = (props) => {
       </div>
       <h1 className="font-bold text-3xl pt-4">{props.name}</h1>
       <h1 className="font-bold pt-1 italic">{props.work}</h1>
+      <h1 className="font-semibold pt-1">Email: {props.email}</h1>
       <div className="pt-2">
         <p className="text-center font-serif italic">{props.about}</p>
       </div>

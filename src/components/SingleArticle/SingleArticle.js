@@ -77,6 +77,7 @@ const SingleArticle = (props) => {
             id={author.id}
             name={author.name}
             work={author.work}
+            email={author.email}
             about={author.about}
             github={author.github}
             facebook={author.facebook}
