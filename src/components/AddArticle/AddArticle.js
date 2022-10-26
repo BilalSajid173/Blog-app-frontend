@@ -167,12 +167,14 @@ const AddNewArticle = (props) => {
   const NewArticleFormContent = (
     <Fragment>
       <div className="p-2 sm:px-6 dark:text-white">
-        <h1 className="font-bold font-sans text-lg mb-6">CREATE ARTICLE</h1>
+        <h1 className="font-bold font-sans text-lg mb-6 mt-2">
+          CREATE ARTICLE
+        </h1>
         <div>
           <form onSubmit={formSubmitHandler}>
             <div className="w-full">
               <input
-                className="rounded-sm p-2 w-full border-0 outline-none dark:bg-gray-800"
+                className="transition-all duration-200 bg-gray-200 border-gray-400 rounded-sm p-2 w-full border-2 outline-none dark:bg-gray-900 mb-2 dark:border-gray-800"
                 placeholder="Enter Title (at least 20 characters)"
                 type="text"
                 id="title"
@@ -186,7 +188,7 @@ const AddNewArticle = (props) => {
                 rows="12"
                 name="content"
                 id="content"
-                className="rounded-sm p-2 my-1 w-full resize-none border-0 outline-none dark:bg-gray-800 scrollbar"
+                className="rounded-sm p-2 mb-2 w-full bg-gray-200 border-gray-400 resize-none border-2 dark:border-gray-800 outline-none dark:bg-gray-900 scrollbar"
                 placeholder="Whats this about? (min. 100 characters, enclose subheadings in {})"
                 required
                 value={enteredContent}
@@ -194,7 +196,7 @@ const AddNewArticle = (props) => {
                 onBlur={contentBlurHandler}
               />
               <select
-                className="rounded-sm p-2 w-full border-0 outline-none dark:bg-gray-800"
+                className="rounded-sm p-2 w-full border-2 bg-gray-200 border-gray-400 dark:border-gray-800 outline-none dark:bg-gray-900 mb-2"
                 onChange={categoryChangeHandler}
               >
                 <option disabled selected hidden>
@@ -209,7 +211,7 @@ const AddNewArticle = (props) => {
               </select>
               <div className="rounded-sm my-1 w-full border-0 outline-none">
                 <input
-                  className="rounded-sm p-2 w-9/12 border-0 outline-none  dark:bg-gray-800"
+                  className="rounded-sm p-2 w-9/12 border-2 bg-gray-200 border-gray-400 dark:border-gray-800 outline-none  dark:bg-gray-900"
                   placeholder="Add Tags (max 5)"
                   type="text"
                   value={enteredTag}
@@ -233,7 +235,7 @@ const AddNewArticle = (props) => {
               ></input>
               <label
                 htmlFor="imagepick"
-                className="p-1 px-3 bg-blue-500 cursor-pointer rounded-sm hover:bg-blue-600 mr-3"
+                className="p-2 px-3 border-2 border-blue-600 hover:text-white hover:bg-blue-600 cursor-pointer rounded-md mr-3"
                 type="button"
               >
                 Choose Image
@@ -247,7 +249,7 @@ const AddNewArticle = (props) => {
                 </div>
               )}
               <button
-                className="p-1 px-3 my-3 bg-blue-500 cursor-pointer rounded-sm w-full hover:bg-blue-600"
+                className="p-2 px-3 my-3 border-2 border-blue-600 hover:text-white hover:bg-blue-600 cursor-pointer rounded-md w-full"
                 type="submit"
               >
                 Submit
@@ -256,7 +258,7 @@ const AddNewArticle = (props) => {
           </form>
           <button
             onClick={showPreviewHandler}
-            className="p-2 bg-blue-500 rounded-sm font-semibold hover:bg-blue-600"
+            className="p-2 border-2 border-blue-600 hover:bg-blue-600 hover:text-white rounded-md font-semibold"
           >
             {showPreview ? "Hide Preview" : "Show Preview"}
           </button>
