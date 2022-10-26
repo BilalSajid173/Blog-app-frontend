@@ -82,7 +82,7 @@ const Navbar = () => {
         handleClose={signupModalHandler}
         loginHandler={loginModalHandler}
       />
-      <div className="sticky top-0 z-10 flex flex-wrap items-center p-2 pl-6 pr-6 sm:pl-8 sm:pr-8 lg:pl-12 lg:pr-12 bg-white border-b border-b-gray-200 shadow dark:bg-gray-900 dark:border-none dark:shadow-slate-600 dark:shadow-sm">
+      <div className="sticky top-0 z-10 flex flex-wrap items-center p-2 pl-6 pr-6 sm:pl-8 sm:pr-8 lg:pl-12 lg:pr-12 bg-white shadow-lg dark:bg-gray-900">
         <div className="w-fit font-serif text-3xl font-black mr-4 dark:text-white">
           BLOGIFY
         </div>
@@ -160,13 +160,13 @@ const Navbar = () => {
       {showMenu && (
         <div
           onClick={showMenuHandler}
-          className="fixed top-0 left-0 w-full h-screen z-10 bg-gray-500 opacity-50"
+          className="fixed top-0 left-0 w-full h-screen z-10 bg-gray-900 opacity-50"
         ></div>
       )}
       <div
         className={`duration-300 ease-in-out transition-all transform ${
           showMenu ? "translate-x-0" : "translate-x-full"
-        } p-2 py-3 flex flex-col w-9/12 top-0 right-0 fixed h-screen bg-white z-20 ml-auto dark:bg-gray-700 dark:text-white`}
+        } p-2 py-3 flex flex-col w-9/12 top-0 right-0 fixed h-screen bg-white z-20 ml-auto dark:bg-gray-800 dark:text-white`}
       >
         <div className="px-2 text-right text-lg">
           <i
