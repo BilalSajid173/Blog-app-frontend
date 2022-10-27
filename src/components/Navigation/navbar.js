@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/auth";
 import { modeActions } from "../../store/darkmode";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -14,7 +15,9 @@ const Navbar = () => {
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [openSignupModal, setOpenSignupModal] = useState(false);
   const [openArticleModal, setOpenArticleModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   if (!isDark) {
     document.body.classList.remove("bg-gray-800");
@@ -67,6 +70,17 @@ const Navbar = () => {
       return !prev;
     });
   };
+
+  const searchChangeHandler = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const searchClickHandler = (e) => {
+    e.preventDefault();
+    navigate(`/search?query=${searchQuery}`);
+    setSearchQuery("");
+  };
+
   return (
     <Fragment>
       {openArticleModal && (
@@ -89,10 +103,16 @@ const Navbar = () => {
         <div className="hidden md:flex w-3/12 p-1 pl-2 pr-2 border border-gray-300 rounded mr-auto dark:border-gray-800">
           <form className="w-full flex flex-wrap flex-row justify-between">
             <input
+              onChange={searchChangeHandler}
               className="w-11/12 pl-1 rounded focus:border-none focus:outline-none dark:bg-gray-900 dark:text-white"
               placeholder="Search..."
+              value={searchQuery}
             />
-            <button className="w-1/12" type="submit">
+            <button
+              onClick={searchClickHandler}
+              type="submit"
+              className="w-1/12"
+            >
               <i className="dark:text-white fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
