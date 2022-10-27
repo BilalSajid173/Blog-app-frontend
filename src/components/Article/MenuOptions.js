@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-// import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-// import MoreVertIcon from "@mui/icons-material/MoreVert";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 import EditIcon from "@mui/icons-material/Edit";
@@ -20,6 +18,7 @@ const BasicMenu = (props) => {
   const dispatch = useDispatch();
   const [isSaved, setIsSaved] = useState(props.isSaved);
   const { sendRequest: savePost } = useHttp();
+  const { sendRequest: deletePost } = useHttp();
   const token = useSelector((state) => state.auth.token);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -64,6 +63,26 @@ const BasicMenu = (props) => {
       saveResponseHandler
     );
   };
+
+  const deleteResponseHandler = (data) => {
+    console.log(data);
+    dispatch(authActions.deletePost({ id: props.postid }));
+    handleClose();
+  };
+
+  const deleteHandler = () => {
+    deletePost(
+      {
+        url: "http://localhost:8000/api/products/" + props.postid + "/delete/",
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      },
+      deleteResponseHandler
+    );
+  };
+
   return (
     <div>
       <button
@@ -105,7 +124,7 @@ const BasicMenu = (props) => {
           </MenuItem>
         )}
         {isLoggedIn && user && user.id === props.authorId && (
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={deleteHandler}>
             <DeleteIcon className="mr-2" /> Delete
           </MenuItem>
         )}

@@ -121,6 +121,14 @@ const authSlice = createSlice({
         });
       }
     },
+    deletePost(state, action) {
+      const idx = state.user.products.findIndex(
+        (post) => post.id === action.payload.id
+      );
+      if (idx !== -1) {
+        state.user.products.splice(idx, 1);
+      }
+    },
   },
 });
 
