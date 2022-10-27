@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -26,6 +26,11 @@ const BasicMenu = (props) => {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  useEffect(() => {
+    setIsSaved(props.isSaved);
+  }, [props.isSaved]);
+
   const handleClose = () => {
     setAnchorEl(null);
   };

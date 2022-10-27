@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Moment from "react-moment";
 import BasicMenu from "./MenuOptions";
@@ -24,6 +24,11 @@ const Article = (props) => {
   const { isLoading, sendRequest: likePost } = useHttp();
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    setLikesCount(props.likesCount);
+    setIsLiked(props.isLiked);
+  }, [props.isLiked, props.likesCount]);
 
   const likeResponseHandler = (data) => {
     const like = isLiked;
