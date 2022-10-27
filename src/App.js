@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import Profile from "./pages/Profile";
 import OtherProfile from "./pages/OtherProfile";
 import SinglePost from "./pages/SinglePost";
+import SearchResult from "./pages/SearchPage";
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   return (
@@ -22,6 +23,7 @@ function App() {
           {isLoggedIn && <Route path="/profile" element={<Profile />}></Route>}
           <Route path="/userprofile/:userId" element={<OtherProfile />} />
           <Route path="/post/:postId" element={<SinglePost />} />
+          <Route path="/search" element={<SearchResult />} />
         </Routes>
         <ToastContainer />
       </ScrollToTop>
