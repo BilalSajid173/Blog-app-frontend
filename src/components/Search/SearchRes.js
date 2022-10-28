@@ -11,7 +11,7 @@ const SearchRes = () => {
   const query = new URLSearchParams(location.search);
   const q = query.get("query");
   const { sendRequest } = useHttp();
-  const [articlesSelected, setArticlesSelected0] = useState(true);
+  const [articlesSelected, setArticlesSelected] = useState(true);
   const [authorsSelected, setAuthorsSelected] = useState(false);
   const [articles, setArticles] = useState([]);
   const likedPosts = useSelector((state) => state.auth.likedPosts);
@@ -21,7 +21,6 @@ const SearchRes = () => {
   const [authors, setAuthors] = useState(null);
 
   const responseHandler = (data) => {
-    console.log(data);
     setArticles(data.posts);
     setAuthors((prev) => {
       return data.users.map((user) => {
@@ -38,6 +37,8 @@ const SearchRes = () => {
   };
 
   useEffect(() => {
+    setArticlesSelected(true);
+    setAuthorsSelected(false);
     sendRequest(
       {
         url: "http://localhost:8000/api/products/search/?search=" + q,
@@ -50,13 +51,13 @@ const SearchRes = () => {
   }, [sendRequest, q]);
 
   const showArticlesHandler = () => {
-    setArticlesSelected0(true);
+    setArticlesSelected(true);
     setAuthorsSelected(false);
   };
 
   const showAuthorsHandler = () => {
     setAuthorsSelected(true);
-    setArticlesSelected0(false);
+    setArticlesSelected(false);
   };
 
   const posts = articles.map((post) => {
