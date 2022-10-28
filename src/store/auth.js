@@ -133,6 +133,16 @@ const authSlice = createSlice({
         state.user.products.splice(idx, 1);
       }
     },
+    updatePost(state, action) {
+      const idx = state.user.products.findIndex(
+        (post) => post.id === action.payload.id
+      );
+      if (idx !== -1) {
+        state.user.products[idx].content = action.payload.content;
+        state.user.products[idx].title = action.payload.title;
+        state.user.products[idx].tags = action.payload.tags.join(", ");
+      }
+    },
   },
 });
 

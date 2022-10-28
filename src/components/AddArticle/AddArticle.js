@@ -10,6 +10,9 @@ import Loader from "../UI/Loader/Loader1";
 import ArticlePreview from "./ArticlePreview";
 import Addtags from "./AddTags";
 import { postsActions } from "../../store/allposts";
+import { authActions } from "../../store/auth";
+import { searchedPostsActions } from "../../store/searchposts";
+import { savedPostsActions } from "../../store/savedposts";
 
 const AddNewArticle = (props) => {
   const [tags, setTags] = useState(props.tags || []);
@@ -97,6 +100,30 @@ const AddNewArticle = (props) => {
     toast.success("Article Created Successfully");
     dispatch(
       postsActions.updatepost({
+        id: props.postid,
+        content: enteredContent,
+        title: enteredTitle,
+        tags: tags,
+      })
+    );
+    dispatch(
+      authActions.updatePost({
+        id: props.postid,
+        content: enteredContent,
+        title: enteredTitle,
+        tags: tags,
+      })
+    );
+    dispatch(
+      savedPostsActions.updatePost({
+        id: props.postid,
+        content: enteredContent,
+        title: enteredTitle,
+        tags: tags,
+      })
+    );
+    dispatch(
+      searchedPostsActions.updatePost({
         id: props.postid,
         content: enteredContent,
         title: enteredTitle,

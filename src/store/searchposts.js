@@ -22,7 +22,18 @@ const searchedPostsSlice = createSlice({
         });
       }
     },
-    editpost(state, action) {},
+    updatePost(state, action) {
+      if (state.posts) {
+        const idx = state.posts.findIndex(
+          (post) => post.id === action.payload.id
+        );
+        if (idx !== -1) {
+          state.posts[idx].content = action.payload.content;
+          state.posts[idx].title = action.payload.title;
+          state.posts[idx].tags = action.payload.tags;
+        }
+      }
+    },
     increaseCommentsCount(state, action) {
       if (state.posts) {
         const index = state.posts.findIndex(
