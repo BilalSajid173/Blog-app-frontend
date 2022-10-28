@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { authActions } from "../../store/auth";
 import { savedPostsActions } from "../../store/savedposts";
+import { searchedPostsActions } from "../../store/searchposts";
 
 const BasicMenu = (props) => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -75,6 +76,7 @@ const BasicMenu = (props) => {
     console.log(data);
     dispatch(authActions.deletePost({ id: props.postid }));
     dispatch(savedPostsActions.deletepost({ id: props.postid }));
+    dispatch(searchedPostsActions.deletepost({ id: props.postid }));
     handleClose();
   };
 
