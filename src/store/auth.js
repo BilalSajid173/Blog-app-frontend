@@ -65,13 +65,17 @@ const authSlice = createSlice({
       const index = state.user.products.findIndex(
         (post) => post.id === action.payload.id
       );
-      state.user.products[index].commentCount += 1;
+      if (index !== -1) {
+        state.user.products[index].commentCount += 1;
+      }
     },
     decreaseCommentsCount(state, action) {
       const index = state.user.products.findIndex(
         (post) => post.id === action.payload.id
       );
-      state.user.products[index].commentCount -= 1;
+      if (index !== -1) {
+        state.user.products[index].commentCount -= 1;
+      }
     },
     updateSavedPosts(state, action) {
       if (action.payload.save) {

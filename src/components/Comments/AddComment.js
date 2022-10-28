@@ -7,6 +7,7 @@ import { postsActions } from "../../store/allposts";
 import useHttp from "../../hooks/use-http";
 import image from "../../Images/userimg.png";
 import { authActions } from "../../store/auth";
+import { savedPostsActions } from "../../store/savedposts";
 
 const AddComment = (props) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -38,7 +39,6 @@ const AddComment = (props) => {
   };
 
   const addCommentResponse = (data) => {
-    console.log(data);
     dispatch(
       commentsActions.addNewComment({
         comment: {
@@ -54,6 +54,7 @@ const AddComment = (props) => {
     );
     dispatch(postsActions.increaseCommentsCount({ id: props.postid }));
     dispatch(authActions.increaseCommentsCount({ id: props.postid }));
+    dispatch(savedPostsActions.increaseCommentsCount({ id: props.postid }));
     setShowOptions(false);
     setComment("");
   };

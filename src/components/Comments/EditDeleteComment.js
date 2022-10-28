@@ -11,6 +11,7 @@ import useHttp from "../../hooks/use-http";
 import { commentsActions } from "../../store/comments";
 import { postsActions } from "../../store/allposts";
 import { authActions } from "../../store/auth";
+import { savedPostsActions } from "../../store/savedposts";
 
 const EditDeleteComment = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
@@ -30,6 +31,7 @@ const EditDeleteComment = (props) => {
     dispatch(commentsActions.deleteComment({ id: props.commentId }));
     dispatch(postsActions.decreaseCommentsCount({ id: props.postid }));
     dispatch(authActions.decreaseCommentsCount({ id: props.postid }));
+    dispatch(savedPostsActions.decreaseCommentsCount({ id: props.postid }));
     handleClose();
   };
 

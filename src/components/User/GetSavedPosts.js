@@ -1,16 +1,18 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import EditProfileModal from "../UI/EditProfileModal/EditProfileModal";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import useHttp from "../../hooks/use-http";
 import Article from "../Article/Article";
+import { savedPostsActions } from "../../store/savedposts";
 
 const GetSavedPosts = (props) => {
   const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
   const { sendRequest } = useHttp();
   const user = useSelector((state) => state.auth.user);
   const likedPosts = useSelector((state) => state.auth.likedPosts);
   const savedPosts = useSelector((state) => state.auth.savedPosts);
-  const [articles, setArticles] = useState(null);
+  const articles = useSelector((state) => state.savedPosts.posts);
 
   useEffect(() => {
     const responseHandler = (data) => {
@@ -35,7 +37,7 @@ const GetSavedPosts = (props) => {
           tags: post.tags.split(", "),
         };
       });
-      setArticles(posts);
+      dispatch(savedPostsActions.saveposts({ posts: posts }));
     };
     sendRequest(
       {

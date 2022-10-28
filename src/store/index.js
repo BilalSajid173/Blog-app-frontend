@@ -4,6 +4,7 @@ import modeReducer from "./darkmode";
 import postsReducer from "./allposts";
 import usersReducer from "./topusers";
 import commentsReducer from "./comments";
+import savedPostsReducer from "./savedposts";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     posts: postsReducer,
     users: usersReducer,
     comments: commentsReducer,
+    savedPosts: savedPostsReducer,
   },
 });
 
