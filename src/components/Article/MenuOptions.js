@@ -10,11 +10,13 @@ import useHttp from "../../hooks/use-http";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { authActions } from "../../store/auth";
+import { savedPostsActions } from "../../store/savedposts";
 
 const BasicMenu = (props) => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const isDark = useSelector((state) => state.mode.isDark);
   const user = useSelector((state) => state.auth.user);
+  const savedPosts = useSelector((state) => state.savedPosts.posts);
   const dispatch = useDispatch();
   const [isSaved, setIsSaved] = useState(props.isSaved);
   const { sendRequest: savePost } = useHttp();
@@ -28,7 +30,7 @@ const BasicMenu = (props) => {
 
   useEffect(() => {
     setIsSaved(props.isSaved);
-  }, [props.isSaved]);
+  }, [props.isSaved, savedPosts]);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -39,6 +41,11 @@ const BasicMenu = (props) => {
     dispatch(
       authActions.updateSavedPosts({
         save: like ? false : true,
+        id: props.postid,
+      })
+    );
+    dispatch(
+      savedPostsActions.deletepost({
         id: props.postid,
       })
     );
@@ -67,6 +74,7 @@ const BasicMenu = (props) => {
   const deleteResponseHandler = (data) => {
     console.log(data);
     dispatch(authActions.deletePost({ id: props.postid }));
+    dispatch(savedPostsActions.deletepost({ id: props.postid }));
     handleClose();
   };
 
