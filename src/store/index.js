@@ -5,6 +5,7 @@ import postsReducer from "./allposts";
 import usersReducer from "./topusers";
 import commentsReducer from "./comments";
 import savedPostsReducer from "./savedposts";
+import searchedPostsReducer from "./searchposts";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     users: usersReducer,
     comments: commentsReducer,
     savedPosts: savedPostsReducer,
+    searchedPosts: searchedPostsReducer,
   },
 });
 
