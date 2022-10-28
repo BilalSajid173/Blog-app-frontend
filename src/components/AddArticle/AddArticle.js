@@ -5,10 +5,11 @@ import "react-toastify/dist/ReactToastify.css";
 import useInput from "../../hooks/use-input";
 import useHttp from "../../hooks/use-http";
 import useCloudinary from "../../helpers/use-cloudinary";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Loader from "../UI/Loader/Loader1";
 import ArticlePreview from "./ArticlePreview";
 import Addtags from "./AddTags";
+import { postsActions } from "../../store/allposts";
 
 const AddNewArticle = (props) => {
   const [tags, setTags] = useState(props.tags || []);
@@ -19,6 +20,7 @@ const AddNewArticle = (props) => {
   const [showPreview, setShowPreview] = useState(false);
   const { isLoading, sendRequest: createPost } = useHttp();
   const { isLoading: imageLoading, sendRequest: imageUpload } = useCloudinary();
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const {
     value: enteredTitle,
@@ -93,6 +95,14 @@ const AddNewArticle = (props) => {
 
   const postCreationHandler = (data) => {
     toast.success("Article Created Successfully");
+    dispatch(
+      postsActions.updatepost({
+        id: props.postid,
+        content: enteredContent,
+        title: enteredTitle,
+        tags: tags,
+      })
+    );
     props.onClick();
   };
 
