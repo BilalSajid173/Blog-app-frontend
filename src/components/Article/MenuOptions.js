@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { authActions } from "../../store/auth";
 import { savedPostsActions } from "../../store/savedposts";
 import { searchedPostsActions } from "../../store/searchposts";
+import AddNewArticle from "../AddArticle/AddArticle";
 
 const BasicMenu = (props) => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -24,6 +25,7 @@ const BasicMenu = (props) => {
   const { sendRequest: deletePost } = useHttp();
   const token = useSelector((state) => state.auth.token);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [openArticleModal, setOpenArticleModal] = useState(false);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -73,7 +75,6 @@ const BasicMenu = (props) => {
   };
 
   const deleteResponseHandler = (data) => {
-    console.log(data);
     dispatch(authActions.deletePost({ id: props.postid }));
     dispatch(savedPostsActions.deletepost({ id: props.postid }));
     dispatch(searchedPostsActions.deletepost({ id: props.postid }));
@@ -93,8 +94,30 @@ const BasicMenu = (props) => {
     );
   };
 
+  const closeNewArticleModal = () => {
+    setOpenArticleModal((prev) => {
+      return !prev;
+    });
+  };
+
+  const openNewArticleModal = () => {
+    setOpenArticleModal((prev) => {
+      return !prev;
+    });
+    handleClose();
+  };
+
   return (
     <div>
+      {openArticleModal && (
+        <AddNewArticle
+          title={props.title}
+          content={props.content}
+          tags={props.tags}
+          onClick={closeNewArticleModal}
+          postid={props.postid}
+        ></AddNewArticle>
+      )}
       <button
         className=""
         id="basic-button"
@@ -129,7 +152,7 @@ const BasicMenu = (props) => {
           {`${isSaved ? "Saved" : "Save"}`}
         </MenuItem>
         {isLoggedIn && user && user.id === props.authorId && (
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={openNewArticleModal}>
             <EditIcon className="mr-2" /> Edit
           </MenuItem>
         )}

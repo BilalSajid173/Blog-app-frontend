@@ -11,7 +11,7 @@ import ArticlePreview from "./ArticlePreview";
 import Addtags from "./AddTags";
 
 const AddNewArticle = (props) => {
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState(props.tags || []);
   const [imageName, setImageName] = useState("No Image Selected");
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState("");
@@ -20,12 +20,12 @@ const AddNewArticle = (props) => {
   const { isLoading, sendRequest: createPost } = useHttp();
   const { isLoading: imageLoading, sendRequest: imageUpload } = useCloudinary();
   const token = useSelector((state) => state.auth.token);
-
   const {
     value: enteredTitle,
     valueChangeHandler: titleChangeHandler,
     onBlurHandler: titleBlurHandler,
     isValid: titleIsValid,
+    setEnteredValue: setInitialTitle,
   } = useInput((value) => value.trim().length >= 20);
 
   const {
@@ -33,6 +33,7 @@ const AddNewArticle = (props) => {
     valueChangeHandler: contentChangeHandler,
     onBlurHandler: contentBlurHandler,
     isValid: contentIsValid,
+    setEnteredValue: setInitialContent,
   } = useInput((value) => value.trim().length >= 100);
 
   const { value: enteredCategory, valueChangeHandler: categoryChangeHandler } =
@@ -63,6 +64,12 @@ const AddNewArticle = (props) => {
   };
 
   useEffect(() => {
+    setInitialTitle(props.title || "");
+    setInitialContent(props.content || "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     const setParaTimer = setTimeout(() => {
       setParagraphs((prev) => {
         const newPars = enteredContent.split("\n");
@@ -90,10 +97,13 @@ const AddNewArticle = (props) => {
   };
 
   const uploadHandler = (data) => {
+    const url =
+      "http://localhost:8000/api/products/" +
+      (props.postid ? props.postid + "/update/" : "");
     createPost(
       {
-        url: "http://localhost:8000/api/products/",
-        method: "POST",
+        url: url,
+        method: props.postid ? "PUT" : "POST",
         body: {
           title: enteredTitle,
           content: enteredContent,
@@ -191,7 +201,7 @@ const AddNewArticle = (props) => {
                 className="rounded-sm p-2 mb-2 w-full bg-gray-200 border-gray-400 resize-none border-2 dark:border-gray-800 outline-none dark:bg-gray-900 scrollbar"
                 placeholder="Whats this about? (min. 100 characters, enclose subheadings in {})"
                 required
-                value={enteredContent}
+                value={props.content || enteredContent}
                 onChange={contentChangeHandler}
                 onBlur={contentBlurHandler}
               />

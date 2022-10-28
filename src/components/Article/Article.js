@@ -110,13 +110,16 @@ const Article = (props) => {
               authorId={props.authorId}
               postid={props.id}
               isSaved={props.isSaved}
+              content={props.content}
+              title={props.title}
+              tags={props.tags}
             />
           </div>
         </div>
         <div className="">
           <h1 className="text-2xl font-bold">{props.title}</h1>
           <p>
-            {props.content}
+            {props.content.slice(0, 250) + "..."}
             {/*Single post + post id */}
             <Link to={`/post/${props.id}`} className="text-blue-500">
               Read More
