@@ -28,7 +28,7 @@ const AllArticles = () => {
           isSaved: savedposts.includes(post.id) ? true : false,
           id: post.id,
           name: post.user.name,
-          content: post.content.slice(0, 250) + "...",
+          content: post.content,
           createdAt: post.created_at,
           authorId: post.user.id,
           title: post.title,
