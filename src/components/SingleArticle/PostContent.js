@@ -99,7 +99,7 @@ const PostContent = (props) => {
         <div className="my-6 flex flex-wrap justify-center items-center transition-all rounded-sm ">
           <span
             onClick={props.CommentsModalHandler}
-            className="p-1 px-2 border-2 border-blue-500 rounded-md cursor-pointer hover:bg-blue-500  dark:hover:text-black"
+            className="p-1 px-2 border-2 border-blue-500 rounded-md cursor-pointer hover:bg-blue-500 hover:text-white dark:hover:text-black"
           >
             <CommentIcon /> View Comments
           </span>

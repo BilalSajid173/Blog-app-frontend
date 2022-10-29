@@ -16,14 +16,14 @@ const CategoryPicker = () => {
       <Button
         disabled={searchParams.get("sort") === "latest"}
         onClick={sortingOrderHandler.bind(null, "latest")}
-        className="p-1 md:p-3 py-2 bg-blue-300 dark:bg-white rounded-sm font-bold mr-1 md:mr-2 hover:bg-gray-400 mb-1 disabled:bg-gray-200 disabled:hover:bg-gray-200 disabled:cursor-not-allowed"
+        className="p-1 md:p-3 py-2 bg-blue-500 text-white disabled:text-black  rounded-sm font-bold mr-1 md:mr-2 hover:bg-blue-600  mb-1 disabled:bg-gray-200 disabled:hover:bg-gray-200"
       >
         Latest
       </Button>
       <Button
         disabled={searchParams.get("sort") === "toprated"}
         onClick={sortingOrderHandler.bind(null, "toprated")}
-        className="p-1 md:p-3 py-2 bg-blue-300 dark:bg-white rounded-sm font-bold mr-1 md:mr-2  hover:bg-gray-400 mb-1 disabled:bg-gray-200 disabled:hover:bg-gray-200 disabled:cursor-not-allowed"
+        className="p-1 md:p-3 py-2 bg-blue-500 text-white disabled:text-black  rounded-sm font-bold mr-1 md:mr-2  hover:bg-blue-600  mb-1 disabled:bg-gray-200 disabled:hover:bg-gray-200"
       >
         Top Rated
       </Button>
