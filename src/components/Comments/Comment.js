@@ -12,6 +12,8 @@ import Moment from "react-moment";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SingleComment = (props) => {
   const [isLiked, setIsLiked] = useState(props.isLiked);
@@ -20,6 +22,7 @@ const SingleComment = (props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [dislikes, setDislikes] = useState(props.dislikes);
   const { sendRequest: commentReaction } = useHttp();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
@@ -32,7 +35,6 @@ const SingleComment = (props) => {
   }, [props.isLiked, props.isDisliked, props.likes, props.dislikes]);
 
   const reactionResponseHandler = (action, data) => {
-    console.log(action);
     if (action === "like") {
       setIsLiked(true);
       dispatch(authActions.updateLikedComments({ like: true, id: props.id }));
@@ -86,6 +88,10 @@ const SingleComment = (props) => {
   };
 
   const likeDislikeHandler = (action) => {
+    if (!isLoggedIn) {
+      toast.error("You are not logged In!");
+      return;
+    }
     let url = "";
     switch (action) {
       case "removelike":

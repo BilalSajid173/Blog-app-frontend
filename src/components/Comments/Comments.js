@@ -24,7 +24,6 @@ const ViewComments = (props) => {
   const { sendRequest: fetchComments } = useHttp();
   useEffect(() => {
     const commentsHandler = (data) => {
-      console.log(data);
       const likedcomments = likedComments ? likedComments : [];
       const dislikedcomments = dislikedComments ? dislikedComments : [];
       const comments = data.map((comment) => {
