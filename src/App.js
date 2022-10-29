@@ -21,6 +21,7 @@ function App() {
           />
           <Route path="/all" element={<Mainpage />} />
           {isLoggedIn && <Route path="/profile" element={<Profile />}></Route>}
+          {!isLoggedIn && <Route path="/profile" element={<Navigate to="/" replace />} />}
           <Route path="/userprofile/:userId" element={<OtherProfile />} />
           <Route path="/post/:postId" element={<SinglePost />} />
           <Route path="/search" element={<SearchResult />} />
