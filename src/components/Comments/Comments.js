@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import CommentsModal from "../UI/CommentsModal/CommentsModal";
 import { useSelector, useDispatch } from "react-redux";
 // import { toast } from "react-toastify";
@@ -9,10 +9,15 @@ import SingleComment from "./Comment";
 import useHttp from "../../hooks/use-http";
 import { commentsActions } from "../../store/comments";
 import AddComment from "./AddComment";
+import LoginModal from "../SignUp&Login/LoginModal";
+import SignupModal from "../SignUp&Login/SignUpModal";
 
 const ViewComments = (props) => {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const comments = useSelector((state) => state.comments.comments);
   const likedComments = useSelector((state) => state.auth.likedComments);
+  const [openLoginModal, setOpenLoginModal] = useState(false);
+  const [openSignupModal, setOpenSignupModal] = useState(false);
   const dislikedComments = useSelector((state) => state.auth.dislikedComments);
   const dispatch = useDispatch();
   const { sendRequest: fetchComments } = useHttp();
@@ -49,9 +54,38 @@ const ViewComments = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchComments]);
 
+  const loginModalHandler = () => {
+    setOpenSignupModal((prev) => {
+      return false;
+    });
+    setOpenLoginModal((prev) => {
+      return !prev;
+    });
+  };
+
+  const signupModalHandler = () => {
+    setOpenLoginModal((prev) => {
+      return false;
+    });
+    setOpenSignupModal((prev) => {
+      return !prev;
+    });
+  };
+
   const CommentsModalContent = (
     <Fragment>
       <div className="p-2 dark:text-white">
+        <LoginModal
+          open={openLoginModal}
+          handleClose={loginModalHandler}
+          signUpHandler={signupModalHandler}
+        />
+
+        <SignupModal
+          open={openSignupModal}
+          handleClose={signupModalHandler}
+          loginHandler={loginModalHandler}
+        />
         <div className="flex flex-wrap justify-center">
           <span className="mr-auto">
             Comments {comments && comments.length}
@@ -64,7 +98,17 @@ const ViewComments = (props) => {
             />
           </div>
         </div>
-        <AddComment postid={props.id} />
+        {!isLoggedIn && (
+          <div className="flex flex-wrap justify-center mt-4">
+            <button
+              onClick={loginModalHandler}
+              className="p-2 foont-bold text-center text-white bg-blue-500 hover:bg-blue-600 rounded-md px-4"
+            >
+              Log In to add a comment
+            </button>
+          </div>
+        )}
+        {isLoggedIn && <AddComment postid={props.id} />}
         <div className="mt-8">
           {comments &&
             comments.map((comment) => {

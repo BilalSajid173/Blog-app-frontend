@@ -19,6 +19,7 @@ const Article = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isLiked, setIsLiked] = useState(props.isLiked);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [showCommentsModal, setShowCommentsModal] = useState(false);
   const [likesCount, setLikesCount] = useState(props.likesCount);
   const { isLoading, sendRequest: likePost } = useHttp();
@@ -48,6 +49,10 @@ const Article = (props) => {
   };
 
   const likeHandler = () => {
+    if (!isLoggedIn) {
+      toast.error("You must be logged in to like an article!");
+      return;
+    }
     likePost(
       {
         url: `http://localhost:8000/api/user/${

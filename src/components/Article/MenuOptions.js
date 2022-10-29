@@ -60,6 +60,11 @@ const BasicMenu = (props) => {
   };
 
   const saveHandler = () => {
+    if (!isLoggedIn) {
+      toast.error("You must be logged in to save an article!");
+      handleClose()
+      return;
+    }
     savePost(
       {
         url: `http://localhost:8000/api/user/${
