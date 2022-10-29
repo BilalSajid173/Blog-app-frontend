@@ -8,8 +8,11 @@ import useHttp from "../../hooks/use-http";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LeftCard = (props) => {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const token = useSelector((state) => state.auth.token);
   const [isFollowing, setIsFollowing] = useState(props.isFollowed);
   const { sendRequest: followRequest } = useHttp();
@@ -45,6 +48,10 @@ const LeftCard = (props) => {
   };
 
   const followHandler = () => {
+    if (!isLoggedIn) {
+      toast.error("You are not logged In!");
+      return;
+    }
     followRequest(
       {
         url: "http://localhost:8000/api/user/addfollowers/",

@@ -159,8 +159,15 @@ const SingleComment = (props) => {
           </div>
           <div className="mr-auto">
             <div className="flex flex-wrap items-center">
-              <Link to={`/${props.authorId}`}>
-                <span className="font-bold mr-2">{props.name}</span>
+              <Link
+                to={`${
+                  user && user.id === props.authorId
+                    ? "/profile"
+                    : `/userprofile/${props.authorId}`
+                }`}
+                className="font-bold mr-2"
+              >
+                {user && props.authorId === user.id ? "You" : props.name}
               </Link>
               <span className="text-sm">
                 <Moment fromNow>{props.created_at}</Moment>
