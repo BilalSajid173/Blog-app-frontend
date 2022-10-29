@@ -18,7 +18,7 @@ import Loader from "../UI/Loader/Loader";
 
 const SignupModal = (props) => {
   const [showPassword, setShowPassword] = useState(false);
-  const { isLoading, sendRequest: userSignup } = useHttp();
+  const { error, setError, isLoading, sendRequest: userSignup } = useHttp();
   const isDark = useSelector((state) => state.mode.isDark);
 
   const darkTheme = createTheme({
@@ -54,9 +54,16 @@ const SignupModal = (props) => {
     reset: resetpassword,
   } = useInput((value) => value.trim().length >= 8);
 
+  if (error) {
+    resetEmail();
+    resetpassword();
+    resetName();
+    setError(null);
+    toast.error("User with this email already exists!");
+    props.handleClose();
+  }
+
   const signupResponseHandler = (data) => {
-    // console.log(data);
-    // dispatch(authActions.login({ user: data.data, token: data.data.token }));
     props.handleClose();
     toast.success("Signup Successful!");
     resetEmail();

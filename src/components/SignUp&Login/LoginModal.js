@@ -19,7 +19,7 @@ import Loader from "../UI/Loader/Loader";
 
 const LoginModal = (props) => {
   const [showPassword, setShowPassword] = useState(false);
-  const { isLoading, sendRequest: userLogin } = useHttp();
+  const { error, setError, isLoading, sendRequest: userLogin } = useHttp();
   const dispatch = useDispatch();
   const isDark = useSelector((state) => state.mode.isDark);
 
@@ -46,6 +46,14 @@ const LoginModal = (props) => {
     isValid: passwordIsValid,
     reset: resetpassword,
   } = useInput((value) => value.trim().length >= 8);
+
+  if (error) {
+    resetEmail();
+    resetpassword();
+    setError(null);
+    toast.error("Invalid username or password");
+    props.handleClose();
+  }
 
   const loginResponseHandler = (data) => {
     dispatch(
