@@ -7,6 +7,15 @@ import { authActions } from "../../store/auth";
 import { modeActions } from "../../store/darkmode";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import LogoutIcon from "@mui/icons-material/Logout";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import LoginIcon from "@mui/icons-material/Login";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -117,18 +126,28 @@ const Navbar = () => {
             </button>
           </form>
         </div>
-        <div className="hidden md:flex w-fit px-2 flex-wrap justify-center align-middle dark:text-white">
-          <button onClick={darkModeHandler} className="mr-4">
-            {!isDark && <i className="fa-solid fa-sun"></i>}
-            {isDark && <i className="fa-regular fa-moon dark:text-white"></i>}
+        <div className="hidden md:flex w-fit px-2 flex-wrap justify-center align-middle text-gray-700 dark:text-white">
+          {isLoggedIn && (
+            <button
+              onClick={openNewArticleModal}
+              className="transition-all duration-300 px-2 py-1 mr-2 rounded-sm hover:bg-blue-700 hover:text-white"
+            >
+              New Article
+            </button>
+          )}
+          <button onClick={darkModeHandler} className="mr-2">
+            {!isDark && <LightModeIcon />}
+            {isDark && <DarkModeIcon />}
           </button>
-          <button className="transition-all duration-300 px-2 py-1 hover:bg-blue-600 hover:text-white">
-            About
-          </button>
+          <Link to="/">
+            <button className="transition-all duration-300 px-2 py-1">
+              <HomeIcon />
+            </button>
+          </Link>
           {!isLoggedIn && (
             <button
               onClick={loginModalHandler}
-              className="transition-all duration-300 mr-2 px-2 py-1 hover:bg-blue-600 hover:text-white"
+              className="transition-all duration-300 rounded-sm mr-2 px-2 py-1 hover:bg-blue-700 hover:text-white"
             >
               Login
             </button>
@@ -136,44 +155,31 @@ const Navbar = () => {
           {!isLoggedIn && (
             <button
               onClick={signupModalHandler}
-              className="transition-all duration-300 px-2 py-1 border border-blue-700 hover:bg-blue-600 hover:text-gray-100"
+              className="transition-all duration-300 px-2 py-1 rounded-sm border border-blue-700 hover:bg-blue-700 hover:text-white"
             >
               Create Account
             </button>
           )}
           {isLoggedIn && (
-            <button
-              onClick={openNewArticleModal}
-              className="transition-all duration-300 px-2 py-1 hover:bg-blue-600 hover:text-white"
-            >
-              New
-            </button>
-          )}
-          {isLoggedIn && (
-            <button
-              onClick={logoutHandler}
-              className="transition-all duration-300 mr-2 px-2 py-1 hover:bg-blue-600 hover:text-white"
-            >
-              Sign Out
-            </button>
-          )}
-          {isLoggedIn && (
             <Link to={`/profile`}>
-              <button className="p-1.5 px-3 bg-slate-300 rounded-3xl">
-                <i className="dark:text-black fa-regular fa-user"></i>
+              <button className="py-1 px-2">
+                <AccountCircleIcon />
               </button>
             </Link>
           )}
         </div>
-        <div className="md:hidden flex w-fit flex-wrap ml-auto justify-center align-middle dark:text-white">
-          <button onClick={darkModeHandler}>
-            {!isDark && <i className="p-1 mr-4 fa-solid fa-sun"></i>}
-            {isDark && (
-              <i className="p-1 mr-4 fa-regular fa-moon dark:text-white"></i>
-            )}
+        <div className="md:hidden flex w-fit flex-wrap ml-auto justify-center align-middle  text-gray-700 dark:text-white">
+          <button onClick={darkModeHandler} className="p-1">
+            {!isDark && <LightModeIcon />}
+            {isDark && <DarkModeIcon />}
           </button>
+          <Link to="/">
+            <button className="transition-all duration-300 px-2 mr-2 py-1">
+              <HomeIcon />
+            </button>
+          </Link>
           <button onClick={showMenuHandler}>
-            <i className="p-1 fa-sharp fa-solid fa-bars"></i>
+            <MenuIcon />
           </button>
         </div>
       </div>
@@ -186,20 +192,17 @@ const Navbar = () => {
       <div
         className={`duration-300 ease-in-out transition-all transform ${
           showMenu ? "translate-x-0" : "translate-x-full"
-        } p-2 py-3 flex flex-col w-9/12 top-0 right-0 fixed h-screen bg-white z-20 ml-auto dark:bg-gray-800 dark:text-white`}
+        } py-3 flex flex-col w-9/12 top-0 right-0 fixed h-screen bg-white z-20 ml-auto dark:bg-gray-800 text-gray-700 dark:text-white`}
       >
         <div className="px-2 text-right text-lg">
-          <i
-            onClick={showMenuHandler}
-            className="cursor-pointer fa-solid fa-xmark"
-          ></i>
+          <CloseIcon onClick={showMenuHandler} />
         </div>
         {!isLoggedIn && (
           <button
             onClick={loginModalHandler}
             className="transition-all duration-300 px-2 py-1 my-1 text-left hover:bg-blue-600 hover:text-white"
           >
-            <i class="mr-2 p-2 fa-solid fa-arrow-right-to-bracket"></i> Login
+            <LoginIcon className="mr-2" /> Login
           </button>
         )}
         {!isLoggedIn && (
@@ -207,14 +210,13 @@ const Navbar = () => {
             onClick={signupModalHandler}
             className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"
           >
-            <i class="mr-2 p-2 fa-sharp fa-solid fa-circle-plus"></i> Create
-            Account
+            <AddBoxIcon className="mr-2" /> Create Account
           </button>
         )}
         {isLoggedIn && (
           <Link to={`/profile`}>
             <button className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white w-full">
-              <i className="mr-2 p-2 px-2.5 fa-regular fa-user"></i> Account
+              <AccountCircleIcon className="mr-2" /> Account
             </button>
           </Link>
         )}
@@ -223,7 +225,7 @@ const Navbar = () => {
             onClick={openNewArticleModal}
             className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"
           >
-            <i class="mr-2 p-2 px-2.5 fa-solid fa-plus"></i> New Article
+            <AddBoxIcon className="mr-2" /> New Article
           </button>
         )}
         {isLoggedIn && (
@@ -231,13 +233,9 @@ const Navbar = () => {
             onClick={logoutHandler}
             className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"
           >
-            <i class="mr-2 p-2 fa-solid fa-arrow-right-from-bracket"></i> Sign
-            Out
+            <LogoutIcon className="mr-2" /> Sign Out
           </button>
         )}
-        <button className="transition-all duration-300 text-left my-1 px-2 py-1 hover:bg-blue-600 hover:text-white">
-          <i class="mr-2 p-2 px-2.5 fa-solid fa-circle-info"></i>About
-        </button>
       </div>
     </Fragment>
   );
