@@ -5,10 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { commentsActions } from "../../store/comments";
 import { postsActions } from "../../store/allposts";
 import useHttp from "../../hooks/use-http";
-import image from "../../Images/userimg.png";
 import { authActions } from "../../store/auth";
 import { savedPostsActions } from "../../store/savedposts";
 import { searchedPostsActions } from "../../store/searchposts";
+import { Image } from "cloudinary-react";
 
 const AddComment = (props) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -47,9 +47,10 @@ const AddComment = (props) => {
           name: data.name,
           content: data.comment,
           createdAt: data.created_at,
-          authorId: data.user,
+          authorId: data.user.id,
           likesCount: data.likesCount,
           dislikesCount: data.dislikesCount,
+          userimgid: data.user.profilePic,
         },
       })
     );
@@ -81,11 +82,16 @@ const AddComment = (props) => {
   };
   return (
     <div className="flex mt-4 w-full">
-      <img
-        src={image}
-        alt="user"
-        className="w-10 h-10 rounded-full bg-white mr-4"
-      />
+      <div className="mr-2">
+        <Image
+          className="rounded-full"
+          cloudName="dntn0wocu"
+          publicId={props.userimgId}
+          width="60"
+          height="60"
+          crop="scale"
+        />
+      </div>
       <div className="w-full">
         <ThemeProvider theme={darkTheme}>
           <TextField

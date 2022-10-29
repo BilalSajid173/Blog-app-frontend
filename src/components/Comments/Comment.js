@@ -1,4 +1,3 @@
-import image from "../../Images/userimg.png";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
@@ -12,6 +11,7 @@ import EditComment from "./EditComment";
 import Moment from "react-moment";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Image } from "cloudinary-react";
 
 const SingleComment = (props) => {
   const [isLiked, setIsLiked] = useState(props.isLiked);
@@ -127,7 +127,6 @@ const SingleComment = (props) => {
   const openEditing = () => {
     setIsEditing(true);
   };
-
   const closeEditing = () => {
     setIsEditing(false);
   };
@@ -142,11 +141,16 @@ const SingleComment = (props) => {
       )}
       {!isEditing && (
         <>
-          <img
-            src={image}
-            alt="user"
-            className="w-10 h-10 rounded-full bg-white mr-4"
-          />
+          <div className="mr-2">
+            <Image
+              className="rounded-full"
+              cloudName="dntn0wocu"
+              publicId={props.userimgId}
+              width="40"
+              height="40"
+              crop="scale"
+            />
+          </div>
           <div className="mr-auto">
             <div className="flex flex-wrap items-center">
               <Link to={`/${props.authorId}`}>

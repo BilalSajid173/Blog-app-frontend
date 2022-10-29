@@ -15,6 +15,7 @@ import SignupModal from "../SignUp&Login/SignUpModal";
 const ViewComments = (props) => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const comments = useSelector((state) => state.comments.comments);
+  const user = useSelector((state) => state.auth.user);
   const likedComments = useSelector((state) => state.auth.likedComments);
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [openSignupModal, setOpenSignupModal] = useState(false);
@@ -23,6 +24,7 @@ const ViewComments = (props) => {
   const { sendRequest: fetchComments } = useHttp();
   useEffect(() => {
     const commentsHandler = (data) => {
+      console.log(data);
       const likedcomments = likedComments ? likedComments : [];
       const dislikedcomments = dislikedComments ? dislikedComments : [];
       const comments = data.map((comment) => {
@@ -33,9 +35,12 @@ const ViewComments = (props) => {
           name: comment.name,
           content: comment.comment,
           createdAt: comment.created_at,
-          authorId: comment.user,
+          authorId: comment.user.id,
           likesCount: comment.likesCount,
           dislikesCount: comment.dislikesCount,
+          userimgid: comment.user.profilePic
+            ? comment.user.profilePic
+            : "chat-app/noynwdkfnsyt33lrsyld",
         };
       });
       dispatch(commentsActions.addComments({ comments: comments }));
@@ -108,7 +113,9 @@ const ViewComments = (props) => {
             </button>
           </div>
         )}
-        {isLoggedIn && <AddComment postid={props.id} />}
+        {isLoggedIn && (
+          <AddComment userimgId={user.profilePic} postid={props.id} />
+        )}
         <div className="mt-8">
           {comments &&
             comments.map((comment) => {
@@ -124,6 +131,7 @@ const ViewComments = (props) => {
                   isDisliked={comment.isDisliked}
                   authorId={comment.authorId}
                   postid={props.id}
+                  userimgId={comment.userimgid}
                 />
               );
             })}
