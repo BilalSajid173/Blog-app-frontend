@@ -102,6 +102,7 @@ const AddComment = (props) => {
             placeholder="add a comment"
             variant="standard"
             value={comment}
+            multiline
             autoComplete="off"
           />
         </ThemeProvider>
