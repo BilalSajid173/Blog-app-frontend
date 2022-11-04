@@ -79,7 +79,7 @@ const PersonalInfo = (props) => {
       <div className="flex flex-wrap justify-center">
         <button
           onClick={props.nextHandler}
-          className="border-2 text-lg border-blue-500 p-2 px-6 mt-4 rounded-md hover:bg-blue-500"
+          className="border-2 text-lg border-blue-500 p-2 px-6 mt-4 rounded-md hover:bg-blue-500 hover:text-white"
         >
           Next
         </button>

@@ -26,7 +26,7 @@ const ChangePassword = (props) => {
 
   const responseHandler = (data) => {
     toast.success("Password updated successfully!");
-    props.onClick()
+    props.onClick();
   };
 
   const submitHandler = () => {
@@ -73,7 +73,7 @@ const ChangePassword = (props) => {
   };
 
   const PasswordModalContent = (
-    <div className="dark:text-white p-2">
+    <div className="dark:text-white p-2 flex flex-col justify-center h-full">
       <h1 className="font-bold text-lg mb-4 mt-4 dark:text-gray-400">
         Change Password
       </h1>
@@ -134,13 +134,13 @@ const ChangePassword = (props) => {
       <div className="p-2 flex flex-wrap justify-center">
         <button
           onClick={submitHandler}
-          className="p-2 px-6 mr-2 border-2 border-blue-500 rounded-md hover:bg-blue-500"
+          className="p-2 px-6 mr-2 border-2 hover:text-white border-blue-500 rounded-md hover:bg-blue-500"
         >
           Submit
         </button>
         <button
           onClick={props.onClick}
-          className="p-2 px-6 border-2 border-blue-500 rounded-md hover:bg-blue-500"
+          className="p-2 px-6 hover:text-white border-2 border-blue-500 rounded-md hover:bg-blue-500"
         >
           Cancel
         </button>

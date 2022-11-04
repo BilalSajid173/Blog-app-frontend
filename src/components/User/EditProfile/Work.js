@@ -57,13 +57,13 @@ const WorkInfo = (props) => {
       <div className="flex flex-wrap justify-center">
         <button
           onClick={props.prevHandler}
-          className="border-2 text-lg border-blue-500 p-2 px-6 mt-4 rounded-md hover:bg-blue-500 mr-2"
+          className="border-2 hover:text-white text-lg border-blue-500 p-2 px-6 mt-4 rounded-md hover:bg-blue-500 mr-2"
         >
           Previous
         </button>
         <button
           onClick={props.nextHandler}
-          className="border-2 text-lg border-blue-500 p-2 px-6 mt-4 rounded-md hover:bg-blue-500"
+          className="border-2 hover:text-white text-lg border-blue-500 p-2 px-6 mt-4 rounded-md hover:bg-blue-500"
         >
           Next
         </button>

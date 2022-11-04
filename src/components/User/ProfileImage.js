@@ -81,8 +81,8 @@ const EditImage = (props) => {
 
   const EditImageModalContent = (
     <Fragment>
-      <div className="p-2 dark:text-white flex flex-wrap justify-center">
-        <div className="flex flex-col justify-center items-center my-2 w-full">
+      <div className="p-2 dark:text-white flex flex-wrap justify-center h-full">
+        <div className="flex flex-col justify-center items-center my-2 w-full h-full">
           <input
             id="imagepick"
             type="file"
@@ -92,7 +92,7 @@ const EditImage = (props) => {
           ></input>
           <label
             htmlFor="imagepick"
-            className="p-2 px-6 bg-blue-500 cursor-pointer rounded-md hover:bg-blue-600"
+            className="p-2 px-6 mr-2 hover:text-white border-2 border-blue-500 rounded-md hover:bg-blue-500"
             type="button"
           >
             Choose Image
@@ -112,13 +112,13 @@ const EditImage = (props) => {
             <div className="p-2 flex flex-wrap justify-center">
               <button
                 onClick={imageUploadHandler}
-                className="p-2 px-6 mr-2 border-2 border-blue-500 rounded-md hover:bg-blue-500"
+                className="p-2 px-6 mr-2 hover:text-white border-2 border-blue-500 rounded-md hover:bg-blue-500"
               >
                 Upload
               </button>
               <button
                 onClick={props.onClick}
-                className="p-2 px-6 border-2 border-blue-500 rounded-md hover:bg-blue-500"
+                className="p-2 px-6 border-2 hover:text-white border-blue-500 rounded-md hover:bg-blue-500"
               >
                 Cancel
               </button>
