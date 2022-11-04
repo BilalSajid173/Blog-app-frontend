@@ -6,13 +6,14 @@ import { useState } from "react";
 import Article from "../Article/Article";
 import UserCard from "../User/UserCard";
 import { searchedPostsActions } from "../../store/searchposts";
+import Loader from "../UI/Loader/Loader";
 
 const SearchRes = () => {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const q = query.get("query");
   const dispatch = useDispatch();
-  const { sendRequest } = useHttp();
+  const { isLoading, sendRequest } = useHttp();
   const [articlesSelected, setArticlesSelected] = useState(true);
   const [authorsSelected, setAuthorsSelected] = useState(false);
   const articles = useSelector((state) => state.searchedPosts.posts);
@@ -82,6 +83,11 @@ const SearchRes = () => {
   return (
     <>
       <div className="py-10 flex flex-wrap flex-col items-center dark:text-white">
+        {isLoading && (
+          <div className="w-11/12 h-5/6 flex justify-center items-center absolute">
+            <Loader />
+          </div>
+        )}
         <h1 className="mb-6 font-bold text-lg dark:text-gray-400">
           Search Results for "{q}"
         </h1>
@@ -105,7 +111,8 @@ const SearchRes = () => {
           </button>
         </div>
         <div className="w-11/12 sm:w-9/12 lg:w-5/12 md:w-7/12">
-          {articlesSelected &&
+          {!isLoading &&
+            articlesSelected &&
             articles &&
             articles.map((article) => {
               return (
@@ -130,6 +137,14 @@ const SearchRes = () => {
                 />
               );
             })}
+          {!isLoading &&
+            articlesSelected &&
+            articles &&
+            articles.length === 0 && (
+              <h1 className="font-bold text-lg text-center mt-8">
+                No articles matching the current request!
+              </h1>
+            )}
           {authorsSelected &&
             authors &&
             authors.map((author) => {
@@ -142,6 +157,12 @@ const SearchRes = () => {
                 />
               );
             })}
+
+          {!isLoading && authorsSelected && authors && authors.length === 0 && (
+            <h1 className="font-bold text-lg text-center mt-8">
+              No authors found!
+            </h1>
+          )}
         </div>
       </div>
     </>
