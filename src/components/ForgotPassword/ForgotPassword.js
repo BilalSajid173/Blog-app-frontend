@@ -8,7 +8,10 @@ import IconButton from "@mui/material/IconButton";
 
 const ForgotPasswordForm = () => {
   const isDark = useSelector((state) => state.mode.isDark);
-  const [showPassword, setShowPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const darkTheme = createTheme({
     palette: {
@@ -16,10 +19,24 @@ const ForgotPasswordForm = () => {
     },
   });
 
-  const handleShowPassword = () => {
-    setShowPassword((prev) => {
+  const handleShowNewPassword = () => {
+    setShowNewPassword((prev) => {
       return !prev;
     });
+  };
+
+  const handleShowConfirmPassword = () => {
+    setShowConfirmPassword((prev) => {
+      return !prev;
+    });
+  };
+
+  const newChangeHandler = (e) => {
+    setNewPassword(e.target.value);
+  };
+
+  const confirmChangeHandler = (e) => {
+    setConfirmPassword(e.target.value);
   };
 
   return (
@@ -36,18 +53,19 @@ const ForgotPasswordForm = () => {
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
-                type={showPassword ? "text" : "password"}
-                // value={enteredPassword}
-                // onChange={passwordChangeHandler}
+                type={showNewPassword ? "text" : "password"}
+                autoComplete="off"
+                value={newPassword}
+                onChange={newChangeHandler}
                 required
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
-                      onClick={handleShowPassword}
+                      onClick={handleShowNewPassword}
                       edge="end"
                     >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                      {showNewPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 }
@@ -62,18 +80,19 @@ const ForgotPasswordForm = () => {
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
-                type={showPassword ? "text" : "password"}
-                // value={enteredPassword}
-                // onChange={passwordChangeHandler}
+                type={showConfirmPassword ? "text" : "password"}
+                autoComplete="off"
+                value={confirmPassword}
+                onChange={confirmChangeHandler}
                 required
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
-                      onClick={handleShowPassword}
+                      onClick={handleShowConfirmPassword}
                       edge="end"
                     >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                      {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 }
