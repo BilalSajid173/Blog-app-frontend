@@ -89,16 +89,16 @@ const SearchRes = () => {
           <button
             onClick={showArticlesHandler}
             selected
-            className={`transition-all duration-300 p-2 mr-2 border-b-4 border-gray-800 dark:text-gray-400 font-bold ${
-              articlesSelected ? "border-b-blue-600" : ""
+            className={`transition-all duration-300 p-2 mr-2 border-b-4 border-transparent dark:text-gray-400 font-bold ${
+              articlesSelected ? "border-b-blue-600 border-b-4" : ""
             }`}
           >
             Articles
           </button>
           <button
             onClick={showAuthorsHandler}
-            className={`transition-all duration-300 p-2 border-b-4 border-gray-800 dark:text-gray-400 font-bold ${
-              authorsSelected ? "border-b-blue-600" : ""
+            className={`transition-all duration-300 p-2 border-b-4 border-transparent dark:text-gray-400 font-bold ${
+              authorsSelected ? "border-b-blue-600 border-b-4" : ""
             }`}
           >
             Authors

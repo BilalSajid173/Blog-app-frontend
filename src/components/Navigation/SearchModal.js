@@ -22,6 +22,7 @@ const SearchQueryModal = (props) => {
   };
 
   const searchClickHandler = (e) => {
+    if (query.trim() === "") return;
     navigate(`/search?query=${query}`);
     setQuery("");
     props.onClick();
@@ -33,9 +34,9 @@ const SearchQueryModal = (props) => {
           <TextField
             className="w-full"
             required
+            autoComplete="off"
             onChange={valueChangeHandler}
             id="outlined-basic"
-            label="Email"
             variant="outlined"
           />
         </ThemeProvider>

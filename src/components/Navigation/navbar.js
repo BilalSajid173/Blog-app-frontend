@@ -92,6 +92,7 @@ const Navbar = () => {
 
   const searchClickHandler = (e) => {
     e.preventDefault();
+    if (searchQuery.trim() === "") return;
     navigate(`/search?query=${searchQuery}`);
     setSearchQuery("");
   };
