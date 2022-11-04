@@ -53,7 +53,7 @@ const BasicMenu = (props) => {
       })
     );
     setIsSaved((prevState) => {
-      !prevState && toast.success("Post liked");
+      !prevState && toast.success("Post Saved");
       return !prevState;
     });
     handleClose();

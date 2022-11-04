@@ -123,7 +123,7 @@ const Navbar = () => {
         loginHandler={loginModalHandler}
       />
       <div className="sticky top-0 z-10 flex flex-wrap items-center p-2 pl-6 pr-6 sm:pl-8 sm:pr-8 lg:pl-12 lg:pr-12 bg-white shadow-lg dark:bg-gray-900">
-        <div className="w-fit font-serif text-3xl font-black mr-4 dark:text-white">
+        <div className="w-fit font-serif text-3xl font-black mr-4 text-gray-700 dark:text-white">
           BLOGIFY
         </div>
         <div className="hidden md:flex w-3/12 p-1 pl-2 pr-2 border border-gray-300 rounded mr-auto dark:border-gray-800">
