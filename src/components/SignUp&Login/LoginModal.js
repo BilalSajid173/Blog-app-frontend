@@ -17,13 +17,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/auth";
 import Loader from "../UI/Loader/Loader";
 import { useNavigate } from "react-router-dom";
+import ForgotPasswordModal from "./ForgotPassword";
 
 const LoginModal = (props) => {
   const [showPassword, setShowPassword] = useState(false);
   const { error, setError, isLoading, sendRequest: userLogin } = useHttp();
   const dispatch = useDispatch();
   const isDark = useSelector((state) => state.mode.isDark);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [openForgotModal, setOpenForgotModal] = useState(false);
 
   const darkTheme = createTheme({
     palette: {
@@ -113,8 +115,21 @@ const LoginModal = (props) => {
     });
   };
 
+  const forgotModalHandler = () => {
+    setOpenForgotModal((prev) => {
+      return !prev;
+    });
+    props.handleClose();
+  };
+
   return (
     <div>
+      {openForgotModal && (
+        <ForgotPasswordModal
+          open={openForgotModal}
+          onClose={forgotModalHandler}
+        />
+      )}
       <Modal
         open={props.open}
         onClose={props.handleClose}
@@ -131,10 +146,6 @@ const LoginModal = (props) => {
             <h2 className="text-xl sm:text-2xl text-gray-600 mr-auto dark:text-gray-200">
               Login To Continue
             </h2>
-            {/* <div className="flex flex-wrap justify-center pt-1">
-              <FacebookIcon className="cursor-pointer text-blue-700 mr-1 dark:text-gray-200" />
-              <TwitterIcon className="cursor-pointer text-blue-700 dark:text-blue-400" />
-            </div> */}
           </div>
           <div className="mb-4 w-[calc(100vw-5rem)] sm:w-96">
             {emailHasError && (
@@ -200,7 +211,10 @@ const LoginModal = (props) => {
             Sign In
           </button>
           <div className="flex flex-wrap justify-center">
-            <span className="cursor-pointer mr-auto text-blue-600 dark:text-blue-300">
+            <span
+              onClick={forgotModalHandler}
+              className="cursor-pointer mr-auto text-blue-600 dark:text-blue-300"
+            >
               Forgot Password?
             </span>
             <span
