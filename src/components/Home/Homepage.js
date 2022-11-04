@@ -1,6 +1,4 @@
 import React, { Fragment, useEffect, useRef } from "react";
-//import image from "../../Images/hpbgimg2.jpg";
-// import image1 from "../../Images/hpbgimg.png";
 import AllArticles from "../Article/AllArticles";
 import TopAuths from "./TopAuthors";
 import lottie from "lottie-web";
@@ -128,9 +126,11 @@ const Home = () => {
           </div>
         </div>
       )}
-      <div className="flex justify-center p-10">
-        <PaginationRounded />
-      </div>
+      {!isLoading && (
+        <div className="flex justify-center p-10">
+          <PaginationRounded />
+        </div>
+      )}
     </Fragment>
   );
 };
