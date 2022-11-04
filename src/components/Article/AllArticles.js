@@ -15,7 +15,7 @@ const AllArticles = () => {
   const tag = query.get("tag");
   const sort = query.get("sort");
   const page = query.get("page");
-  const user = useSelector((state) => state.auth.user);
+  // const user = useSelector((state) => state.auth.user);
   const likedPosts = useSelector((state) => state.auth.likedPosts);
   const savedPosts = useSelector((state) => state.auth.savedPosts);
   useEffect(() => {
@@ -68,7 +68,7 @@ const AllArticles = () => {
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchArticles, dispatch, location.search, user]);
+  }, [fetchArticles, dispatch, location.search]);
   return (
     <Fragment>
       {isLoading && (

@@ -16,12 +16,14 @@ import useInput from "../../hooks/use-input";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/auth";
 import Loader from "../UI/Loader/Loader";
+import { useNavigate } from "react-router-dom";
 
 const LoginModal = (props) => {
   const [showPassword, setShowPassword] = useState(false);
   const { error, setError, isLoading, sendRequest: userLogin } = useHttp();
   const dispatch = useDispatch();
   const isDark = useSelector((state) => state.mode.isDark);
+  const navigate = useNavigate()
 
   const darkTheme = createTheme({
     palette: {
@@ -84,6 +86,7 @@ const LoginModal = (props) => {
     toast.success("Login Successful!");
     resetEmail();
     resetpassword();
+    navigate("/");
   };
 
   const userLoginHandler = () => {
