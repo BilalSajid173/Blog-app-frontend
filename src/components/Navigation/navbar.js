@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import LoginModal from "../SignUp&Login/LoginModal";
 import SignupModal from "../SignUp&Login/SignUpModal";
+import SearchQueryModal from "./SearchModal";
 import AddNewArticle from "../AddArticle/AddArticle";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/auth";
@@ -16,6 +17,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import LoginIcon from "@mui/icons-material/Login";
+import SearchIcon from "@mui/icons-material/Search";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -25,6 +27,7 @@ const Navbar = () => {
   const [openSignupModal, setOpenSignupModal] = useState(false);
   const [openArticleModal, setOpenArticleModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showSearchModal, setShowSearchModal] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -43,6 +46,7 @@ const Navbar = () => {
     setOpenLoginModal((prev) => {
       return !prev;
     });
+    setShowMenu(false);
   };
 
   const signupModalHandler = () => {
@@ -52,6 +56,7 @@ const Navbar = () => {
     setOpenSignupModal((prev) => {
       return !prev;
     });
+    setShowMenu(false);
   };
 
   const logoutHandler = () => {
@@ -78,6 +83,7 @@ const Navbar = () => {
     setOpenArticleModal((prev) => {
       return !prev;
     });
+    setShowMenu(false);
   };
 
   const searchChangeHandler = (e) => {
@@ -90,10 +96,20 @@ const Navbar = () => {
     setSearchQuery("");
   };
 
+  const searchModalHandler = () => {
+    setShowSearchModal((prev) => {
+      return !prev;
+    });
+    setShowMenu(false);
+  };
+
   return (
     <Fragment>
       {openArticleModal && (
         <AddNewArticle onClick={closeNewArticleModal}></AddNewArticle>
+      )}
+      {showSearchModal && (
+        <SearchQueryModal onClick={searchModalHandler}></SearchQueryModal>
       )}
       <LoginModal
         open={openLoginModal}
@@ -226,6 +242,14 @@ const Navbar = () => {
             className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"
           >
             <AddBoxIcon className="mr-2" /> New Article
+          </button>
+        )}
+        {isLoggedIn && (
+          <button
+            onClick={searchModalHandler}
+            className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"
+          >
+            <SearchIcon className="mr-2" /> Search
           </button>
         )}
         {isLoggedIn && (
