@@ -9,6 +9,7 @@ import Profile from "./pages/Profile";
 import OtherProfile from "./pages/OtherProfile";
 import SinglePost from "./pages/SinglePost";
 import SearchResult from "./pages/SearchPage";
+import ForgotPasswordPage from "./pages/ForgotPassword";
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   return (
@@ -21,10 +22,13 @@ function App() {
           />
           <Route path="/all" element={<Mainpage />} />
           {isLoggedIn && <Route path="/profile" element={<Profile />}></Route>}
-          {!isLoggedIn && <Route path="/profile" element={<Navigate to="/" replace />} />}
+          {!isLoggedIn && (
+            <Route path="/profile" element={<Navigate to="/" replace />} />
+          )}
           <Route path="/userprofile/:userId" element={<OtherProfile />} />
           <Route path="/post/:postId" element={<SinglePost />} />
           <Route path="/search" element={<SearchResult />} />
+          <Route path="/change-password" element={<ForgotPasswordPage />} />
         </Routes>
         <ToastContainer />
       </ScrollToTop>
