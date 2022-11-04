@@ -119,7 +119,7 @@ const EditProfile = (props) => {
 
   const EditModalContent = (
     <Fragment>
-      <div className="p-2 dark:text-white">
+      <div className="p-2 dark:text-white h-full flex flex-col justify-center">
         {page === 1 && (
           <PersonalInfo
             name={name}

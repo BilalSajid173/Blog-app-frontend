@@ -12,7 +12,7 @@ const WorkInfo = (props) => {
   });
 
   return (
-    <div className="w-full mt-2">
+    <div className="w-full">
       <h1 className="font-bold mb-6 text-2xl dark:text-gray-400 mx-auto">
         Education and Work
       </h1>
