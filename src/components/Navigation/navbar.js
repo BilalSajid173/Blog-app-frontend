@@ -143,7 +143,7 @@ const Navbar = () => {
             </button>
           </form>
         </div>
-        <div className="hidden md:flex w-fit px-2 flex-wrap justify-center align-middle text-gray-700 dark:text-white">
+        <div className="hidden md:flex w-fit flex-wrap justify-center align-middle text-gray-700 dark:text-white">
           {isLoggedIn && (
             <button
               onClick={openNewArticleModal}

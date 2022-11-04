@@ -38,6 +38,7 @@ const SearchQueryModal = (props) => {
             onChange={valueChangeHandler}
             id="outlined-basic"
             variant="outlined"
+            placeholder="Search..."
           />
         </ThemeProvider>
         <button
