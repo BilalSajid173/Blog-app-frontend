@@ -1,29 +1,41 @@
-import image from "../../Images/userimg.png";
+import { useSelector } from "react-redux";
+import { Image } from "cloudinary-react";
+import Moment from "react-moment";
+import CommentIcon from "@mui/icons-material/Comment";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 const ArticlePreview = (props) => {
+  const user = useSelector((state) => state.auth.user);
   return (
-    <div className="border border-gray-300 dark:border-gray-500 flex flex-col p-3 bg-white dark:bg-[#07244C] dark:text-white my-3 first:mt-0 rounded-sm">
+    <div className="flex flex-col p-3 bg-gray-300 dark:bg-[#201d36] dark:text-white my-3 first:mt-0 rounded-md">
       <div className="flex flex-wrap justify-center mb-2">
         <div className="rounded-full h-16 w-16 flex flex-wrap bg-gray-500 dark:bg-white">
-          <img src={image} className="" alt="img"></img>
+          <Image
+            className="rounded-full"
+            cloudName="dntn0wocu"
+            publicId={
+              user.profilePic
+                ? user.profilePic
+                : "chat-app/noynwdkfnsyt33lrsyld"
+            }
+            width="80"
+            height="80"
+            crop="scale"
+          />
         </div>
         <div className="ml-2 mr-auto flex flex-wrap flex-col items-start justify-start">
-          <h2 className="font-bold">Bilal Sajid</h2>
-          <span>Today</span>
-        </div>
-        <div>
+          <h2 className="font-bold">{user.name}</h2>
           <span>
-            <i class="fa-regular fa-star"></i>
-            {/* <i class="fa-solid fa-star"></i> */}
+            <Moment fromNow>{new Date()}</Moment>
           </span>
         </div>
       </div>
       <div className="">
-        <h1 className="text-2xl font-bold mb-2">{props.title}</h1>
-        <div className="flex flex-wrap mt-3 mb-3">
+        <h1 className="text-2xl font-bold mb-4">{props.title}</h1>
+        <div className="flex flex-wrap justify-center mt-3 mb-3">
           {props.previewSource ? (
             <img
-              className="w-full h-48"
+              className="w-300 h-48"
               src={props.previewSource}
               alt="preview_img"
             ></img>
@@ -40,32 +52,35 @@ const ArticlePreview = (props) => {
             }
             return (
               <>
-                {heading !== "" && <h2 className="font-semibold">{heading}</h2>}
+                {heading !== "" && (
+                  <h2 className="font-semibold text-lg">{heading}</h2>
+                )}
                 <p className="mb-2">{para}</p>
               </>
             );
           })}
         </div>
-        <div className="flex flex-wrap mt-2">
+        <div className="flex flex-wrap mt-4">
           {props.tags.map((tag) => {
             return (
-              <div className="transition-all cursor-pointer rounded-sm w-fit p-1 mx-2 hover:bg-red-200 first:ml-0 dark:hover:text-black">
+              <div className="transition-all rounded-md mt-2 border border-blue-300 w-fit px-2 py-1 hover:bg-blue-200 mr-2 dark:hover:text-black">
                 <span>#{tag}</span>
               </div>
             );
           })}
         </div>
         <div className="flex flex-wrap mt-3">
-          <div className="flex flex-wrap transition-all cursor-pointer rounded-sm w-fit mx-2 ml-0  dark:hover:text-black">
-            <span className="p-1 px-2 border border-rose-400 rounded-sm  hover:bg-gray-100">
-              <i class="fas mr-2 fa-light fa-message"></i> {props.comments}{" "}
-              comments
-            </span>
-          </div>
-          <div className="flex flex-wrap transition-all cursor-pointer rounded-sm w-fit mx-2  dark:hover:text-black">
-            <span className="p-1 px-2 border border-rose-400 rounded-sm  hover:bg-gray-100">
-              <i class="mr-2 fa-solid fa-heart"></i> {props.likes} likes
-            </span>
+          <div className="flex flex-wrap mt-3">
+            <div className="flex flex-wrap justify-center items-center transition-all rounded-sm w-fit mx-2 ml-0  dark:hover:text-black">
+              <span className="p-1 px-2 border border-blue-500 rounded-md  hover:bg-blue-300">
+                <CommentIcon /> 0 comments
+              </span>
+            </div>
+            <div className="flex flex-wrap justify-center items-center transition-all rounded-sm w-fit mx-2  dark:hover:text-black">
+              <span className="p-1 px-2 border border-blue-500 rounded-md  hover:bg-blue-300 relative">
+                <FavoriteBorderIcon /> 0 likes
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -73,5 +88,4 @@ const ArticlePreview = (props) => {
   );
 };
 
-
-export default ArticlePreview
+export default ArticlePreview;
