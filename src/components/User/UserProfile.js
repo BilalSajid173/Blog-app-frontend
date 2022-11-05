@@ -171,7 +171,7 @@ const UserProfile = (props) => {
             user.profilePic ? user.profilePic : "chat-app/noynwdkfnsyt33lrsyld"
           }
         />
-        <div className="w-full md:w-10/12 lg:w-7/12 lg:ml-6 bg-gray-200 dark:bg-gray-900 rounded-md p-4 sm:p-6 py-8 dark:text-white shadow-lg">
+        <div className="w-full md:w-10/12 lg:w-7/12 lg:ml-6 bg-gray-300 dark:bg-gray-900 rounded-md p-4 sm:p-6 py-8 dark:text-white shadow-lg">
           <div className="dark:text-gray-400">
             <div
               className={`${

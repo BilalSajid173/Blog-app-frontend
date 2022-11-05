@@ -2,7 +2,6 @@ import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { Link } from "react-router-dom";
 import classes from "./UserProfile.module.css";
 import { Image } from "cloudinary-react";
 import AddSocials from "./AddSocials";
