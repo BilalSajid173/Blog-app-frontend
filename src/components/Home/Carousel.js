@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useSelector, useDispatch } from "react-redux";
 import { postsActions } from "../../store/allposts";
+import { BASE_URL } from "../../lib/apiurl";
 
 // Import Swiper styles
 import "swiper/css";
@@ -58,7 +59,7 @@ const Carousel = () => {
     if (articles === null) {
       fetchArticles(
         {
-          url: "http://localhost:8000/api/products/all/",
+          url: BASE_URL + "api/products/all/",
           headers: {
             "Content-Type": "application/json",
           },

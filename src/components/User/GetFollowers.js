@@ -3,6 +3,7 @@ import EditProfileModal from "../UI/EditProfileModal/EditProfileModal";
 import { useState, useEffect } from "react";
 import useHttp from "../../hooks/use-http";
 import UserCard from "./UserCard";
+import { BASE_URL } from "../../lib/apiurl";
 
 const GetFollowers = (props) => {
   const token = useSelector((state) => state.auth.token);
@@ -27,7 +28,7 @@ const GetFollowers = (props) => {
     };
     sendEditRequest(
       {
-        url: "http://localhost:8000/api/user/getfollowers/" + user.id + "/",
+        url: BASE_URL + "api/user/getfollowers/" + user.id + "/",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,

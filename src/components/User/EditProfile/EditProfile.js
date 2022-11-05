@@ -10,6 +10,7 @@ import WorkInfo from "./Work";
 import About from "./About";
 import SocialLinks from "./Socials";
 import { authActions } from "../../../store/auth";
+import { BASE_URL } from "../../../lib/apiurl";
 
 const EditProfile = (props) => {
   const [page, setPage] = useState(1);
@@ -90,7 +91,7 @@ const EditProfile = (props) => {
     }
     sendEditRequest(
       {
-        url: "http://localhost:8000/api/user/editprofile/",
+        url: BASE_URL + "api/user/editprofile/",
         method: "PUT",
         body: {
           name: name,

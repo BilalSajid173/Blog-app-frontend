@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BASE_URL } from "../../lib/apiurl";
 
 const SingleComment = (props) => {
   const [isLiked, setIsLiked] = useState(props.isLiked);
@@ -95,20 +96,16 @@ const SingleComment = (props) => {
     let url = "";
     switch (action) {
       case "removelike":
-        url =
-          "http://localhost:8000/api/user/removelikecomment/" + props.id + "/";
+        url = BASE_URL + "api/user/removelikecomment/" + props.id + "/";
         break;
       case "like":
-        url = "http://localhost:8000/api/user/likecomment/" + props.id + "/";
+        url = BASE_URL + "api/user/likecomment/" + props.id + "/";
         break;
       case "dislike":
-        url = "http://localhost:8000/api/user/unlikecomment/" + props.id + "/";
+        url = BASE_URL + "api/user/unlikecomment/" + props.id + "/";
         break;
       case "removedislike":
-        url =
-          "http://localhost:8000/api/user/removeunlikecomment/" +
-          props.id +
-          "/";
+        url = BASE_URL + "api/user/removeunlikecomment/" + props.id + "/";
         break;
       default:
         url = "";

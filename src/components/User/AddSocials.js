@@ -5,6 +5,7 @@ import EditProfileModal from "../UI/EditProfileModal/EditProfileModal";
 import { authActions } from "../../store/auth";
 import { useState } from "react";
 import useHttp from "../../hooks/use-http";
+import { BASE_URL } from "../../lib/apiurl";
 
 const AddSocials = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
@@ -36,7 +37,7 @@ const AddSocials = (props) => {
   const submitHandler = () => {
     sendEditRequest(
       {
-        url: "http://localhost:8000/api/user/editprofile/",
+        url: BASE_URL + "api/user/editprofile/",
         method: "PUT",
         body: {
           twitter: twitter,

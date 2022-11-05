@@ -10,6 +10,7 @@ import { authActions } from "../../store/auth";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BASE_URL } from "../../lib/apiurl";
 
 const LeftCard = (props) => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -27,7 +28,7 @@ const LeftCard = (props) => {
     followRequest(
       {
         url:
-          "http://localhost:8000/api/user/removefollowers/" +
+          BASE_URL + "api/user/removefollowers/" +
           user.id +
           "/" +
           props.id +

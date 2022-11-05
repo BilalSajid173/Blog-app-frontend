@@ -14,6 +14,7 @@ import Loader from "../UI/Loader/Loader";
 import CategoryPicker from "./CategorySelection";
 import Tags from "./Tags";
 import PaginationRounded from "../Paginator/Paginator";
+import { BASE_URL } from "../../lib/apiurl";
 
 const Home = () => {
   const isDark = useSelector((state) => state.mode.isDark);
@@ -53,7 +54,7 @@ const Home = () => {
     if (token && !isLoggedIn) {
       userAutoLogin(
         {
-          url: "http://localhost:8000/api/user/profile/",
+          url: BASE_URL + "api/user/profile/",
           headers: {
             Authorization: "Bearer " + token,
           },

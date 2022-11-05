@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 // import useHttp from "../../hooks/use-http";
 import { useSelector } from "react-redux";
 import useHttp from "../../hooks/use-http";
+import { BASE_URL } from "../../lib/apiurl";
 
 const ForgotPasswordModal = (props) => {
   //   const { error, setError, isLoading, sendRequest: userLogin } = useHttp();
@@ -29,7 +30,7 @@ const ForgotPasswordModal = (props) => {
     }
     sendRequest(
       {
-        url: "http://localhost:8000/api/user/forgetpassword/",
+        url: BASE_URL + "api/user/forgetpassword/",
         method: "POST",
         body: {
           email: email.trim().toLowerCase(),

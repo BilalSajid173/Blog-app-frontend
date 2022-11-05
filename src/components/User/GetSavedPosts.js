@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import useHttp from "../../hooks/use-http";
 import Article from "../Article/Article";
 import { savedPostsActions } from "../../store/savedposts";
+import { BASE_URL } from "../../lib/apiurl";
 
 const GetSavedPosts = (props) => {
   const token = useSelector((state) => state.auth.token);
@@ -41,7 +42,7 @@ const GetSavedPosts = (props) => {
     };
     sendRequest(
       {
-        url: "http://localhost:8000/api/user/getsavedposts/",
+        url: BASE_URL + "api/user/getsavedposts/",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,

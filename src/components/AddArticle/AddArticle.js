@@ -13,6 +13,7 @@ import { postsActions } from "../../store/allposts";
 import { authActions } from "../../store/auth";
 import { searchedPostsActions } from "../../store/searchposts";
 import { savedPostsActions } from "../../store/savedposts";
+import { BASE_URL } from "../../lib/apiurl";
 
 const AddNewArticle = (props) => {
   const [tags, setTags] = useState(props.tags || []);
@@ -160,7 +161,7 @@ const AddNewArticle = (props) => {
     );
     userFetch(
       {
-        url: "http://localhost:8000/api/user/profile/",
+        url: BASE_URL + "api/user/profile/",
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -172,7 +173,7 @@ const AddNewArticle = (props) => {
 
   const uploadHandler = (data) => {
     const url =
-      "http://localhost:8000/api/products/" +
+      BASE_URL + "api/products/" +
       (props.postid ? props.postid + "/update/" : "");
     createPost(
       {

@@ -6,6 +6,7 @@ import DoneIcon from "@mui/icons-material/Done";
 import { useState } from "react";
 import useHttp from "../../hooks/use-http";
 import { authActions } from "../../store/auth";
+import { BASE_URL } from "../../lib/apiurl";
 
 //pass updated values to user in redux and extract that data on profile page
 
@@ -57,7 +58,7 @@ const EditField = (props) => {
 
     fieldEdit(
       {
-        url: "http://localhost:8000/api/user/editprofile/",
+        url: BASE_URL + "api/user/editprofile/",
         method: "PUT",
         body: { ...body },
         headers: {

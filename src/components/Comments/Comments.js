@@ -11,6 +11,7 @@ import { commentsActions } from "../../store/comments";
 import AddComment from "./AddComment";
 import LoginModal from "../SignUp&Login/LoginModal";
 import SignupModal from "../SignUp&Login/SignUpModal";
+import { BASE_URL } from "../../lib/apiurl";
 
 const ViewComments = (props) => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -50,7 +51,7 @@ const ViewComments = (props) => {
 
     fetchComments(
       {
-        url: "http://localhost:8000/api/products/getcomments/" + props.id + "/",
+        url: BASE_URL + "api/products/getcomments/" + props.id + "/",
         headers: {
           "Content-Type": "application/json",
         },

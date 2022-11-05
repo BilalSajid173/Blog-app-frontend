@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import { useParams, useNavigate } from "react-router-dom";
 import useHttp from "../../hooks/use-http";
 import { toast } from "react-toastify";
+import { BASE_URL } from "../../lib/apiurl";
 
 const ForgotPasswordForm = () => {
   const isDark = useSelector((state) => state.mode.isDark);
@@ -64,7 +65,7 @@ const ForgotPasswordForm = () => {
 
     sendRequest(
       {
-        url: "http://localhost:8000/api/user/resetpassword/" + token + "/",
+        url: BASE_URL + "api/user/resetpassword/" + token + "/",
         method: "POST",
         body: {
           password: newPassword,

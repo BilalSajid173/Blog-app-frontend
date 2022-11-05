@@ -7,6 +7,7 @@ import { authActions } from "../../store/auth";
 import useHttp from "../../hooks/use-http";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BASE_URL } from "../../lib/apiurl";
 
 // Blog-app/x7oeq7chbxpyp6zmhnkj -- dummy image id
 
@@ -26,7 +27,7 @@ const EditImage = (props) => {
   const uploadResponseHandler = (data) => {
     imageUploadToBackend(
       {
-        url: "http://localhost:8000/api/user/editprofile/",
+        url: BASE_URL + "api/user/editprofile/",
         method: "PUT",
         body: {
           profilePic: data,

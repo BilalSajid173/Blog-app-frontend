@@ -6,6 +6,7 @@ import useHttp from "../../hooks/use-http";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { userActions } from "../../store/topusers";
+import { BASE_URL } from "../../lib/apiurl";
 
 const TopAuths = (props) => {
   const { sendRequest: fetchUsers } = useHttp();
@@ -45,7 +46,7 @@ const TopAuths = (props) => {
     if (!authors) {
       fetchUsers(
         {
-          url: "http://localhost:8000/api/user/all/",
+          url: BASE_URL + "api/user/all/",
           headers: {
             "Content-Type": "application/json",
           },

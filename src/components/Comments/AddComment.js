@@ -9,6 +9,7 @@ import { authActions } from "../../store/auth";
 import { savedPostsActions } from "../../store/savedposts";
 import { searchedPostsActions } from "../../store/searchposts";
 import { Image } from "cloudinary-react";
+import { BASE_URL } from "../../lib/apiurl";
 
 const AddComment = (props) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -65,7 +66,7 @@ const AddComment = (props) => {
   const addCommentHandler = () => {
     addComment(
       {
-        url: "http://localhost:8000/api/products/addcomment/",
+        url: BASE_URL + "api/products/addcomment/",
         method: "POST",
         body: {
           comment: comment,

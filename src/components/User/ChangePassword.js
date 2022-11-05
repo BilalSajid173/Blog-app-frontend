@@ -9,6 +9,7 @@ import { useState } from "react";
 import useHttp from "../../hooks/use-http";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BASE_URL } from "../../lib/apiurl";
 
 const ChangePassword = (props) => {
   const [showOldPassword, setShowOldPassword] = useState(false);
@@ -37,7 +38,7 @@ const ChangePassword = (props) => {
 
     editPasswordRequest(
       {
-        url: "http://localhost:8000/api/user/changepassword/",
+        url: BASE_URL + "api/user/changepassword/",
         method: "PUT",
         body: {
           old_password: oldPassword,

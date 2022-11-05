@@ -5,6 +5,7 @@ import Loader from "../UI/Loader/Loader";
 import { useSelector, useDispatch } from "react-redux";
 import { postsActions } from "../../store/allposts";
 import { useLocation } from "react-router-dom";
+import { BASE_URL } from "../../lib/apiurl";
 
 const AllArticles = () => {
   const { isLoading, sendRequest: fetchArticles } = useHttp();
@@ -50,13 +51,13 @@ const AllArticles = () => {
       fetchArticles(
         {
           url: tag
-            ? "http://localhost:8000/api/products/filter/?page=" +
+            ? BASE_URL + "api/products/filter/?page=" +
               page +
               "&sort=" +
               sort +
               "&tag=" +
               tag
-            : "http://localhost:8000/api/products/filter/?page=" +
+            : BASE_URL + "api/products/filter/?page=" +
               page +
               "&sort=" +
               sort,

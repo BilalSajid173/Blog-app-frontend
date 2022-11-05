@@ -14,6 +14,7 @@ import { commentsActions } from "../../store/comments";
 import Loader1 from "../UI/Loader/Loader1";
 import ViewComments from "../Comments/Comments";
 import { Image } from "cloudinary-react";
+import { BASE_URL } from "../../lib/apiurl";
 
 const Article = (props) => {
   const navigate = useNavigate();
@@ -55,7 +56,7 @@ const Article = (props) => {
     }
     likePost(
       {
-        url: `http://localhost:8000/api/user/${
+        url: `${BASE_URL}/api/user/${
           isLiked ? `unlikepost/${props.id}/` : `likepost/${props.id}/`
         }`,
         method: "POST",

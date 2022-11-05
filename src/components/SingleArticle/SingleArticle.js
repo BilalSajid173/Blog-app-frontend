@@ -6,6 +6,7 @@ import ViewComments from "../Comments/Comments";
 import { commentsActions } from "../../store/comments";
 import PostContent from "./PostContent";
 import AboutTheAuthor from "./AboutTheAuthor";
+import { BASE_URL } from "../../lib/apiurl";
 
 const SingleArticle = (props) => {
   const { postId } = useParams();
@@ -41,7 +42,7 @@ const SingleArticle = (props) => {
   useEffect(() => {
     sendRequest(
       {
-        url: "http://localhost:8000/api/products/" + postId + "/",
+        url: BASE_URL + "api/products/" + postId + "/",
         headers: {
           "Content-Type": "application/json",
         },

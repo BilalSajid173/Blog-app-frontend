@@ -15,6 +15,7 @@ import useHttp from "../../hooks/use-http";
 import useInput from "../../hooks/use-input";
 import { useSelector } from "react-redux";
 import Loader from "../UI/Loader/Loader";
+import { BASE_URL } from "../../lib/apiurl";
 
 const SignupModal = (props) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -75,7 +76,7 @@ const SignupModal = (props) => {
     if (!emailIsValid || !passwordIsValid || !nameIsValid) return;
     userSignup(
       {
-        url: "http://localhost:8000/api/user/register/",
+        url: BASE_URL + "api/user/register/",
         method: "POST",
         body: {
           name: enteredName,

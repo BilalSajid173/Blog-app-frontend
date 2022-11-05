@@ -13,6 +13,7 @@ import { authActions } from "../../store/auth";
 import { savedPostsActions } from "../../store/savedposts";
 import { searchedPostsActions } from "../../store/searchposts";
 import AddNewArticle from "../AddArticle/AddArticle";
+import { BASE_URL } from "../../lib/apiurl";
 
 const BasicMenu = (props) => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -62,12 +63,12 @@ const BasicMenu = (props) => {
   const saveHandler = () => {
     if (!isLoggedIn) {
       toast.error("You must be logged in to save an article!");
-      handleClose()
+      handleClose();
       return;
     }
     savePost(
       {
-        url: `http://localhost:8000/api/user/${
+        url: `${BASE_URL}api/user/${
           isSaved ? `unsavepost/${props.postid}/` : `savepost/${props.postid}/`
         }`,
         method: "POST",
@@ -89,7 +90,7 @@ const BasicMenu = (props) => {
   const deleteHandler = () => {
     deletePost(
       {
-        url: "http://localhost:8000/api/products/" + props.postid + "/delete/",
+        url: BASE_URL + "api/products/" + props.postid + "/delete/",
         method: "DELETE",
         headers: {
           Authorization: "Bearer " + token,

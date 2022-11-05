@@ -13,6 +13,7 @@ import { postsActions } from "../../store/allposts";
 import { authActions } from "../../store/auth";
 import { savedPostsActions } from "../../store/savedposts";
 import { searchedPostsActions } from "../../store/searchposts";
+import { BASE_URL } from "../../lib/apiurl";
 
 const EditDeleteComment = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
@@ -41,7 +42,7 @@ const EditDeleteComment = (props) => {
     commentDelete(
       {
         url:
-          "http://localhost:8000/api/products/deletecomment/" +
+          BASE_URL + "api/products/deletecomment/" +
           props.commentId +
           "/",
         method: "DELETE",

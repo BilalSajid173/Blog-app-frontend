@@ -7,6 +7,7 @@ import Article from "../Article/Article";
 import UserCard from "../User/UserCard";
 import { searchedPostsActions } from "../../store/searchposts";
 import Loader from "../UI/Loader/Loader";
+import { BASE_URL } from "../../lib/apiurl";
 
 const SearchRes = () => {
   const location = useLocation();
@@ -60,7 +61,7 @@ const SearchRes = () => {
     };
     sendRequest(
       {
-        url: "http://localhost:8000/api/products/search/?search=" + q,
+        url: BASE_URL + "api/products/search/?search=" + q,
         headers: {
           "Content-Type": "application/json",
         },

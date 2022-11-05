@@ -6,6 +6,7 @@ import Article from "../Article/Article";
 import { useState, useEffect } from "react";
 import useHttp from "../../hooks/use-http";
 import { useParams } from "react-router-dom";
+import { BASE_URL } from "../../lib/apiurl";
 
 const OtherUserProfile = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
@@ -29,7 +30,7 @@ const OtherUserProfile = (props) => {
     if (!user) {
       getUserProfile(
         {
-          url: "http://localhost:8000/api/user/getprofile/" + userId + "/",
+          url: BASE_URL + "api/user/getprofile/" + userId + "/",
           headers: {
             "Content-Type": "application/json",
           },

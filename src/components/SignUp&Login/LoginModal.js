@@ -18,6 +18,7 @@ import { authActions } from "../../store/auth";
 import Loader from "../UI/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import ForgotPasswordModal from "./ForgotPassword";
+import { BASE_URL } from "../../lib/apiurl";
 
 const LoginModal = (props) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -95,7 +96,7 @@ const LoginModal = (props) => {
     if (!emailIsValid || !passwordIsValid) return;
     userLogin(
       {
-        url: "http://localhost:8000/api/user/login/",
+        url: BASE_URL + "api/user/login/",
         method: "POST",
         body: {
           email: enteredEmail.trim().toLowerCase(),

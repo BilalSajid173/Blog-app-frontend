@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { commentsActions } from "../../store/comments";
 import useHttp from "../../hooks/use-http";
 import image from "../../Images/userimg.png";
+import { BASE_URL } from "../../lib/apiurl";
 
 const EditComment = (props) => {
   const [comment, setComment] = useState(props.comment);
@@ -38,7 +39,7 @@ const EditComment = (props) => {
     editComment(
       {
         url:
-          "http://localhost:8000/api/products/updatecomment/" + props.id + "/",
+          BASE_URL + "api/products/updatecomment/" + props.id + "/",
         method: "PUT",
         body: {
           comment: comment,
