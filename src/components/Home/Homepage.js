@@ -71,7 +71,7 @@ const Home = () => {
       loop: true,
       autoplay: true,
       animationData: isDark
-        ? require("../../Animations/animation.json")
+        ? require("../../Animations/animation2.json")
         : require("../../Animations/animation2.json"),
     });
 
