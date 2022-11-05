@@ -55,7 +55,7 @@ const LeftCard = (props) => {
     }
     followRequest(
       {
-        url: "http://localhost:8000/api/user/addfollowers/",
+        url: BASE_URL + "api/user/addfollowers/",
         method: "POST",
         body: {
           following_user_id: props.id,
