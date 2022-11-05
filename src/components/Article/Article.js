@@ -56,7 +56,7 @@ const Article = (props) => {
     }
     likePost(
       {
-        url: `${BASE_URL}/api/user/${
+        url: `${BASE_URL}api/user/${
           isLiked ? `unlikepost/${props.id}/` : `likepost/${props.id}/`
         }`,
         method: "POST",
