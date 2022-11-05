@@ -22,6 +22,7 @@ const AddNewArticle = (props) => {
   const [paragraphs, setParagraphs] = useState([""]);
   const [showPreview, setShowPreview] = useState(false);
   const { isLoading, sendRequest: createPost } = useHttp();
+  const { sendRequest: userFetch } = useHttp();
   const { isLoading: imageLoading, sendRequest: imageUpload } = useCloudinary();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -96,8 +97,35 @@ const AddNewArticle = (props) => {
     });
   };
 
+  const userFetchHandler = (data) => {
+    dispatch(
+      authActions.login({
+        user: data.User,
+        token: localStorage.getItem("token"),
+        likedPosts: data.User.likedPosts.map((post) => {
+          return post.id;
+        }),
+        savedPosts: data.User.savedPosts.map((post) => {
+          return post.id;
+        }),
+        comments: data.User.comments.map((comment) => {
+          return comment.id;
+        }),
+        likedComments: data.User.likedComments.map((comment) => {
+          return comment.id;
+        }),
+        dislikedComments: data.User.dislikedComments.map((comment) => {
+          return comment.id;
+        }),
+        following: data.User.following.map((user) => {
+          return user.following_user_id;
+        }),
+      })
+    );
+  };
+
   const postCreationHandler = (data) => {
-    toast.success("Article Created Successfully");
+    toast.success("Article Created Successfully.");
     dispatch(
       postsActions.updatepost({
         id: props.postid,
@@ -129,6 +157,15 @@ const AddNewArticle = (props) => {
         title: enteredTitle,
         tags: tags,
       })
+    );
+    userFetch(
+      {
+        url: "http://localhost:8000/api/user/profile/",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      },
+      userFetchHandler
     );
     props.onClick();
   };

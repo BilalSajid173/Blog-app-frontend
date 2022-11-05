@@ -17,7 +17,7 @@ const TopAuths = (props) => {
     const compareFn = (a, b) => {
       var x = a.followers.length + a.products.reduce(getSum, 0);
       var y = b.followers.length + b.products.reduce(getSum, 0);
-      return x >= y;
+      return y - x;
     };
 
     const getSum = (total, itr) => {
