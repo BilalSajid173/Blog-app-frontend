@@ -22,6 +22,8 @@ const ViewComments = (props) => {
   const dislikedComments = useSelector((state) => state.auth.dislikedComments);
   const dispatch = useDispatch();
   const { sendRequest: fetchComments } = useHttp();
+
+  const len = comments ? comments.length : 0;
   useEffect(() => {
     const commentsHandler = (data) => {
       const likedcomments = likedComments ? likedComments : [];
@@ -56,7 +58,7 @@ const ViewComments = (props) => {
       commentsHandler
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchComments]);
+  }, [fetchComments, len]);
 
   const loginModalHandler = () => {
     setOpenSignupModal((prev) => {
@@ -113,7 +115,14 @@ const ViewComments = (props) => {
           </div>
         )}
         {isLoggedIn && (
-          <AddComment userimgId={user.profilePic} postid={props.id} />
+          <AddComment
+            userimgId={
+              user.profilePic
+                ? user.profilePic
+                : "chat-app/noynwdkfnsyt33lrsyld"
+            }
+            postid={props.id}
+          />
         )}
         <div className="mt-8">
           {comments &&
