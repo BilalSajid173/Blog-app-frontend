@@ -28,7 +28,7 @@ const GetFollowing = (props) => {
     };
     sendEditRequest(
       {
-        url: BASE_URL + "/user/getfollowing/" + user.id + "/",
+        url: BASE_URL + "api/user/getfollowing/" + user.id + "/",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
