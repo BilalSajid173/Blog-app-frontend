@@ -5,6 +5,9 @@ import { FormControl, InputLabel, OutlinedInput } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
+import { useParams, useNavigate } from "react-router-dom";
+import useHttp from "../../hooks/use-http";
+import { toast } from "react-toastify";
 
 const ForgotPasswordForm = () => {
   const isDark = useSelector((state) => state.mode.isDark);
@@ -12,6 +15,9 @@ const ForgotPasswordForm = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const { error, sendRequest } = useHttp();
+  const { token } = useParams();
+  const navigate = useNavigate();
 
   const darkTheme = createTheme({
     palette: {
@@ -37,6 +43,38 @@ const ForgotPasswordForm = () => {
 
   const confirmChangeHandler = (e) => {
     setConfirmPassword(e.target.value);
+  };
+
+  const responseHandler = (data) => {
+    toast.success("Password Reset Successfully");
+    navigate("/");
+  };
+
+  if (error) {
+    toast.error("Invalid Request");
+  }
+
+  const submitHandler = () => {
+    if (confirmPassword !== newPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    if (confirmPassword.trim().length === 0) return;
+
+    sendRequest(
+      {
+        url: "http://localhost:8000/api/user/resetpassword/" + token + "/",
+        method: "POST",
+        body: {
+          password: newPassword,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      responseHandler
+    );
   };
 
   return (
@@ -102,7 +140,10 @@ const ForgotPasswordForm = () => {
           </div>
         </ThemeProvider>
         <div className="flex flex-wrap justify-center">
-          <button className="border-2 text-lg border-blue-500 p-2 px-6 mt-4 rounded-md hover:bg-blue-500 hover:text-white">
+          <button
+            onClick={submitHandler}
+            className="border-2 text-lg border-blue-500 p-2 px-6 mt-4 rounded-md hover:bg-blue-500 hover:text-white"
+          >
             Done
           </button>
         </div>

@@ -28,7 +28,10 @@ function App() {
           <Route path="/userprofile/:userId" element={<OtherProfile />} />
           <Route path="/post/:postId" element={<SinglePost />} />
           <Route path="/search" element={<SearchResult />} />
-          <Route path="/change-password" element={<ForgotPasswordPage />} />
+          <Route
+            path="/change-password/:token"
+            element={<ForgotPasswordPage />}
+          />
         </Routes>
         <ToastContainer />
       </ScrollToTop>
