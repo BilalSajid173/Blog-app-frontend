@@ -31,13 +31,13 @@ const postsSlice = createSlice({
       const index = state.posts.findIndex(
         (post) => post.id === action.payload.id
       );
-      if (index) state.posts[index].commentsCount += 1;
+      state.posts[index].commentsCount += 1;
     },
     decreaseCommentsCount(state, action) {
       const index = state.posts.findIndex(
         (post) => post.id === action.payload.id
       );
-      if (index) state.posts[index].commentsCount -= 1;
+      state.posts[index].commentsCount -= 1;
     },
   },
 });
