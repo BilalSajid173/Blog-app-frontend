@@ -6,11 +6,12 @@ import Article from "../Article/Article";
 import { useState, useEffect } from "react";
 import useHttp from "../../hooks/use-http";
 import { useParams } from "react-router-dom";
+import Loader from "../UI/Loader/Loader";
 import { BASE_URL } from "../../lib/apiurl";
 
 const OtherUserProfile = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
-  const { sendRequest: getUserProfile } = useHttp();
+  const { isLoading, sendRequest: getUserProfile } = useHttp();
   const [user, setUser] = useState(null);
   const [articles, setArticles] = useState([]);
   const likedPosts = useSelector((state) => state.auth.likedPosts);
@@ -60,7 +61,8 @@ const OtherUserProfile = (props) => {
   return (
     <>
       <div className="flex flex-wrap justify-center px-4 py-10 sm:p-10">
-        {user && (
+        {isLoading && <Loader />}
+        {!isLoading && user && (
           <LeftCard
             isFollowed={following.includes(user.id) ? true : false}
             id={user.id}
@@ -80,7 +82,7 @@ const OtherUserProfile = (props) => {
             }
           />
         )}
-        {user && (
+        {!isLoading && user && (
           <div className="w-full md:w-10/12 lg:w-7/12 lg:ml-6 bg-gray-200 dark:bg-gray-900 rounded-md p-4 sm:p-6 py-8 dark:text-white shadow-lg">
             <div className="dark:text-gray-400">
               <div
@@ -139,7 +141,12 @@ const OtherUserProfile = (props) => {
               </div>
             </div>
             <div className="mt-6 flex flex-wrap justify-center">
-              <h1 className="font-bold text-2xl mb-4">Your Posts</h1>
+              <h1 className="font-bold text-2xl mb-4">{user.name}'s Posts</h1>
+              {user && posts.length === 0 && (
+                <h1 className="w-full mt-4 text-center font-bold">
+                  Oops!! Looks like {user.name} hasn't posted anything!
+                </h1>
+              )}
               <div>
                 {user &&
                   posts.map((article) => {

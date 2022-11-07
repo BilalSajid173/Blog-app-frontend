@@ -232,6 +232,11 @@ const UserProfile = (props) => {
           </div>
           <div className="mt-6 flex flex-wrap justify-center">
             <h1 className="font-bold text-2xl mb-4">Your Posts</h1>
+            {user && posts.length === 0 && (
+              <h1 className="w-full mt-4 text-center font-bold">
+                Oops!! Looks like you haven't posted anything!
+              </h1>
+            )}
             <div>
               {user &&
                 posts.map((article) => {

@@ -12,6 +12,7 @@ import AddComment from "./AddComment";
 import LoginModal from "../SignUp&Login/LoginModal";
 import SignupModal from "../SignUp&Login/SignUpModal";
 import { BASE_URL } from "../../lib/apiurl";
+import Loader from "../UI/Loader/Loader";
 
 const ViewComments = (props) => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -22,7 +23,7 @@ const ViewComments = (props) => {
   const [openSignupModal, setOpenSignupModal] = useState(false);
   const dislikedComments = useSelector((state) => state.auth.dislikedComments);
   const dispatch = useDispatch();
-  const { sendRequest: fetchComments } = useHttp();
+  const { isLoading, sendRequest: fetchComments } = useHttp();
 
   const len = comments ? comments.length : 0;
   useEffect(() => {
@@ -126,7 +127,18 @@ const ViewComments = (props) => {
           />
         )}
         <div className="mt-8">
-          {comments &&
+          {isLoading && (
+            <div className="h-full flex justify-center items-center">
+              <Loader />
+            </div>
+          )}
+          {!isLoading && comments && comments.length === 0 && (
+            <div className="h-full flex justify-center items-center">
+              <h1 className="font-bold text-lg">Be the first to comment!</h1>
+            </div>
+          )}
+          {!isLoading &&
+            comments &&
             comments.map((comment) => {
               return (
                 <SingleComment
