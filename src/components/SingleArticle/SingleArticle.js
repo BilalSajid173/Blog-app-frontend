@@ -6,6 +6,7 @@ import ViewComments from "../Comments/Comments";
 import { commentsActions } from "../../store/comments";
 import PostContent from "./PostContent";
 import AboutTheAuthor from "./AboutTheAuthor";
+import Loader from "../UI/Loader/Loader";
 import { BASE_URL } from "../../lib/apiurl";
 
 const SingleArticle = (props) => {
@@ -15,7 +16,7 @@ const SingleArticle = (props) => {
   const [article, setArticle] = useState(null);
   const [author, setAuthor] = useState(null);
   const [paras, setParas] = useState(null);
-  const { sendRequest } = useHttp();
+  const { isLoading, sendRequest } = useHttp();
 
   const responseHandler = (data) => {
     const post = {
@@ -64,15 +65,22 @@ const SingleArticle = (props) => {
         {showCommentsModal && (
           <ViewComments onClick={CommentsModalHandler} id={article.id} />
         )}
-        <div className="w-full md:w-10/12 lg:w-7/12 lg:mr-6 bg-gray-200 dark:bg-gray-900 rounded-md p-4 sm:p-6 py-8 dark:text-white shadow-lg">
-          {article && (
-            <PostContent
-              article={article}
-              paras={paras}
-              CommentsModalHandler={CommentsModalHandler}
-            />
-          )}
-        </div>
+        {isLoading && (
+          <div className="h-[80vh] flex flex-wrap justify-center items-center">
+            <Loader />
+          </div>
+        )}
+        {!isLoading && (
+          <div className="w-full md:w-10/12 lg:w-7/12 lg:mr-6 bg-gray-200 dark:bg-gray-900 rounded-md p-4 sm:p-6 py-8 dark:text-white shadow-lg">
+            {article && (
+              <PostContent
+                article={article}
+                paras={paras}
+                CommentsModalHandler={CommentsModalHandler}
+              />
+            )}
+          </div>
+        )}
         {author && (
           <AboutTheAuthor
             id={author.id}

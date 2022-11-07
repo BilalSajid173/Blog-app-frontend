@@ -135,7 +135,7 @@ const UserProfile = (props) => {
           />
         )}
         <span
-          className="fixed left-0 top-96 z-10 rounded-md cursor-pointer"
+          className="fixed left-0 top-64 md:top-96 z-10 rounded-md cursor-pointer"
           onClick={showMenuHandler}
         >
           <ArrowForwardIosIcon fontSize="large" />
