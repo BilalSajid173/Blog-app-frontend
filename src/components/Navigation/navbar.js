@@ -122,7 +122,7 @@ const Navbar = () => {
         handleClose={signupModalHandler}
         loginHandler={loginModalHandler}
       />
-      <div className="sticky top-0 z-10 flex flex-wrap items-center p-2 pl-6 pr-6 sm:pl-8 sm:pr-8 lg:pl-12 lg:pr-12 bg-white shadow-lg dark:bg-gray-900">
+      <div className="sticky top-0 z-10 flex flex-wrap items-center p-2 pl-4 pr-4 sm:pl-8 sm:pr-8 lg:pl-12 lg:pr-12 bg-white shadow-lg dark:bg-gray-900">
         <div className="w-fit font-serif text-3xl font-black mr-4 text-gray-700 dark:text-white">
           BLOGIFY
         </div>
@@ -245,14 +245,14 @@ const Navbar = () => {
             <AddBoxIcon className="mr-2" /> New Article
           </button>
         )}
-        {isLoggedIn && (
+        {
           <button
             onClick={searchModalHandler}
             className="transition-all duration-300 my-1 text-left px-2 py-1 hover:bg-blue-600 hover:text-white"
           >
             <SearchIcon className="mr-2" /> Search
           </button>
-        )}
+        }
         {isLoggedIn && (
           <button
             onClick={logoutHandler}

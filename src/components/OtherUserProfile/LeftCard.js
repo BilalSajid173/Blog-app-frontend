@@ -16,19 +16,24 @@ const LeftCard = (props) => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const token = useSelector((state) => state.auth.token);
   const [isFollowing, setIsFollowing] = useState(props.isFollowed);
+  const [followersCount, setFollowersCount] = useState(props.followers);
   const { sendRequest: followRequest } = useHttp();
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const unfollowResponseHandler = (data) => {
     dispatch(authActions.updateFollowing({ id: props.id, add: false }));
     setIsFollowing(false);
+    setFollowersCount((prev) => {
+      return prev - 1;
+    });
   };
 
   const unfollowHandler = () => {
     followRequest(
       {
         url:
-          BASE_URL + "api/user/removefollowers/" +
+          BASE_URL +
+          "api/user/removefollowers/" +
           user.id +
           "/" +
           props.id +
@@ -46,6 +51,9 @@ const LeftCard = (props) => {
   const followResponseHandler = (data) => {
     dispatch(authActions.updateFollowing({ id: props.id, add: true }));
     setIsFollowing(true);
+    setFollowersCount((prev) => {
+      return prev + 1;
+    });
   };
 
   const followHandler = () => {
@@ -87,7 +95,7 @@ const LeftCard = (props) => {
       <h1 className="font-bold text-3xl pt-4">{props.name}</h1>
       <h1 className="font-bold pt-1 italic">{props.work}</h1>
       <div className="flex flex-wrap mt-2 justify-between">
-        <span className="text-blue-500"> {props.followers} Followers</span>
+        <span className="text-blue-500"> {followersCount} Followers</span>
         <span className="mx-4">.</span>
         <span className="text-blue-500"> {props.following} Following</span>
       </div>
