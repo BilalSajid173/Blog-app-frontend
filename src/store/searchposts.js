@@ -14,7 +14,6 @@ const searchedPostsSlice = createSlice({
     removeposts(state, action) {
       state.posts = null;
     },
-    //works for both delete post and remove from saved posts
     deletepost(state, action) {
       if (state.posts) {
         state.posts = state.posts.filter((post) => {

@@ -26,7 +26,7 @@ const commentsSlice = createSlice({
       const index = state.comments.findIndex(
         (comment) => comment.id === action.payload.id
       );
-      state.comments[index].content = action.payload.comment;
+      if (index) state.comments[index].content = action.payload.comment;
     },
     sortLatest(state) {
       state.comments.sort((a, b) => {
