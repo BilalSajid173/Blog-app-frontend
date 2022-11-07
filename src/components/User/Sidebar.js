@@ -21,7 +21,7 @@ const Sidebar = (props) => {
         props.showMenu ? "-translate-x-0" : "-translate-x-full"
       } py-3 flex flex-col w-[20rem] top-0 left-0 fixed h-screen bg-white z-20 ml-auto dark:bg-gray-800 dark:text-white`}
     >
-      <div className="px-2 text-right text-lg">
+      <div className="px-4 text-right text-lg">
         <i
           onClick={props.showMenuHandler}
           className="cursor-pointer fa-solid fa-xmark"
