@@ -126,7 +126,11 @@ const AddNewArticle = (props) => {
   };
 
   const postCreationHandler = (data) => {
-    toast.success("Article Created Successfully.");
+    toast.success(
+      props.postid
+        ? "Article Updated Successfully."
+        : "Article Created Successfully."
+    );
     dispatch(
       postsActions.updatepost({
         id: props.postid,
@@ -173,7 +177,8 @@ const AddNewArticle = (props) => {
 
   const uploadHandler = (data) => {
     const url =
-      BASE_URL + "api/products/" +
+      BASE_URL +
+      "api/products/" +
       (props.postid ? props.postid + "/update/" : "");
     createPost(
       {

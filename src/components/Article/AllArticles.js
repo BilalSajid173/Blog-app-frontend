@@ -51,16 +51,14 @@ const AllArticles = () => {
       fetchArticles(
         {
           url: tag
-            ? BASE_URL + "api/products/filter/?page=" +
+            ? BASE_URL +
+              "api/products/filter/?page=" +
               page +
               "&sort=" +
               sort +
               "&tag=" +
               tag
-            : BASE_URL + "api/products/filter/?page=" +
-              page +
-              "&sort=" +
-              sort,
+            : BASE_URL + "api/products/filter/?page=" + page + "&sort=" + sort,
           headers: {
             "Content-Type": "application/json",
           },
@@ -76,6 +74,11 @@ const AllArticles = () => {
         <div className="w-full h-full flex justify-center items-center absolute">
           <Loader />
         </div>
+      )}
+      {!isLoading && articles && articles.length === 0 && (
+        <h1 className="font-bold my-28 text-2xl dark:text-white text-center">
+          No posts found!!
+        </h1>
       )}
       {!isLoading &&
         articles &&
