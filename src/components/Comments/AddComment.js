@@ -8,6 +8,7 @@ import useHttp from "../../hooks/use-http";
 import { authActions } from "../../store/auth";
 import { savedPostsActions } from "../../store/savedposts";
 import { searchedPostsActions } from "../../store/searchposts";
+import { userPostsActions } from "../../store/profile";
 import { Image } from "cloudinary-react";
 import { BASE_URL } from "../../lib/apiurl";
 
@@ -59,6 +60,7 @@ const AddComment = (props) => {
     dispatch(authActions.increaseCommentsCount({ id: props.postid }));
     dispatch(savedPostsActions.increaseCommentsCount({ id: props.postid }));
     dispatch(searchedPostsActions.increaseCommentsCount({ id: props.postid }));
+    dispatch(userPostsActions.increaseCommentsCount({ id: props.postid }));
     setShowOptions(false);
     setComment("");
   };

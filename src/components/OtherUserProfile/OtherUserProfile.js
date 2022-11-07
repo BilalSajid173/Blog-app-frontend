@@ -1,5 +1,5 @@
 import classes from "./OtherUserProfile.module.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import LeftCard from "./LeftCard";
 import DataField from "./DataField";
 import Article from "../Article/Article";
@@ -7,13 +7,14 @@ import { useState, useEffect } from "react";
 import useHttp from "../../hooks/use-http";
 import { useParams } from "react-router-dom";
 import Loader from "../UI/Loader/Loader";
+import { userPostsActions } from "../../store/profile";
 import { BASE_URL } from "../../lib/apiurl";
 
 const OtherUserProfile = (props) => {
   const isDark = useSelector((state) => state.mode.isDark);
   const { isLoading, sendRequest: getUserProfile } = useHttp();
   const [user, setUser] = useState(null);
-  const [articles, setArticles] = useState([]);
+  const articles = useSelector((state) => state.userPosts.posts);
   const likedPosts = useSelector((state) => state.auth.likedPosts);
   const savedPosts = useSelector((state) => state.auth.savedPosts);
   const Following = useSelector((state) => state.auth.following);
@@ -21,11 +22,28 @@ const OtherUserProfile = (props) => {
   let savedposts = savedPosts ? savedPosts : [];
   let following = Following ? Following : [];
   const { userId } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const responseHandler = (data) => {
       setUser(data.User);
-      setArticles(data.User.products);
+      const posts = data.User.products.map((post) => {
+        return {
+          isLiked: likedposts.includes(post.id) ? true : false,
+          isSaved: savedposts.includes(post.id) ? true : false,
+          id: post.id,
+          name: post.user.name,
+          content: post.content.slice(0, 250) + "...",
+          createdAt: post.created_at,
+          authorId: post.user.id,
+          title: post.title,
+          imageId: post.imageId,
+          commentsCount: post.commentCount,
+          likesCount: post.likesCount,
+          tags: post.tags.split(", "),
+        };
+      });
+      dispatch(userPostsActions.saveposts({ posts: posts }));
     };
     if (!user) {
       getUserProfile(
@@ -40,22 +58,7 @@ const OtherUserProfile = (props) => {
     }
   }, [getUserProfile, user, userId]);
 
-  const posts = articles.map((post) => {
-    return {
-      isLiked: likedposts.includes(post.id) ? true : false,
-      isSaved: savedposts.includes(post.id) ? true : false,
-      id: post.id,
-      name: post.user.name,
-      content: post.content.slice(0, 250) + "...",
-      createdAt: post.created_at,
-      authorId: post.user.id,
-      title: post.title,
-      imageId: post.imageId,
-      commentsCount: post.commentCount,
-      likesCount: post.likesCount,
-      tags: post.tags.split(", "),
-    };
-  });
+  console.log(articles);
 
   return (
     <>
@@ -141,14 +144,15 @@ const OtherUserProfile = (props) => {
             </div>
             <div className="mt-6 flex flex-wrap justify-center">
               <h1 className="font-bold text-2xl mb-4">{user.name}'s Posts</h1>
-              {user && posts.length === 0 && (
+              {user && articles.length === 0 && (
                 <h1 className="w-full mt-4 text-center font-bold">
                   Oops!! Looks like {user.name} hasn't posted anything!
                 </h1>
               )}
               <div>
                 {user &&
-                  posts.map((article) => {
+                  articles &&
+                  articles.map((article) => {
                     return (
                       <Article
                         key={article.id}

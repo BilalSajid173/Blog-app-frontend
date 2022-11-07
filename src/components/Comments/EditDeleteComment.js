@@ -13,6 +13,7 @@ import { postsActions } from "../../store/allposts";
 import { authActions } from "../../store/auth";
 import { savedPostsActions } from "../../store/savedposts";
 import { searchedPostsActions } from "../../store/searchposts";
+import { userPostsActions } from "../../store/profile";
 import { BASE_URL } from "../../lib/apiurl";
 
 const EditDeleteComment = (props) => {
@@ -35,16 +36,14 @@ const EditDeleteComment = (props) => {
     dispatch(authActions.decreaseCommentsCount({ id: props.postid }));
     dispatch(savedPostsActions.decreaseCommentsCount({ id: props.postid }));
     dispatch(searchedPostsActions.decreaseCommentsCount({ id: props.postid }));
+    dispatch(userPostsActions.decreaseCommentsCount({ id: props.postid }));
     handleClose();
   };
 
   const commentDeleteHandler = () => {
     commentDelete(
       {
-        url:
-          BASE_URL + "api/products/deletecomment/" +
-          props.commentId +
-          "/",
+        url: BASE_URL + "api/products/deletecomment/" + props.commentId + "/",
         method: "DELETE",
         headers: {
           Authorization: "Bearer " + token,
