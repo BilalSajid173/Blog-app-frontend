@@ -61,6 +61,7 @@ const TopAuths = (props) => {
         authors.map((author) => {
           return (
             <Tooltip
+              key={author.id}
               componentsProps={{
                 tooltip: {
                   sx: {

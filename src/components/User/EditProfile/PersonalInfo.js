@@ -26,7 +26,7 @@ const PersonalInfo = (props) => {
             autoComplete="off"
             onChange={props.valueChangeHandler.bind(null, "name")}
             placeholder="Name *"
-            value={props.name}
+            value={props.name || ""}
           />
         </div>
         <div className="mb-6">
@@ -38,7 +38,7 @@ const PersonalInfo = (props) => {
             autoComplete="off"
             onChange={props.valueChangeHandler.bind(null, "email")}
             placeholder="Email *"
-            value={props.email}
+            value={props.email || ""}
           />
         </div>
         <div className="mb-6">
@@ -49,7 +49,7 @@ const PersonalInfo = (props) => {
             autoComplete="off"
             onChange={props.valueChangeHandler.bind(null, "number")}
             placeholder="Phone Number"
-            value={props.number}
+            value={props.number || ""}
           />
         </div>
         <div className="mb-6">
@@ -60,7 +60,7 @@ const PersonalInfo = (props) => {
             autoComplete="off"
             onChange={props.valueChangeHandler.bind(null, "address")}
             placeholder="Address"
-            value={props.address}
+            value={props.address || ""}
           />
         </div>
         <div className="mb-6">
@@ -72,7 +72,7 @@ const PersonalInfo = (props) => {
             autoComplete="off"
             onChange={props.valueChangeHandler.bind(null, "age")}
             placeholder="Age"
-            value={props.age}
+            value={props.age || ""}
           />
         </div>
       </ThemeProvider>

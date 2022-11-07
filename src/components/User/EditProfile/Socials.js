@@ -26,7 +26,7 @@ const SocialLinks = (props) => {
             autoComplete="off"
             onChange={props.valueChangeHandler.bind(null, "linkedIn")}
             placeholder="LinkedIn"
-            value={props.linkedIn}
+            value={props.linkedIn || ""}
           />
         </div>
         <div className="mb-6">
@@ -38,7 +38,7 @@ const SocialLinks = (props) => {
             autoComplete="off"
             onChange={props.valueChangeHandler.bind(null, "github")}
             placeholder="Github"
-            value={props.github}
+            value={props.github || ""}
           />
         </div>
         <div className="mb-6">
@@ -50,7 +50,7 @@ const SocialLinks = (props) => {
             autoComplete="off"
             onChange={props.valueChangeHandler.bind(null, "facebook")}
             placeholder="Facebook"
-            value={props.facebook}
+            value={props.facebook || ""}
           />
         </div>
         <div className="mb-6">
@@ -62,7 +62,7 @@ const SocialLinks = (props) => {
             autoComplete="off"
             onChange={props.valueChangeHandler.bind(null, "twitter")}
             placeholder="Twitter"
-            value={props.twitter}
+            value={props.twitter || ""}
           />
         </div>
       </ThemeProvider>

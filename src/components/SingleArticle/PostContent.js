@@ -88,6 +88,7 @@ const PostContent = (props) => {
           {props.article.tags.map((tag) => {
             return (
               <div
+                key={Math.random()}
                 onClick={clickHandler.bind(null, tag)}
                 className="transition-all cursor-pointer rounded-md w-fit px-2 py-1 mx-2 hover:bg-blue-300 first:ml-0 dark:hover:text-black"
               >

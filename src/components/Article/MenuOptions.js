@@ -133,7 +133,7 @@ const BasicMenu = (props) => {
         onClick={handleClick}
       >
         {/* <MoreVertIcon className="text-black" /> */}
-        <i class="fa-solid fa-ellipsis-vertical text-2xl"></i>
+        <i className="fa-solid fa-ellipsis-vertical text-2xl"></i>
       </button>
       <Menu
         PaperProps={{

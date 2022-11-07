@@ -66,6 +66,7 @@ const GetSavedPosts = (props) => {
         articles.map((article) => {
           return (
             <Article
+              key={article.id}
               name={article.name}
               createdAt={article.createdAt}
               title={article.title}

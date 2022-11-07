@@ -26,7 +26,7 @@ const WorkInfo = (props) => {
             autoComplete="off"
             onChange={props.valueChangeHandler.bind(null, "education")}
             placeholder="Education"
-            value={props.education}
+            value={props.education || ""}
           />
         </div>
         <div className="mb-6">
@@ -38,7 +38,7 @@ const WorkInfo = (props) => {
             autoComplete="off"
             onChange={props.valueChangeHandler.bind(null, "work")}
             placeholder="Occupation"
-            value={props.work}
+            value={props.work || ""}
           />
         </div>
         <div className="mb-6">
@@ -50,7 +50,7 @@ const WorkInfo = (props) => {
             multiline
             onChange={props.valueChangeHandler.bind(null, "experience")}
             placeholder="Experience"
-            value={props.experience}
+            value={props.experience || ""}
           />
         </div>
       </ThemeProvider>

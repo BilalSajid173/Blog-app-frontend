@@ -142,6 +142,7 @@ const ViewComments = (props) => {
             comments.map((comment) => {
               return (
                 <SingleComment
+                  key={comment.id}
                   name={comment.name}
                   content={comment.content}
                   created_at={comment.createdAt}

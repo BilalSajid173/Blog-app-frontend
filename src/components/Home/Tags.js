@@ -21,6 +21,7 @@ const Tags = () => {
       {tags.map((tag) => {
         return (
           <div
+            key={Math.random()}
             onClick={clickHandler.bind(null, tag)}
             className="transition-all cursor-pointer rounded-md mr-2 mb-2 w-fit p-2 border border-blue-300 hover:bg-blue-200 first:ml-0 dark:hover:text-black"
           >

@@ -28,7 +28,7 @@ const About = (props) => {
             rows={5}
             onChange={props.valueChangeHandler.bind(null, "bio")}
             placeholder="Bio"
-            value={props.bio}
+            value={props.bio || ""}
           />
         </div>
         <div className="mb-6">
@@ -42,7 +42,7 @@ const About = (props) => {
             rows={5}
             onChange={props.valueChangeHandler.bind(null, "about")}
             placeholder="About(not more than 150 characters)"
-            value={props.about}
+            value={props.about || ""}
           />
         </div>
       </ThemeProvider>

@@ -136,6 +136,7 @@ const Article = (props) => {
             {props.tags.map((tag) => {
               return (
                 <div
+                  key={Math.random()}
                   onClick={clickHandler.bind(null, tag)}
                   className="transition-all cursor-pointer rounded-md border border-blue-300 w-fit px-2 py-1 hover:bg-blue-200 mr-2 mt-2 dark:hover:text-black"
                 >

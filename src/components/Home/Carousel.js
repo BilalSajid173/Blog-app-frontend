@@ -101,7 +101,10 @@ const Carousel = () => {
           {articles &&
             articles.map((article) => {
               return (
-                <SwiperSlide className={classes["swiper-slide"]}>
+                <SwiperSlide
+                  key={article.id}
+                  className={classes["swiper-slide"]}
+                >
                   <TopArticle
                     title={article.heading}
                     content={article.content}

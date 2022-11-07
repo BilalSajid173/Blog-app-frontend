@@ -24,7 +24,6 @@ const OtherUserProfile = (props) => {
 
   useEffect(() => {
     const responseHandler = (data) => {
-      console.log(data);
       setUser(data.User);
       setArticles(data.User.products);
     };
@@ -152,6 +151,7 @@ const OtherUserProfile = (props) => {
                   posts.map((article) => {
                     return (
                       <Article
+                        key={article.id}
                         name={article.name}
                         createdAt={article.createdAt}
                         title={article.title}

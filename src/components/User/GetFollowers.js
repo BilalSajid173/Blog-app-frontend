@@ -55,6 +55,7 @@ const GetFollowers = (props) => {
             followers.map((follower) => {
               return (
                 <UserCard
+                  key={follower.id}
                   name={follower.name}
                   email={follower.email}
                   userimgId={follower.userimgId}
