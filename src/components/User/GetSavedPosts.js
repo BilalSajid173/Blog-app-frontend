@@ -5,11 +5,12 @@ import useHttp from "../../hooks/use-http";
 import Article from "../Article/Article";
 import { savedPostsActions } from "../../store/savedposts";
 import { BASE_URL } from "../../lib/apiurl";
+import Loader from "../UI/Loader/Loader";
 
 const GetSavedPosts = (props) => {
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
-  const { sendRequest } = useHttp();
+  const { isLoading, sendRequest } = useHttp();
   const user = useSelector((state) => state.auth.user);
   const likedPosts = useSelector((state) => state.auth.likedPosts);
   const savedPosts = useSelector((state) => state.auth.savedPosts);
@@ -55,7 +56,13 @@ const GetSavedPosts = (props) => {
 
   const SavedPostsModalContent = (
     <div className="w-full mt-2 dark:text-white p-2">
-      {articles &&
+      {isLoading && (
+        <div className="flex flex-wrap justify-center">
+          <Loader />
+        </div>
+      )}
+      {!isLoading &&
+        articles &&
         articles.map((article) => {
           return (
             <Article

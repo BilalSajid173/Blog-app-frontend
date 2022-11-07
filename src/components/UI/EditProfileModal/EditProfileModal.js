@@ -4,7 +4,7 @@ import reactDom from "react-dom";
 const Backdrop = (props) => {
   return (
     <div
-      className="fixed top-0 left-0 w-full h-full z-30 bg-gray-800 opacity-30"
+      className="fixed top-0 left-0 w-full h-full z-30 bg-gray-800 opacity-60"
       onClick={props.onClick}
     ></div>
   );
@@ -12,7 +12,7 @@ const Backdrop = (props) => {
 
 const ModalOverlay = (props) => {
   return (
-    <div className="overflow-y-scroll scrollbar fixed top-28 w-11/12 left-[4%] md:w-[30rem] md:left-[calc(50%-15rem)] h-4/6 bg-gray-200 p-2 sm:p-4 z-40 rounded-sm dark:bg-gray-900">
+    <div className="overflow-y-scroll flex flex-col justify-center scrollbar fixed top-14 h-5/6 md:top-28 w-11/12 left-[4%] md:w-[30rem] md:left-[calc(50%-15rem)] md:h-4/6 bg-gray-200 p-2 sm:p-4 z-40 rounded-sm dark:bg-gray-900">
       {props.children}
     </div>
   );
