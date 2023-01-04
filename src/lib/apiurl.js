@@ -1,1 +1,1 @@
-export const BASE_URL = "https://blog-app-backend-123.herokuapp.com/";
+export const BASE_URL = "https://blog-app-72o1.onrender.com/";
