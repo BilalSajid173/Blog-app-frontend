@@ -1,12 +1,12 @@
-import { Avatar, Tooltip } from "@mui/material";
+import { Tooltip } from "@mui/material";
 import { Fragment, useEffect } from "react";
-import image from "../../Images/userimg.png";
 import AuthInfo from "./AuthorInfo";
 import useHttp from "../../hooks/use-http";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { userActions } from "../../store/topusers";
 import { BASE_URL } from "../../lib/apiurl";
+import { Image } from "cloudinary-react";
 
 const TopAuths = (props) => {
   const { sendRequest: fetchUsers } = useHttp();
@@ -82,6 +82,7 @@ const TopAuths = (props) => {
                   facebook={author.fb}
                   twitter={author.twitter}
                   linkedIn={author.linkedIn}
+                  userImgId={author.userImgId}
                 />
               }
               classes={{ tooltip: "dark:bg-gray-600" }}
@@ -95,7 +96,18 @@ const TopAuths = (props) => {
                 }`}
               >
                 <div className="cursor-pointer flex flex-wrap items-center rounded-sm p-2 my-1 bg-slate-200 hover:bg-slate-400 dark:bg-slate-600 dark:hover:bg-slate-500">
-                  <Avatar className="mr-2 bg-white" src={image} />
+                  {/* <Avatar className="mr-2 bg-white" src={author.userImgId} /> */}
+                  <div className="rounded-full h-12 w-12 mr-2">
+                    {/* <img src={image} className="" alt="img"></img> */}
+                    <Image
+                      className="rounded-full"
+                      cloudName="dntn0wocu"
+                      publicId={author.userImgId}
+                      width="50"
+                      height="50"
+                      crop="scale"
+                    />
+                  </div>
 
                   <h2>{author.name}</h2>
                 </div>

@@ -1,6 +1,6 @@
 import { Fragment } from "react";
-import image from "../../Images/userimg.png";
 import classes from "./AuthorInfo.module.css";
+import { Image } from "cloudinary-react";
 
 const AuthInfo = (props) => {
   return (
@@ -8,11 +8,14 @@ const AuthInfo = (props) => {
       <div
         className={`${classes["profile-card"]} before:bg-[#9db4f4] dark:before:bg-[#4e409d] dark:bg-gray-900 dark:text-gray-200`}
       >
-        <div className={classes.image}>
-          <img
-            src={image}
-            alt="xyz"
-            className={`${classes["profile-img"]} bg-[#9db4f4] dark:bg-[#4e409d]`}
+        <div className="relative rounded-full w-200 h-200 bg-blue-900 border-[#4e409d] border-4 mb-3">
+          <Image
+            className="rounded-full"
+            cloudName="dntn0wocu"
+            publicId={props.userImgId}
+            width="150"
+            height="150"
+            crop="scale"
           />
         </div>
 

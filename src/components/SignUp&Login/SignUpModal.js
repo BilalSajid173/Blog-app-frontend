@@ -131,7 +131,7 @@ const SignupModal = (props) => {
                 className="w-full"
                 required
                 id="outlined-basic"
-                label="text"
+                label="Name"
                 variant="outlined"
                 value={enteredName}
                 onChange={nameChangeHandler}
