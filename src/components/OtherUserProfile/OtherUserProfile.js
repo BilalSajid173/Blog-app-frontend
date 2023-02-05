@@ -56,6 +56,7 @@ const OtherUserProfile = (props) => {
         responseHandler
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getUserProfile, user, userId]);
 
   console.log(articles);
